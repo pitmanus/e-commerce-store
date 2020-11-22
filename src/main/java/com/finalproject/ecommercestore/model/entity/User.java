@@ -20,6 +20,7 @@ public class User {
     private String email;
     private String tel;
     private String password;
+    private Boolean enabled = true;
 
     @OneToOne
     @JoinColumn(name = "address_id")
