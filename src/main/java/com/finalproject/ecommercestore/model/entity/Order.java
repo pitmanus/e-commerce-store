@@ -3,6 +3,7 @@ package com.finalproject.ecommercestore.model.entity;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "user_order")
@@ -16,6 +17,9 @@ public class Order {
     private String shippingMethod;
     private String orderStatus;
     private BigDecimal orderTotal;
+
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private List<CartItem> cartItems;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -75,5 +79,13 @@ public class Order {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<CartItem> getCartItems() {
+        return cartItems;
+    }
+
+    public void setCartItems(List<CartItem> cartItems) {
+        this.cartItems = cartItems;
     }
 }
