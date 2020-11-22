@@ -25,6 +25,10 @@ public abstract class Product {
     @Transient
     private MultipartFile productImage;
 
+    @ManyToOne
+    @JoinColumn(name = "cart_item_id")
+    private CartItem cartItem;
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "products_categories",
@@ -33,10 +37,6 @@ public abstract class Product {
             inverseJoinColumns = @JoinColumn(
                     name = "category_id", referencedColumnName = "id"))
     private List<Category> productCategories = new ArrayList<>();
-
-    @ManyToOne
-    @JoinColumn(name = "id_shopping_cart")
-    private ShoppingCart shoppingCart;
 
 
     public Long getId() {
@@ -83,14 +83,6 @@ public abstract class Product {
         this.productCategories = productCategories;
     }
 
-    public ShoppingCart getShoppingCart() {
-        return shoppingCart;
-    }
-
-    public void setShoppingCart(ShoppingCart shoppingCart) {
-        this.shoppingCart = shoppingCart;
-    }
-
     public void setPrice(double price) {
         this.price = price;
     }
@@ -109,5 +101,13 @@ public abstract class Product {
 
     public void setProductImage(MultipartFile productImage) {
         this.productImage = productImage;
+    }
+
+    public CartItem getCartItem() {
+        return cartItem;
+    }
+
+    public void setCartItem(CartItem cartItem) {
+        this.cartItem = cartItem;
     }
 }

@@ -15,7 +15,7 @@ public class ShoppingCart {
     private BigDecimal total;
 
     @OneToMany(mappedBy = "shoppingCart", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Product> productsList = new ArrayList<>();
+    private List<CartItem> cartItemList = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -33,11 +33,11 @@ public class ShoppingCart {
         this.total = total;
     }
 
-    public List<Product> getProductsList() {
-        return productsList;
+    public List<CartItem> getCartItemList() {
+        return cartItemList;
     }
 
-    public void setProductsList(List<Product> productsList) {
-        this.productsList = productsList;
+    public void setCartItemList(List<CartItem> cartItemList) {
+        this.cartItemList = cartItemList;
     }
 }
