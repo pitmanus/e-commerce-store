@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:replace="common/common :: common-header">
+<body>
+<div th:replace="common/common :: navbar"></div>
+
+<!--nav-tabs-->
+
+<div style="border-bottom: 10px" class="container">
+    <div class="row justify-content-md-center">
+        <div class="col-md-6 col-md-offset-3">
+
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#tab-1"><span style="color: black">Register</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#tab-2"><span style="color: black">Login</span></a>
+    </li>
+</ul>
+
+<!--tab panels-->
+<div class="tab-content">
+    <!--
+registration panel
+-->
+    <div class="tab-pane fade" id="tab-1">
+        <div class="panel-group">
+            <div class="panel panel-default" style="border: none;">
+                <div class="panel-body" style=" margin-top: 20px;">
+                    <form style="padding-bottom: 80px">
+                        <div class="form-group">
+                            <label for="first-name">First name</label>
+                            <input type="text" class="form-control" id="first-name" >
+                        </div>
+                        <div class="form-group">
+                            <label for="last-name">Last name</label>
+                            <input type="text" class="form-control" id="last-name" >
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email address</label>
+                            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" >
+                        </div>
+                        <div class="form-group">
+                            <label for="tel">Telefon</label>
+                            <input type="text" class="form-control" id="tel" >
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password">
+                        </div>
+                        <div class="form-group">
+                            <label for="city">City</label>
+                            <input type="text" class="form-control" id="city" >
+                        </div>
+                        <div class="form-group">
+                            <label for="street">Street</label>
+                            <input type="text" class="form-control" id="street" >
+                        </div>
+                        <div class="form-group">
+                            <label for="building-num">Building and apartment number</label>
+                            <input type="text" class="form-control" id="building-num" >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="zip">Zip code</label>
+                            <input type="text" class="form-control" id="zip" >
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--
+login panel
+-->
+    <div class="tab-pane fade" id="tab-2">
+        <div class="panel-group">
+            <div class="panel panel-default" style="border: none;">
+                <div class="panel-body" style=" margin-top: 20px;">
+                    <form>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Login</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your email">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+        </div>
+    </div>
+</div>
+
+
+
+<!--
+<div th:replace="common/common :: footer" ></div>
+-->
+
+</body>
+</html>

@@ -10,5 +10,10 @@ public class MainController {
     public String mainPage(){
         return "index";
     }
+
+    @GetMapping("/my-account")
+    public String myAccount(){
+        return "my-account";
+    }
 }
 

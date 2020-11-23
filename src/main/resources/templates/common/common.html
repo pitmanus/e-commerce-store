@@ -15,7 +15,7 @@
 <!--banner-->
 <div class="page-top" style="width: 100%; height: 15px; background-color: orange"></div>
 <!-- Navbar section -->
-<nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom"> <a class="navbar-brand ml-5 font-weight-bold" href="#"><span id="burgundy">The</span><span id="orange"> Store</span></a> <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor" aria-controls="navbarColor" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+<nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom"> <a class="navbar-brand ml-5 font-weight-bold" th:href="@{/}"><span id="burgundy">The</span><span id="orange"> Store</span></a> <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor" aria-controls="navbarColor" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
     <div class="collapse navbar-collapse" id="navbarColor">
         <ul class="navbar-nav">
 
@@ -30,7 +30,7 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="#" class="btn btn-light">SHOPPING CART</a> </li>
-            <li><a href="#" class="btn btn-light">MY ACCOUNT</a> </li>
+            <li><a th:href="@{/my-account}" class="btn btn-light">MY ACCOUNT</a> </li>
             <li><a href="#" class="btn btn-light">LOGOUT</a> </li>
 
         </ul>
@@ -43,12 +43,12 @@
 
 
 <!--Footer-->
-<div th:fragment="footer">
+<!--<div th:fragment="footer">
     <div class="footer" >
         <div class="py-2 border-top ml-3">
             <div class="footer-text"><p>Footer</p></div>
         </div>
     </div>
-</div>
+</div>-->
 </body>
 </html>
