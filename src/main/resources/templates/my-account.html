@@ -10,12 +10,12 @@
     <div class="row justify-content-md-center">
         <div class="col-md-6 col-md-offset-3">
 
-<ul class="nav nav-tabs">
+<ul class="nav nav-tabs" >
     <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#tab-1"><span style="color: black">Register</span></a>
+        <a th:class="${classActiveNewAccount}? 'nav-link active' : 'nav-link'" data-toggle="tab" href="#tab-1"><span style="color: black">Register</span></a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#tab-2"><span style="color: black">Login</span></a>
+    <li>
+         <a th:class="${classActiveLogin}? 'nav-link active' : 'nav-link'" data-toggle="tab" href="#tab-2"><span style="color: black">Login</span></a>
     </li>
 </ul>
 
@@ -24,7 +24,7 @@
     <!--
 registration panel
 -->
-    <div class="tab-pane fade" id="tab-1">
+    <div class="tab-pane fade" id="tab-1" th:class="${classActiveNewAccount}">
         <div class="panel-group">
             <div class="panel panel-default" style="border: none;">
                 <div class="panel-body" style=" margin-top: 20px;">
@@ -36,6 +36,10 @@ registration panel
                         <div class="form-group">
                             <label for="last-name">Last name</label>
                             <input type="text" class="form-control" id="last-name" >
+                        </div>
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" class="form-control" id="username" >
                         </div>
                         <div class="form-group">
                             <label for="email">Email address</label>
@@ -76,14 +80,14 @@ registration panel
 <!--
 login panel
 -->
-    <div class="tab-pane fade" id="tab-2">
+    <div class="tab-pane fade" id="tab-2" th:class="${classActiveLogin}">
         <div class="panel-group">
             <div class="panel panel-default" style="border: none;">
                 <div class="panel-body" style=" margin-top: 20px;">
                     <form>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Login</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your email">
+                            <label for="usernamelogin">Login</label>
+                            <input type="email" class="form-control" id="usernamelogin" placeholder="Enter your email">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Password</label>

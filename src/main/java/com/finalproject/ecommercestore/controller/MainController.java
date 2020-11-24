@@ -1,7 +1,9 @@
 package com.finalproject.ecommercestore.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class MainController {
@@ -11,9 +13,16 @@ public class MainController {
         return "index";
     }
 
-    @GetMapping("/my-account")
+    /*@GetMapping("/my-account")
     public String myAccount(){
         return "my-account";
+    }*/
+
+    @RequestMapping("/login")
+    public String login(){
+        return "login";
     }
+
+
 }
 

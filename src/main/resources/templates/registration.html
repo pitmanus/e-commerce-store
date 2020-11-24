@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:replace="common/common :: common-header"></head>
+<body>
+<div th:replace="common/common :: navbar"></div>
+
+<!--html registration form-->
+
+<div class="container">
+    <div class="row justify-content-center">
+    <div class="row">
+        <div class="col-md-20 col-md-offset-3">
+
+            <!--success message-->
+            <div th:if="${param.success}" style="padding-top: 20px">
+                <div class="alert alert-info">You've successfully registered to our app!</div>
+            </div>
+
+            <h1>Registration</h1>
+
+            <form th:action="@{/registration}" method="post" th:object="${user}">
+                <div class="form-group">
+                    <label class="control-label" for="firstName">First name</label>
+                    <input id="firstName" class="form-control" th:field="*{firstName}" required autofocus="autofocus"/>
+                    <p class="text-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First name error</p>
+
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="lastName">Last name</label>
+                    <input id="lastName" class="form-control" th:field="*{lastName}" required autofocus="autofocus"/>
+                    <p class="text-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last name error</p>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="username">Username</label>
+                    <input id="username" class="form-control" th:field="*{username}" required autofocus="autofocus"/>
+                    <p class="text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username error</p>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="email">Email</label>
+                    <input id="email" class="form-control" th:field="*{email}" required autofocus="autofocus"/>
+                    <p class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</p>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="tel">Tel</label>
+                    <input id="tel" class="form-control" th:field="*{tel}" required autofocus="autofocus"/>
+                    <p class="text-danger" th:if="${#fields.hasErrors('tel')}" th:errors="*{tel}">Telephone number error</p>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="password">Password</label>
+                    <input type="password" id="password" class="form-control" th:field="*{password}" required
+                           autofocus="autofocus"/>
+                    <p class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password error</p>
+                </div>
+
+                <div th:object="${address}">
+                    <div class="form-group">
+                        <label class="control-label" for="street">Street</label>
+                        <input type="text" id="street" class="form-control" th:field="*{street}" required
+                               autofocus="autofocus"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" for="building-and-apartment-number">Building and apartment number</label>
+                        <input type="text" id="building-and-apartment-number" class="form-control" th:field="*{buildingNumberAndApartment}" required
+                               autofocus="autofocus"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" for="city">City</label>
+                        <input type="text" id="city" class="form-control" th:field="*{city}" required
+                               autofocus="autofocus"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" for="zip-code">Zip Code</label>
+                        <input type="text" id="zip-code" class="form-control" th:field="*{zip}" required
+                               autofocus="autofocus"/>
+                    </div>
+
+                </div>
+
+                <div class="form-group" style="padding-top: 20px">
+                    <button type="submit" class="btn btn-success">Register</button>
+                    <span>Already registered? <a th:href="@{/login}">Login here</a> </span>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

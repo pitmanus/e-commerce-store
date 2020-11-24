@@ -19,6 +19,11 @@
     <div class="collapse navbar-collapse" id="navbarColor">
         <ul class="navbar-nav">
 
+<!--
+            <li><h3>Hello, <span sec:authentication="principal.username"></span>!</h3></li>
+-->
+
+
             <li class="nav-item search-nav-item">
                 <span>
             <form class="form-inline">
@@ -30,8 +35,8 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="#" class="btn btn-light">SHOPPING CART</a> </li>
-            <li><a th:href="@{/my-account}" class="btn btn-light">MY ACCOUNT</a> </li>
-            <li><a href="#" class="btn btn-light">LOGOUT</a> </li>
+            <li><a th:href="@{/login}" class="btn btn-light">MY ACCOUNT</a> </li>
+            <li><a th:href="@{/logout}" class="btn btn-light">LOGOUT</a> </li>
 
         </ul>
     </div>
