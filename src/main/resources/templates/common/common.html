@@ -19,10 +19,8 @@
     <div class="collapse navbar-collapse" id="navbarColor">
         <ul class="navbar-nav">
 
-<!--
-            <li><h3>Hello, <span sec:authentication="principal.username"></span>!</h3></li>
--->
-
+           <li><div sec:authorize="isAuthenticated()">
+                <h5>Hello, <span sec:authentication="name"></span>!</h5></div></li>
 
             <li class="nav-item search-nav-item">
                 <span>
