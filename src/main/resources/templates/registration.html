@@ -62,24 +62,29 @@
                         <label class="control-label" for="street">Street</label>
                         <input type="text" id="street" class="form-control" th:field="*{street}" required
                                autofocus="autofocus"/>
+                        <p class="text-danger" th:if="${#fields.hasErrors('street')}" th:errors="*{street}">Street name error</p>
+
                     </div>
 
                     <div class="form-group">
                         <label class="control-label" for="building-and-apartment-number">Building and apartment number</label>
                         <input type="text" id="building-and-apartment-number" class="form-control" th:field="*{buildingNumberAndApartment}" required
                                autofocus="autofocus"/>
+                        <p class="text-danger" th:if="${#fields.hasErrors('buildingNumberAndApartment')}" th:errors="*{buildingNumberAndApartment}">Building and apartment number error</p>
                     </div>
 
                     <div class="form-group">
                         <label class="control-label" for="city">City</label>
                         <input type="text" id="city" class="form-control" th:field="*{city}" required
                                autofocus="autofocus"/>
+                        <p class="text-danger" th:if="${#fields.hasErrors('city')}" th:errors="*{city}">City name error</p>
                     </div>
 
                     <div class="form-group">
                         <label class="control-label" for="zip-code">Zip Code</label>
                         <input type="text" id="zip-code" class="form-control" th:field="*{zip}" required
                                autofocus="autofocus"/>
+                        <p class="text-danger" th:if="${#fields.hasErrors('zip')}" th:errors="*{zip}">Zip code error</p>
                     </div>
 
                 </div>
