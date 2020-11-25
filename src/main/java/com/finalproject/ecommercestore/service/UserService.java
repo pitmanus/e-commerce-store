@@ -26,13 +26,7 @@ public class UserService implements UserDetailsService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public void saveUser(UserDto userDto) {
-        Address address = new Address(
-                userDto.getAddress().getStreet(),
-                userDto.getAddress().getBuildingNumberAndApartment(),
-                userDto.getAddress().getCity(),
-                userDto.getAddress().getZip()
-        );
+    public User saveUser(UserDto userDto) {
         User user = new User(
                 userDto.getFirstName(),
                 userDto.getLastName(),
@@ -40,9 +34,14 @@ public class UserService implements UserDetailsService {
                 userDto.getEmail(),
                 passwordEncoder.encode(userDto.getPassword()),
                 userDto.getTel(),
-                address,
+                new Address(
+                        userDto.getAddress().getStreet(),
+                        userDto.getAddress().getBuildingNumberAndApartment(),
+                        userDto.getAddress().getCity(),
+                        userDto.getAddress().getZip()),
                 Arrays.asList(new Role("USER"))
         );
+        return userRepository.save(user);
     }
 
     @Override

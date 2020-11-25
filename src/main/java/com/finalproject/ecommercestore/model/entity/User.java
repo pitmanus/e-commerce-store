@@ -9,7 +9,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Entity
-@Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
+@Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = "username"))
 public class User implements UserDetails {
 
     @Id
@@ -25,9 +25,9 @@ public class User implements UserDetails {
     private String tel;
     private String username;
     private String password;
-    private Boolean enabled = true;
+    private Boolean enabled;
 
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "address_id")
     private Address address;
 
@@ -47,9 +47,12 @@ public class User implements UserDetails {
         this.tel = tel;
         this.username = username;
         this.password = password;
-        this.enabled = enabled;
+        this.enabled = true;
         this.address = address;
         this.roles = roles;
+    }
+
+    public User() {
     }
 
     public long getId() {

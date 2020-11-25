@@ -23,6 +23,9 @@ public class Address {
         this.zip = zip;
     }
 
+    public Address() {
+    }
+
     public Long getId() {
         return id;
     }
