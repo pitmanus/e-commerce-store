@@ -1,11 +1,56 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head th:replace="common/common :: common-header">
+    <link href="/css/admin-account.css" rel="stylesheet">
 </head>
 <body>
 <div th:replace="common/common :: navbar"></div>
 
-ADMIN ACCOUNT
+            <ul class="nav nav-tabs" >
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#tab-1"><span style="color: black">Add product category</span></a>
+                </li>
+                <li>
+                    <a class="nav-link" data-toggle="tab" href="#tab-2"><span style="color: black">Add product</span></a>
+                </li>
+                <li>
+                    <a class="nav-link" data-toggle="tab" href="#tab-3"><span style="color: black">Users administration</span></a>
+                </li>
+            </ul>
+
+            <!--tab panels-->
+            <div class="tab-content">
+
+                <div class="tab-pane fade" id="tab-1" >
+                    <div class="panel-group">
+                        <div class="panel panel-default" style="border: none;">
+                            <div class="panel-body" style=" margin-top: 20px;">
+                    <p>Here will be adding category functionality</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="tab-2" >
+                    <div class="panel-group">
+                        <div class="panel panel-default" style="border: none;">
+                            <div class="panel-body" style=" margin-top: 20px;">
+                               <p>Here will be adding product functionality</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="tab-3" >
+                    <div class="panel-group">
+                        <div class="panel panel-default" style="border: none;">
+                            <div class="panel-body" style=" margin-top: 20px;">
+                                <p>Here will be users administration functionality</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 </body>
 </html>

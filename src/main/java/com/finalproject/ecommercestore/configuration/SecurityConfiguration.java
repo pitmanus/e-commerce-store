@@ -33,7 +33,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 //.antMatchers("/**")
                 .antMatchers(
                         "/registration**",
-                        "/my-account",
                         "/js/**",
                         "/css/**",
                         "/img/**"

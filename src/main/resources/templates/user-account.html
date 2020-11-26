@@ -5,6 +5,50 @@
 <body>
 <div th:replace="common/common :: navbar"></div>
 
-USER ACCOUNT
+<ul class="nav nav-tabs" >
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#tab-1"><span style="color: black">Shopping cart</span></a>
+    </li>
+    <li>
+        <a class="nav-link" data-toggle="tab" href="#tab-2"><span style="color: black">Purchased products</span></a>
+    </li>
+    <li>
+        <a class="nav-link" data-toggle="tab" href="#tab-3"><span style="color: black">Account information</span></a>
+    </li>
+</ul>
+
+<!--tab panels-->
+<div class="tab-content">
+
+    <div class="tab-pane fade" id="tab-1" >
+        <div class="panel-group">
+            <div class="panel panel-default" style="border: none;">
+                <div class="panel-body" style=" margin-top: 20px;">
+                    <p>Here will be shopping cart items</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-pane fade" id="tab-2" >
+        <div class="panel-group">
+            <div class="panel panel-default" style="border: none;">
+                <div class="panel-body" style=" margin-top: 20px;">
+                    <p>Here will be list of purchased products</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-pane fade" id="tab-3" >
+        <div class="panel-group">
+            <div class="panel panel-default" style="border: none;">
+                <div class="panel-body" style=" margin-top: 20px;">
+                    <p>Here will be user account information</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
