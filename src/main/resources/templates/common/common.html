@@ -12,46 +12,42 @@
 </head>
 <body>
 <div th:fragment="navbar">
-<!--banner-->
-<div class="page-top" style="width: 100%; height: 15px; background-color: orange"></div>
+
 <!-- Navbar section -->
-<nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom"> <a class="navbar-brand ml-5 font-weight-bold" th:href="@{/}"><span id="burgundy">The</span><span id="orange"> Store</span></a> <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor" aria-controls="navbarColor" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
-    <div class="collapse navbar-collapse" id="navbarColor">
-        <ul class="navbar-nav">
 
-           <li><div sec:authorize="isAuthenticated()">
-                <h5>Hello, <span sec:authentication="name"></span>!</h5></div></li>
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand ml-5 font-weight-bold" th:href="@{/}"><span id="">The</span><span id=""> Store</span></a>
 
-            <li class="nav-item search-nav-item">
-                <span>
-            <form class="form-inline">
-    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-    <button class="btn btn-light my-2 my-sm-0" type="submit">Search</button>
-  </form>
-            </span>
-            </li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="#" class="btn btn-light">SHOPPING CART</a> </li>
-            <li><a th:href="@{/login}" class="btn btn-light">MY ACCOUNT</a> </li>
-            <li><a th:href="@{/logout}" class="btn btn-light">LOGOUT</a> </li>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+            <ul class="navbar-nav ml-auto">
+                <li style="padding-right: 200px">
+                    <form class="form-inline">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                </li>
+                <li class="nav-item active"><a class="nav-link" href="#" >Shopping cart</a> </li>
+                <li class="nav-item active"><a class="nav-link" th:href="@{/my-account}" >My account</a> </li>
+                <li class="nav-item active"><a class="nav-link" th:href="@{/logout}" >Logout</a> </li>
+                <li style="padding-left: 10px" class="nav-item active"><a class="nav-link" href="#" ><div sec:authorize="isAuthenticated()">
+                    <h5>Hello, <span sec:authentication="name"></span>!</h5></div></a> </li>
+            </ul>
+        </div>
 
-        </ul>
-    </div>
 </nav>
-<div class="filter"> <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#mobile-filter" aria-expanded="true" aria-controls="mobile-filter">Filters<span class="fa fa-filter pl-1"></span></button>
-</div>
-</div>
-</div>
 
 
-<!--Footer-->
+
 <!--<div th:fragment="footer">
     <div class="footer" >
-        <div class="py-2 border-top ml-3">
+        <div class="py-2 bg-dark ml-auto">
             <div class="footer-text"><p>Footer</p></div>
         </div>
     </div>
 </div>-->
+
 </body>
 </html>
