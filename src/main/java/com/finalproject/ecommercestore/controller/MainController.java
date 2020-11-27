@@ -1,5 +1,7 @@
 package com.finalproject.ecommercestore.controller;
 
+import com.finalproject.ecommercestore.model.dto.CategoryDto;
+import com.finalproject.ecommercestore.service.CategoryService;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,12 +12,21 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 public class MainController {
 
+    private CategoryService categoryService;
+
+    public MainController(CategoryService categoryService) {
+        this.categoryService = categoryService;
+    }
+
     @GetMapping({"/index", "/"})
-    public String mainPage(){
+    public String mainPage(Model model){
+        List<CategoryDto> categories = categoryService.showAllCategories();
+        model.addAttribute("categories", categories);
         return "index";
     }
 

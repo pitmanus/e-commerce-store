@@ -25,7 +25,22 @@
                     <div class="panel-group">
                         <div class="panel panel-default" style="border: none;">
                             <div class="panel-body" style=" margin-top: 20px;">
-                    <p>Here will be adding category functionality</p>
+                                <div class="container">
+                                    <div class="row justify-content-md-center">
+                                        <div class="row">
+                                            <div class="col-md-20 col-md-offset-10">
+                                <form th:action="@{/add-category}" method="post" th:object="${category}">
+                                    <div class="form-group">
+                                        <label for="category">Category name</label>
+                                        <input type="text" th:field="*{categoryName}" class="form-control" id="category">
+                                        <small id="emailHelp" class="form-text text-muted">Created category will shown in the sidebar on the main page.</small>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -51,6 +66,20 @@
                     </div>
                 </div>
             </div>
+
+<!--success messages-->
+
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="row">
+            <div class="col-md-20 col-md-offset-10">
+                <div th:if="${param.categoryadded}" style="padding-top: 20px">
+                    <div class="alert alert-info">You've successfully added new product category!</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
