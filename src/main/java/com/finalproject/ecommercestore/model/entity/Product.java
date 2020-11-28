@@ -25,7 +25,7 @@ public class Product {
     @Transient
     private MultipartFile productImage;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cart_item_id")
     private CartItem cartItem;
 
