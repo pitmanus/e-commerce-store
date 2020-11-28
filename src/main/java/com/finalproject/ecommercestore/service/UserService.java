@@ -5,14 +5,18 @@ import com.finalproject.ecommercestore.model.entity.Address;
 import com.finalproject.ecommercestore.model.entity.Role;
 import com.finalproject.ecommercestore.model.entity.User;
 import com.finalproject.ecommercestore.repository.UserRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.w3c.dom.stylesheets.LinkStyle;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -21,9 +25,12 @@ public class UserService implements UserDetailsService {
 
     private UserRepository userRepository;
 
-    public UserService(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
+    private ModelMapper modelMapper;
+
+    public UserService(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder, ModelMapper modelMapper) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.modelMapper = modelMapper;
     }
 
     public User saveUser(UserDto userDto) {
@@ -42,6 +49,29 @@ public class UserService implements UserDetailsService {
                 Arrays.asList(new Role("USER"))
         );
         return userRepository.save(user);
+    }
+
+    public User updateUser(UserDto userDto){
+        return userRepository.save(modelMapper.map(userDto, User.class));
+    }
+
+    public void deleteUser(Long id){
+        userRepository.deleteById(id);
+    }
+
+    public List<UserDto> getAllUsers(){
+        return userRepository.findAll()
+                .stream()
+                .map(user -> modelMapper.map(user, UserDto.class))
+                .collect(Collectors.toList());
+    }
+
+    public UserDto getById(Long id){
+        return userRepository.findById(id)
+                .stream()
+                .map(user -> modelMapper.map(user, UserDto.class))
+                .findAny()
+                .orElse(null);
     }
 
     @Override

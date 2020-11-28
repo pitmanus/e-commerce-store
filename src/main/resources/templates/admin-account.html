@@ -14,7 +14,7 @@
                     <a class="nav-link" data-toggle="tab" href="#tab-2"><span style="color: black">Add product</span></a>
                 </li>
                 <li>
-                    <a class="nav-link" data-toggle="tab" href="#tab-3"><span style="color: black">Users administration</span></a>
+                    <a class="nav-link" data-toggle="tab" href="#tab-3"><span style="color: black">Users</span></a>
                 </li>
             </ul>
 
@@ -25,6 +25,7 @@
                     <div class="panel-group">
                         <div class="panel panel-default" style="border: none;">
                             <div class="panel-body" style=" margin-top: 20px;">
+
                                 <div class="container">
                                     <div class="row justify-content-md-center">
                                         <div class="row">
@@ -87,7 +88,63 @@
                     <div class="panel-group">
                         <div class="panel panel-default" style="border: none;">
                             <div class="panel-body" style=" margin-top: 20px;">
-                                <p>Here will be users administration functionality</p>
+
+                                <div class="container">
+                                    <div class="row justify-content-md-center">
+                                        <div class="row">
+                                            <div class="col-md-20 col-md-offset-10">
+
+
+                                                <table class="table table-hover">
+                                                    <thead class="thead-light">
+                                                    <tr>
+                                                        <th scope="col">Id</th>
+                                                        <th scope="col">Username</th>
+                                                        <th scope="col">First name</th>
+                                                        <th scope="col">Last name</th>
+                                                        <th scope="col">Email</th>
+                                                        <th scope="col">Telephone</th>
+                                                        <th scope="col">City</th>
+                                                        <th scope="col">Street</th>
+                                                        <th scope="col">Building and apartment number</th>
+                                                        <th scope="col">Zip code</th>
+                                                        <th scope="col">Is active?</th>
+                                                        <th scope="col">Block</th>
+                                                        <th scope="col">Unblock</th>
+                                                        <th scope="col">Delete user</th>
+
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr style="transform: rotate(0);" th:each="user: ${users}">
+                                                        <form th:action="@{/deleteuser}" th:method="post" th:object="${user}">
+                                                            <td th:type="number" th:text="${user.id}"/></td>
+                                                            <td th:text="${user.username}"/>
+                                                            <td th:text="${user.firstName}"/>
+                                                            <td th:text="${user.lastName}"/>
+                                                            <td th:text="${user.email}"/>
+                                                            <td th:text="${user.tel}"/>
+                                                            <td th:text="${user.address.city}"/>
+                                                            <td th:text="${user.address.street}"/>
+                                                            <td th:text="${user.address.buildingNumberAndApartment}"/>
+                                                            <td th:text="${user.address.zip}"/>
+                                                            <td th:text="${user.enabled}"/>
+                                                            <td><a class="btn btn-warning" th:href="@{/block/{id}(id=${user.id})}">Block</a></td>
+                                                            <td><a class="btn btn-success" th:href="@{/unblock/{id}(id=${user.id})}">Unblock</a></td>
+                                                            <td>
+                                                                <input type="hidden" name="id" th:value="${user.id}">
+                                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                                            </td>
+                                                        </form>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
