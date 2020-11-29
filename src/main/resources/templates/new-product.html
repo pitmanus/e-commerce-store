@@ -41,7 +41,7 @@
         </div>
     <div class="form-group">
         <label for="productImage">Upload product image</label>
-        <input type="file" class="form-control-file" id="productImage" th:field="*{productImage}">
+        <input type="file" class="form-control-file" name="image" id="productImage" accept="image/png, image/jpeg" th:field="*{productImage}">
     </div>
     <div class="form-group">
         <label for="description">Description</label>

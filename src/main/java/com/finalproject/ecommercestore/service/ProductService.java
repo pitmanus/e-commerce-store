@@ -21,8 +21,8 @@ public class ProductService {
         this.modelMapper = modelMapper;
     }
 
-    public void addProduct(ProductDto productDto){
-        productRepository.save(modelMapper.map(productDto, Product.class));
+    public Product addProduct(ProductDto productDto){
+       return productRepository.save(modelMapper.map(productDto, Product.class));
     }
 
     public List<ProductDto> getAllProducts(){
@@ -30,6 +30,10 @@ public class ProductService {
                 .stream()
                 .map(product -> modelMapper.map(product, ProductDto.class))
                 .collect(Collectors.toList());
+    }
+
+    public void deleteProduct(Long id){
+        productRepository.deleteById(id);
     }
 
 

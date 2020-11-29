@@ -28,7 +28,7 @@
                     <tbody>
                     <tr style="transform: rotate(0);" th:each="product: ${productList}">
                         <form th:action="@{/deleteproduct}" th:method="post" th:object="${product}">
-                            <td th:text="${product.productImage}"/>
+                            <td><img th:src="@{'/image/'+'product'+${product.id}+'.png'}" alt="prod_img" border=1 height=100 width=100></td>
                             <td th:type="number" th:text="${product.id}"/></td>
                             <td th:text="${product.name}"/>
                             <td th:text="${product.productCategories}"/>
@@ -36,7 +36,7 @@
                             <td th:text="${product.shippingWeight}"/>
                             <td th:text="${product.description}"/>
                             <td th:text="${product.inStock}"/>
-                            <td><a class="btn btn-success" th:href="@{/newproduct}">Add new product</a></td>
+                            <td><a class="btn btn-success" th:href="@{/newproduct}">Add</a></td>
                             <td>
                                 <input type="hidden" name="id" th:value="${product.id}">
                                 <button type="submit" class="btn btn-danger">Delete</button>

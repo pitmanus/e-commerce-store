@@ -41,7 +41,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/registration**",
                         "/js/**",
                         "/css/**",
-                        "/img/**"
+                        "/image/**"
                 ).permitAll().anyRequest().authenticated()
                 .and()
                 .csrf().disable().cors().disable()

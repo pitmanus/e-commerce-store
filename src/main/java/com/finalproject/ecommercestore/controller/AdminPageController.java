@@ -4,6 +4,7 @@ import com.finalproject.ecommercestore.model.dto.CategoryDto;
 import com.finalproject.ecommercestore.model.dto.ProductDto;
 import com.finalproject.ecommercestore.model.dto.UserDto;
 import com.finalproject.ecommercestore.model.entity.Category;
+import com.finalproject.ecommercestore.model.entity.Product;
 import com.finalproject.ecommercestore.model.entity.User;
 import com.finalproject.ecommercestore.service.CategoryService;
 import com.finalproject.ecommercestore.service.ProductService;
@@ -102,13 +103,13 @@ public class AdminPageController {
 
     @PostMapping("/newproduct")
     public String addNewProduct(@ModelAttribute ProductDto productDto) {
-        productService.addProduct(productDto);
+       Product product = productService.addProduct(productDto);
 
         MultipartFile productImage = productDto.getProductImage();
 
         try {
             byte[] bytes = productImage.getBytes();
-            String name = productDto.getId()+".png";
+            String name = product.getId()+".png";
             BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File("src/main/resources/static/image/product" + name)));
             stream.write(bytes);
             stream.close();
@@ -116,6 +117,12 @@ public class AdminPageController {
             e.printStackTrace();
         }
 
+        return "redirect:/productlist";
+    }
+
+    @PostMapping("/deleteproduct")
+    public String deleteProduct(@ModelAttribute ProductDto productDto){
+        productService.deleteProduct(productDto.getId());
         return "redirect:/productlist";
     }
 

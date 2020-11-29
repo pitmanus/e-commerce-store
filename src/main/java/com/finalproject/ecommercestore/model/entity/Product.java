@@ -29,7 +29,7 @@ public class Product {
     @JoinColumn(name = "cart_item_id")
     private CartItem cartItem;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "products_categories",
             joinColumns = @JoinColumn(
