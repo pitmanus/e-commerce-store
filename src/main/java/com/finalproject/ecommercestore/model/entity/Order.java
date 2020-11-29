@@ -12,7 +12,9 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(columnDefinition = "TIMESTAMP")
     private LocalDateTime orderDate;
+    @Column(columnDefinition = "TIMESTAMP")
     private LocalDateTime shippingDate;
     @Enumerated(EnumType.STRING)
     private ShippingMethod shippingMethod;

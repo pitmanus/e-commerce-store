@@ -1,7 +1,9 @@
 package com.finalproject.ecommercestore.controller;
 
 import com.finalproject.ecommercestore.model.dto.CategoryDto;
+import com.finalproject.ecommercestore.model.dto.ProductDto;
 import com.finalproject.ecommercestore.service.CategoryService;
+import com.finalproject.ecommercestore.service.ProductService;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,15 +20,19 @@ import java.util.List;
 public class MainController {
 
     private CategoryService categoryService;
+    private ProductService productService;
 
-    public MainController(CategoryService categoryService) {
+    public MainController(CategoryService categoryService, ProductService productService) {
         this.categoryService = categoryService;
+        this.productService = productService;
     }
 
     @GetMapping({"/index", "/"})
     public String mainPage(Model model){
         List<CategoryDto> categories = categoryService.showAllCategories();
         model.addAttribute("categories", categories);
+        List<ProductDto> productList = productService.getAllProducts();
+        model.addAttribute("productlist", productList);
         return "index";
     }
 
