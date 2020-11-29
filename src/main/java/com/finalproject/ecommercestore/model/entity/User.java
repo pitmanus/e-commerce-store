@@ -1,5 +1,6 @@
 package com.finalproject.ecommercestore.model.entity;
 
+import com.finalproject.ecommercestore.model.dto.AddressDto;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,7 +26,7 @@ public class User implements UserDetails {
     private String tel;
     private String username;
     private String password;
-    private Boolean enabled;
+    private Boolean enabled = true;
 
     @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "address_id")
@@ -40,19 +41,18 @@ public class User implements UserDetails {
                     name = "role_id", referencedColumnName = "id"))
     private List<Role> roles = new ArrayList<>();
 
-    public User(String firstName, String lastName, String username, String email, String password, String tel, Address address, List<Role> roles) {
+    public User() {
+    }
+
+    public User(String firstName, String lastName, String username, String email, String tel, String password,Address address, List<Role> roles) {
         this.firstName = firstName;
+        this.username = username;
         this.lastName = lastName;
         this.email = email;
         this.tel = tel;
-        this.username = username;
         this.password = password;
-        this.enabled = true;
-        this.address = address;
         this.roles = roles;
-    }
-
-    public User() {
+        this.address = address;
     }
 
     public long getId() {
@@ -130,7 +130,7 @@ public class User implements UserDetails {
     @Override
     public List<? extends GrantedAuthority> getAuthorities() {
         return roles.stream()
-                .map(role -> new SimpleGrantedAuthority(role.getName()))
+                .map(role -> new SimpleGrantedAuthority(role.getName().toString()))
                 .collect(Collectors.toList());
     }
 

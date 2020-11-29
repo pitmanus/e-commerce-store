@@ -9,12 +9,14 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
+
+    @Enumerated
+    private RoleNames name;
 
     public Role() {
     }
 
-    public Role(String name) {
+    public Role(RoleNames name) {
         this.name = name;
     }
 
@@ -26,11 +28,11 @@ public class Role {
         this.id = id;
     }
 
-    public String getName() {
+    public RoleNames getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(RoleNames name) {
         this.name = name;
     }
 }

@@ -20,7 +20,7 @@ public class Product {
     @Column(name = "shipping_weight")
     private double shippingWeight;
     @Column(name = "in_stock")
-    private Boolean inStock = false;
+    private boolean inStock = false;
 
     @Transient
     private MultipartFile productImage;
@@ -40,18 +40,6 @@ public class Product {
 
     public Product() {
     }
-
-  /*  public Product(String name, BigDecimal price, String description, double shippingWeight, boolean inStock, MultipartFile productImage, CartItem cartItem, List<Category> productCategories) {
-        this.name = name;
-        this.price = price;
-        this.description = description;
-        this.shippingWeight = shippingWeight;
-        this.inStock = inStock;
-        this.productImage = productImage;
-        this.cartItem = cartItem;
-        this.productCategories = productCategories;
-    }
-*/
 
     public Long getId() {
         return id;
@@ -81,11 +69,11 @@ public class Product {
         this.description = description;
     }
 
-    public Boolean getInStock() {
+    public boolean getInStock() {
         return inStock;
     }
 
-    public void setInStock(Boolean inStock) {
+    public void setInStock(boolean inStock) {
         this.inStock = inStock;
     }
 

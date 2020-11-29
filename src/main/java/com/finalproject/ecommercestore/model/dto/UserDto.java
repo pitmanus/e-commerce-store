@@ -1,6 +1,4 @@
 package com.finalproject.ecommercestore.model.dto;
-
-import com.finalproject.ecommercestore.model.entity.Address;
 import com.finalproject.ecommercestore.model.entity.Role;
 
 import javax.validation.constraints.NotNull;
@@ -45,16 +43,6 @@ public class UserDto {
     public UserDto() {
     }
 
-    public UserDto(String firstName, String lastName, String username, String email, String tel, String password, List<Role> roles, AddressDto address) {
-        this.firstName = firstName;
-        this.username = username;
-        this.lastName = lastName;
-        this.email = email;
-        this.tel = tel;
-        this.password = password;
-        this.roles = roles;
-        this.address = address;
-    }
 
     public Long getId() {
         return id;

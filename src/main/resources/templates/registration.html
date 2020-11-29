@@ -11,11 +11,6 @@
     <div class="row">
         <div class="col-md-20 col-md-offset-3">
 
-            <!--success message-->
-            <div th:if="${param.success}" style="padding-top: 20px">
-                <div class="alert alert-info">You've successfully registered to our app!</div>
-            </div>
-
             <h1>Registration</h1>
 
             <form th:action="@{/registration}" method="post" th:object="${user}">

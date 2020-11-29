@@ -27,6 +27,11 @@
                     <div class="alert alert-info">You've been logged out!</div>
                 </div>
 
+                <!--success message-->
+                <div th:if="${param.success}" style="padding-top: 20px">
+                    <div class="alert alert-info">You've successfully registered to our app!</div>
+                </div>
+
                 <div class="form-group">
                     <label class="control-label" for="username">Login: </label>
                     <input type="text" id="username" name="username" class="form-control" required autofocus="autofocus" placeholder="Enter your login"/>

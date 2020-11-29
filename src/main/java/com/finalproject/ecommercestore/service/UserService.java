@@ -3,6 +3,7 @@ package com.finalproject.ecommercestore.service;
 import com.finalproject.ecommercestore.model.dto.UserDto;
 import com.finalproject.ecommercestore.model.entity.Address;
 import com.finalproject.ecommercestore.model.entity.Role;
+import com.finalproject.ecommercestore.model.entity.RoleNames;
 import com.finalproject.ecommercestore.model.entity.User;
 import com.finalproject.ecommercestore.repository.UserRepository;
 import org.modelmapper.ModelMapper;
@@ -34,20 +35,9 @@ public class UserService implements UserDetailsService {
     }
 
     public User saveUser(UserDto userDto) {
-        User user = new User(
-                userDto.getFirstName(),
-                userDto.getLastName(),
-                userDto.getUsername(),
-                userDto.getEmail(),
-                passwordEncoder.encode(userDto.getPassword()),
-                userDto.getTel(),
-                new Address(
-                        userDto.getAddress().getStreet(),
-                        userDto.getAddress().getBuildingNumberAndApartment(),
-                        userDto.getAddress().getCity(),
-                        userDto.getAddress().getZip()),
-                Arrays.asList(new Role("USER"))
-        );
+        User user = modelMapper.map(userDto, User.class);
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        user.setRoles(Arrays.asList(new Role(RoleNames.ROLE_USER)));
         return userRepository.save(user);
     }
 
