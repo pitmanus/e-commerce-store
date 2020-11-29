@@ -32,8 +32,8 @@
                             <td th:type="number" th:text="${product.id}"/></td>
                             <td th:text="${product.name}"/>
                             <td th:text="${product.productCategories}"/>
-                            <td th:text="${product.price}"/>
-                            <td th:text="${product.shippingWeight}"/>
+                            <td th:text="${#numbers.formatDecimal(product.price,0,2)}+'$'"/>
+                            <td th:text="${#numbers.formatDecimal(product.shippingWeight,1,2)}+'kg'"/>
                             <td th:text="${product.description}"/>
                             <td th:text="${product.inStock}"/>
                             <td><a class="btn btn-success" th:href="@{/newproduct}">Add</a></td>

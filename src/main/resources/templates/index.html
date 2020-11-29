@@ -58,7 +58,7 @@
                             <h4 class="card-title">
                                 <a href="#" th:text="${product.name}"></a>
                             </h4>
-                            <h5 th:text="${product.price}+'$'"></h5>
+                            <h5 th:text="${#numbers.formatDecimal(product.price,0,2)}+'$'"></h5>
                             <p th:text="${product.inStock}? 'In stock'" style="color: lime"></p>
                             <p th:text="${!product.inStock}? 'Out of stock'" style="color: red"></p>
                             <p class="card-text" th:text="${product.description}"></p>
