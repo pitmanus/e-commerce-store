@@ -47,7 +47,7 @@ public class MainController {
         if (role.contains("ROLE_ADMIN")){
             response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/admin-account"));
         }
-        else if (role.contains("USER")){
+        else if (role.contains("ROLE_USER")){
             response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/user-account"));
         }
     }

@@ -14,8 +14,10 @@ public class Order {
     private Long id;
     private LocalDateTime orderDate;
     private LocalDateTime shippingDate;
-    private String shippingMethod;
-    private String orderStatus;
+    @Enumerated(EnumType.STRING)
+    private ShippingMethod shippingMethod;
+    @Enumerated(EnumType.STRING)
+    private OrderStatus orderStatus;
     private BigDecimal orderTotal;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
@@ -49,19 +51,19 @@ public class Order {
         this.shippingDate = shippingDate;
     }
 
-    public String getShippingMethod() {
+    public ShippingMethod getShippingMethod() {
         return shippingMethod;
     }
 
-    public void setShippingMethod(String shippingMethod) {
+    public void setShippingMethod(ShippingMethod shippingMethod) {
         this.shippingMethod = shippingMethod;
     }
 
-    public String getOrderStatus() {
+    public OrderStatus getOrderStatus() {
         return orderStatus;
     }
 
-    public void setOrderStatus(String orderStatus) {
+    public void setOrderStatus(OrderStatus orderStatus) {
         this.orderStatus = orderStatus;
     }
 
