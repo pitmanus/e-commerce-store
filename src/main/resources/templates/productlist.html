@@ -22,6 +22,7 @@
                         <th scope="col">Description</th>
                         <th scope="col">In stock</th>
                         <th scope="col">Add new product</th>
+                        <th scope="col">Edit product</th>
                         <th scope="col">Delete product</th>
                     </tr>
                     </thead>
@@ -37,6 +38,7 @@
                             <td th:text="${product.description}"/>
                             <td th:text="${product.inStock}"/>
                             <td><a class="btn btn-success" th:href="@{/newproduct}">Add</a></td>
+                            <td><a class="btn btn-warning" th:href="@{/editproduct/{id}(id=${product.id})}">Edit</a></td>
                             <td>
                                 <input type="hidden" name="id" th:value="${product.id}">
                                 <button type="submit" class="btn btn-danger">Delete</button>

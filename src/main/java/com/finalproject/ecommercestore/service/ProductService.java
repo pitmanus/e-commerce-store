@@ -32,6 +32,14 @@ public class ProductService {
                 .collect(Collectors.toList());
     }
 
+    public ProductDto getById(Long id){
+        return productRepository.findById(id)
+                .stream()
+                .map(product -> modelMapper.map(product,ProductDto.class))
+                .findAny()
+                .orElse(null);
+    }
+
     public void deleteProduct(Long id){
         productRepository.deleteById(id);
     }

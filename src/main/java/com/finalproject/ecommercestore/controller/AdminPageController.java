@@ -95,7 +95,7 @@ public class AdminPageController {
     }
 
     @GetMapping("/productlist")
-    public String showAllProducts(Model model){
+    public String showAllProducts(Model model) {
         List<ProductDto> products = productService.getAllProducts();
         model.addAttribute("productList", products);
         return "productlist";
@@ -103,17 +103,17 @@ public class AdminPageController {
 
     @PostMapping("/newproduct")
     public String addNewProduct(@ModelAttribute ProductDto productDto) {
-       Product product = productService.addProduct(productDto);
+        Product product = productService.addProduct(productDto);
 
         MultipartFile productImage = productDto.getProductImage();
 
         try {
             byte[] bytes = productImage.getBytes();
-            String name = product.getId()+".png";
+            String name = product.getId() + ".png";
             BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File("src/main/resources/static/image/product" + name)));
             stream.write(bytes);
             stream.close();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -121,10 +121,37 @@ public class AdminPageController {
     }
 
     @PostMapping("/deleteproduct")
-    public String deleteProduct(@ModelAttribute ProductDto productDto){
+    public String deleteProduct(@ModelAttribute ProductDto productDto) {
         productService.deleteProduct(productDto.getId());
         return "redirect:/productlist";
     }
 
+    @GetMapping("/editproduct/{id}")
+    public String showEditProductPage(@PathVariable Long id, Model model) {
+        ProductDto product = productService.getById(id);
+        model.addAttribute("selectedProduct", product);
+        List<CategoryDto>categories = categoryService.showAllCategories();
+        model.addAttribute("categories", categories);
+        return "editproduct";
+    }
+
+    @PostMapping("/editproduct")
+    public String editProduct(@ModelAttribute("selectedProduct") ProductDto productDto) {
+        Product product = productService.addProduct(productDto);
+
+        MultipartFile productImage = product.getProductImage();
+
+        try {
+            byte[] bytes = productImage.getBytes();
+            String name = product.getId() + ".png";
+            BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File("src/main/resources/static/image/product" + name)));
+            stream.write(bytes);
+            stream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return "redirect:/productlist";
+    }
 
 }
