@@ -5,7 +5,6 @@ import com.finalproject.ecommercestore.model.dto.ProductDto;
 import com.finalproject.ecommercestore.model.dto.UserDto;
 import com.finalproject.ecommercestore.model.entity.Category;
 import com.finalproject.ecommercestore.model.entity.Product;
-import com.finalproject.ecommercestore.model.entity.User;
 import com.finalproject.ecommercestore.service.CategoryService;
 import com.finalproject.ecommercestore.service.ProductService;
 import com.finalproject.ecommercestore.service.UserService;
@@ -13,13 +12,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class AdminPageController {
@@ -130,7 +131,7 @@ public class AdminPageController {
     public String showEditProductPage(@PathVariable Long id, Model model) {
         ProductDto product = productService.getById(id);
         model.addAttribute("selectedProduct", product);
-        List<CategoryDto>categories = categoryService.showAllCategories();
+        List<CategoryDto> categories = categoryService.showAllCategories();
         model.addAttribute("categories", categories);
         return "editproduct";
     }
@@ -139,17 +140,24 @@ public class AdminPageController {
     public String editProduct(@ModelAttribute("selectedProduct") ProductDto productDto) {
         Product product = productService.addProduct(productDto);
 
-        MultipartFile productImage = product.getProductImage();
+        MultipartFile productImage = productDto.getProductImage();
 
-        try {
-            byte[] bytes = productImage.getBytes();
-            String name = product.getId() + ".png";
-            BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File("src/main/resources/static/image/product" + name)));
-            stream.write(bytes);
-            stream.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        if (!productImage.isEmpty())
+            try {
+                byte[] bytes = productImage.getBytes();
+                String name = product.getId() + ".png";
+
+                Files.delete(Paths.get("src/main/resources/static/image/product" + name));
+
+                BufferedOutputStream stream = new BufferedOutputStream(
+                        new FileOutputStream(new File
+                                ("src/main/resources/static/image/product" + name)));
+                stream.write(bytes);
+                stream.close();
+                System.out.println("File updated");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
         return "redirect:/productlist";
     }
