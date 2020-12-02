@@ -1,6 +1,7 @@
 package com.finalproject.ecommercestore.service;
 
 import com.finalproject.ecommercestore.model.dto.ProductDto;
+import com.finalproject.ecommercestore.model.entity.Category;
 import com.finalproject.ecommercestore.model.entity.Product;
 import com.finalproject.ecommercestore.repository.ProductRepository;
 import org.modelmapper.ModelMapper;
@@ -28,6 +29,14 @@ public class ProductService {
     public List<ProductDto> getAllProducts(){
         return productRepository.findAll()
                 .stream()
+                .map(product -> modelMapper.map(product, ProductDto.class))
+                .collect(Collectors.toList());
+    }
+
+    public List<ProductDto> getProductsByCategories(Long id){
+        return productRepository.findAll()
+                .stream()
+                .filter(product -> product.getProductCategories().stream().anyMatch(category -> category.getId()==id))
                 .map(product -> modelMapper.map(product, ProductDto.class))
                 .collect(Collectors.toList());
     }

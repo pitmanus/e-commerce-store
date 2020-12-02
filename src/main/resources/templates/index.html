@@ -14,7 +14,7 @@
 
             <h1 class="my-4">Categories:</h1>
             <div class="list-group">
-                <a th:each="category : ${categories}" th:text="${category.categoryName}" href="#" class="list-group-item">Category name</a>
+                <a th:each="category : ${categories}" th:text="${category.categoryName}" th:href="@{/products/{id}(id=${category.id})}" class="list-group-item">Category name</a>
             </div>
 
         </div>
@@ -62,6 +62,9 @@
                             <p th:text="${product.inStock}? 'In stock'" style="color: lime"></p>
                             <p th:text="${!product.inStock}? 'Out of stock'" style="color: red"></p>
                             <p class="card-text" th:text="${product.description}"></p>
+<!--
+                            <div th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">Add to cart</div>
+-->
                         </div>
                         <div class="card-footer">
                             <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>

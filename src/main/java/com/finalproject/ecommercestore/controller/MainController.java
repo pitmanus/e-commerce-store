@@ -8,6 +8,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.ServletException;
@@ -34,6 +35,15 @@ public class MainController {
         List<ProductDto> productList = productService.getAllProducts();
         model.addAttribute("productlist", productList);
         return "index";
+    }
+
+    @GetMapping("/products/{id}")
+    public String showFilteredByCategoryProducts(@PathVariable Long id, Model model){
+        List<CategoryDto> categories = categoryService.showAllCategories();
+        model.addAttribute("categories", categories);
+        List<ProductDto> productList = productService.getProductsByCategories(id);
+        model.addAttribute("productlist", productList);
+        return "products-by-category";
     }
 
     /*@GetMapping("/my-account")
