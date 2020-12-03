@@ -7,9 +7,8 @@ import com.finalproject.ecommercestore.service.ProductService;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -29,7 +28,7 @@ public class MainController {
     }
 
     @GetMapping({"/index", "/"})
-    public String mainPage(Model model){
+    public String mainPage(Model model) {
         List<CategoryDto> categories = categoryService.showAllCategories();
         model.addAttribute("categories", categories);
         List<ProductDto> productList = productService.getAllProducts();
@@ -38,37 +37,39 @@ public class MainController {
     }
 
     @GetMapping("/products/{id}")
-    public String showFilteredByCategoryProducts(@PathVariable Long id, Model model){
+    public String showFilteredByCategoryProducts(@PathVariable Long id, Model model) {
         List<CategoryDto> categories = categoryService.showAllCategories();
         model.addAttribute("categories", categories);
         List<ProductDto> productList = productService.getProductsByCategories(id);
         model.addAttribute("productlist", productList);
-        return "products-by-category";
+        return "filtered-products";
     }
 
-    /*@GetMapping("/my-account")
-    public String myAccount(){
-        return "my-account";
-    }*/
+    @RequestMapping(value = "search-products", method = RequestMethod.GET)
+    public String showFilteredByProductName(@RequestParam(value = "productName", required = false, defaultValue = "") String productName, Model model) {
+        List<CategoryDto> categories = categoryService.showAllCategories();
+        model.addAttribute("categories", categories);
+        List<ProductDto> productList = productService.getProductsByProductName(productName);
+        model.addAttribute("productlist", productList);
+        return "filtered-products";
+    }
+
 
     @RequestMapping("/login")
-    public String login(){
+    public String login() {
         return "login";
     }
 
     @RequestMapping("/my-account")
-    public void myAccountPageRedirect(HttpServletRequest request, HttpServletResponse response, Authentication authResult)throws IOException, ServletException {
+    public void myAccountPageRedirect(HttpServletRequest request, HttpServletResponse response, Authentication authResult) throws IOException, ServletException {
         String role = authResult.getAuthorities().toString();
 
-        if (role.contains("ROLE_ADMIN")){
+        if (role.contains("ROLE_ADMIN")) {
             response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/admin-account"));
-        }
-        else if (role.contains("ROLE_USER")){
+        } else if (role.contains("ROLE_USER")) {
             response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/user-account"));
         }
     }
-
-
 
 
 }

@@ -41,6 +41,14 @@ public class ProductService {
                 .collect(Collectors.toList());
     }
 
+    public List<ProductDto> getProductsByProductName(String productName){
+        return productRepository.findAll()
+                .stream()
+                .filter(product -> product.getName().contains(productName))
+                .map(product -> modelMapper.map(product, ProductDto.class))
+                .collect(Collectors.toList());
+    }
+
     public ProductDto getById(Long id){
         return productRepository.findById(id)
                 .stream()
