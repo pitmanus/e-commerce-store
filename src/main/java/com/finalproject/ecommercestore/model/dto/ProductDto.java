@@ -2,6 +2,7 @@ package com.finalproject.ecommercestore.model.dto;
 
 import com.finalproject.ecommercestore.model.entity.CartItem;
 import com.finalproject.ecommercestore.model.entity.Category;
+import com.finalproject.ecommercestore.model.entity.Comment;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
@@ -20,8 +21,17 @@ public class ProductDto {
     private MultipartFile productImage;
     private CartItem cartItem;
     private List<Category> productCategories = new ArrayList<>();
+    private List<Comment> comments;
 
     public ProductDto() {
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 
     public Long getId() {

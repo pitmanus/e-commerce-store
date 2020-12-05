@@ -7,6 +7,7 @@ import com.finalproject.ecommercestore.service.CategoryService;
 import com.finalproject.ecommercestore.service.CommentService;
 import com.finalproject.ecommercestore.service.ProductService;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -64,10 +65,19 @@ public class MainController {
         model.addAttribute("categories", categories);
         ProductDto product = productService.getById(id);
         model.addAttribute("product", product);
-        model.addAttribute("comment", new CommentDto());
+        CommentDto commentDto = new CommentDto();
+        model.addAttribute("comment", commentDto);
         List<CommentDto> comments = commentService.getAllComments();
         model.addAttribute("comments", comments);
         return "product-page";
+    }
+
+    @PostMapping("/add-comment/{id}")
+    public String addComment(@PathVariable Long id, @ModelAttribute("comment") CommentDto commentDto){
+        ProductDto product = productService.getById(id);
+        commentDto.setProduct(product);
+        commentService.addComment(commentDto);
+        return "redirect:/product-page/" + id;
     }
 
 

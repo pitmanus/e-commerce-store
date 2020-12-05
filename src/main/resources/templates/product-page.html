@@ -91,10 +91,10 @@
                                         </div>
                                     </div>
 
-                                    <form>
+                                    <form th:action="@{/add-comment/{id}(id=${product.id})}" method="post" th:object="${comment}">
                                     <fieldset>
                                     <div class="form-group">
-                                        <textarea rows="4"  class="form-control"
+                                        <textarea rows="4"  class="form-control" th:field="*{text}"
                                                   placeholder="Leave your comment here"></textarea>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Leave comment</button>

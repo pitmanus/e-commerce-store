@@ -4,6 +4,8 @@ import com.finalproject.ecommercestore.model.dto.CommentDto;
 import com.finalproject.ecommercestore.model.entity.Comment;
 import com.finalproject.ecommercestore.repository.CommentRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -21,6 +23,9 @@ public class CommentService {
     }
 
     public void addComment(CommentDto commentDto){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String userName = auth.getName();
+        commentDto.setAuthor(userName);
         commentDto.setTime(LocalDateTime.now());
         commentRepository.save(modelMapper.map(commentDto, Comment.class));
     }

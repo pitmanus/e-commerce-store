@@ -40,17 +40,18 @@ public class Product {
                     name = "category_id", referencedColumnName = "id"))
     private List<Category> productCategories = new ArrayList<>();
 
-    @ManyToMany
-    @LazyCollection(LazyCollectionOption.FALSE)
-    @JoinTable(
-            name = "products_comments",
-            joinColumns = @JoinColumn(
-                    name = "product_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(
-                    name = "comment_id", referencedColumnName = "id"))
-    private List<Comment> comments = new ArrayList<>();
+    @OneToMany(mappedBy = "product")
+    private List<Comment> comments;
 
     public Product() {
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 
     public Long getId() {

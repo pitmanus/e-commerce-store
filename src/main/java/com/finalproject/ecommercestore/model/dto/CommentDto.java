@@ -1,5 +1,7 @@
 package com.finalproject.ecommercestore.model.dto;
 
+import com.finalproject.ecommercestore.model.entity.Product;
+
 import javax.persistence.Column;
 import java.time.LocalDateTime;
 
@@ -8,6 +10,15 @@ public class CommentDto {
     private String text;
     private String author;
     private LocalDateTime time;
+    private ProductDto product;
+
+    public ProductDto getProduct() {
+        return product;
+    }
+
+    public void setProduct(ProductDto product) {
+        this.product = product;
+    }
 
     public Long getId() {
         return id;
