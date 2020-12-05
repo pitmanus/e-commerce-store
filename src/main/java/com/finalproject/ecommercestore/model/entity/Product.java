@@ -1,5 +1,7 @@
 package com.finalproject.ecommercestore.model.entity;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
@@ -37,6 +39,16 @@ public class Product {
             inverseJoinColumns = @JoinColumn(
                     name = "category_id", referencedColumnName = "id"))
     private List<Category> productCategories = new ArrayList<>();
+
+    @ManyToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @JoinTable(
+            name = "products_comments",
+            joinColumns = @JoinColumn(
+                    name = "product_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "comment_id", referencedColumnName = "id"))
+    private List<Comment> comments = new ArrayList<>();
 
     public Product() {
     }
