@@ -54,6 +54,14 @@ public class MainController {
         return "filtered-products";
     }
 
+    @GetMapping("/product-page/{id}")
+    public String showSingleProductPage(@PathVariable Long id, Model model){
+        List<CategoryDto> categories = categoryService.showAllCategories();
+        model.addAttribute("categories", categories);
+        ProductDto product = productService.getById(id);
+        model.addAttribute("product", product);
+        return "product-page";
+    }
 
     @RequestMapping("/login")
     public String login() {
