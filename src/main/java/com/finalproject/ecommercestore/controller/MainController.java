@@ -1,8 +1,10 @@
 package com.finalproject.ecommercestore.controller;
 
 import com.finalproject.ecommercestore.model.dto.CategoryDto;
+import com.finalproject.ecommercestore.model.dto.CommentDto;
 import com.finalproject.ecommercestore.model.dto.ProductDto;
 import com.finalproject.ecommercestore.service.CategoryService;
+import com.finalproject.ecommercestore.service.CommentService;
 import com.finalproject.ecommercestore.service.ProductService;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -21,10 +23,12 @@ public class MainController {
 
     private CategoryService categoryService;
     private ProductService productService;
+    private CommentService commentService;
 
-    public MainController(CategoryService categoryService, ProductService productService) {
+    public MainController(CategoryService categoryService, ProductService productService, CommentService commentService) {
         this.categoryService = categoryService;
         this.productService = productService;
+        this.commentService = commentService;
     }
 
     @GetMapping({"/index", "/"})
@@ -60,8 +64,12 @@ public class MainController {
         model.addAttribute("categories", categories);
         ProductDto product = productService.getById(id);
         model.addAttribute("product", product);
+        model.addAttribute("comment", new CommentDto());
+        List<CommentDto> comments = commentService.getAllComments();
+        model.addAttribute("comments", comments);
         return "product-page";
     }
+
 
     @RequestMapping("/login")
     public String login() {
