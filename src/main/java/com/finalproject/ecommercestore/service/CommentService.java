@@ -7,6 +7,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CommentService {
@@ -21,6 +23,13 @@ public class CommentService {
     public void addComment(CommentDto commentDto){
         commentDto.setTime(LocalDateTime.now());
         commentRepository.save(modelMapper.map(commentDto, Comment.class));
+    }
+
+    public List<CommentDto> getAllComments(){
+        return commentRepository.findAll()
+                .stream()
+                .map(comment -> modelMapper.map(comment, CommentDto.class))
+                .collect(Collectors.toList());
     }
 }
 
