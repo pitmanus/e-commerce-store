@@ -73,33 +73,36 @@
                         <div class="row">
                             <div class="col-md-10">
                                 <div class="page-header">
-                                    <h1><small class="pull-right">45 comments</small> Comments </h1>
+                                    <h1><small class="pull-right" th:text="${comments.size()}"> </small> Comments: </h1>
                                     </br>
                                 </div>
-                                <div class="comments-list">
+
+                                <form th:action="@{/add-comment/{id}(id=${product.id})}" method="post" th:object="${comment}">
+                                    <fieldset>
+                                        <div class="form-group">
+                                        <textarea rows="4"  class="form-control" th:field="*{text}"
+                                                  placeholder="Leave your comment here"></textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Leave comment</button>
+                                    </fieldset>
+                                </form>
+                                </br>
+                                <div class="comments-list" th:each="comment1: ${comments}">
                                     <div class="media">
-                                        <p class="pull-right"><small>5 days ago</small></p>
-                                        <a class="media-left" href="#">
-                                            <img src="http://lorempixel.com/40/40/people/1/">
+                                        <a class="media-left" href="#" style="padding-right: 10px">
+                                            <img src="https://p.kindpng.com/picc/s/227-2271313_user-icon-white-head-icon-hd-png-download.png" width="50" height="50">
+
                                         </a>
                                         <div class="media-body">
 
-                                            <h4 class="media-heading user_name">Baltej Singh</h4>
-                                            Wow! this is really great.
+                                            <h4 class="media-heading user_name" th:text="${comment1.author}"></h4>
+                                            <div th:text="${comment1.text}"></div>
+                                            <p class="pull-right"><small th:text="${comment1.time}"></small></p>
 
                                             <p><small><a href="">Like</a> - <a href="">Share</a></small></p>
                                         </div>
                                     </div>
 
-                                    <form th:action="@{/add-comment/{id}(id=${product.id})}" method="post" th:object="${comment}">
-                                    <fieldset>
-                                    <div class="form-group">
-                                        <textarea rows="4"  class="form-control" th:field="*{text}"
-                                                  placeholder="Leave your comment here"></textarea>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Leave comment</button>
-                                    </fieldset>
-                                    </form>
                                 </div>
                             </div>
                         </div>

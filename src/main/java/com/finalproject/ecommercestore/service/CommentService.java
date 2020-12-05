@@ -30,9 +30,10 @@ public class CommentService {
         commentRepository.save(modelMapper.map(commentDto, Comment.class));
     }
 
-    public List<CommentDto> getAllComments(){
+    public List<CommentDto> getAllCommentsForASingleProduct(Long id){
         return commentRepository.findAll()
                 .stream()
+                .filter(comment -> comment.getProducts().stream().anyMatch(product -> product.getId()==id))
                 .map(comment -> modelMapper.map(comment, CommentDto.class))
                 .collect(Collectors.toList());
     }

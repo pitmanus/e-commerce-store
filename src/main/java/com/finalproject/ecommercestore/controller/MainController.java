@@ -17,6 +17,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -67,7 +69,7 @@ public class MainController {
         model.addAttribute("product", product);
         CommentDto commentDto = new CommentDto();
         model.addAttribute("comment", commentDto);
-        List<CommentDto> comments = commentService.getAllComments();
+        List<CommentDto> comments = commentService.getAllCommentsForASingleProduct(id);
         model.addAttribute("comments", comments);
         return "product-page";
     }
@@ -75,7 +77,7 @@ public class MainController {
     @PostMapping("/add-comment/{id}")
     public String addComment(@PathVariable Long id, @ModelAttribute("comment") CommentDto commentDto){
         ProductDto product = productService.getById(id);
-        commentDto.setProduct(product);
+        commentDto.addProducts(product);
         commentService.addComment(commentDto);
         return "redirect:/product-page/" + id;
     }

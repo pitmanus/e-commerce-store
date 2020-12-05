@@ -40,7 +40,7 @@ public class Product {
                     name = "category_id", referencedColumnName = "id"))
     private List<Category> productCategories = new ArrayList<>();
 
-    @OneToMany(mappedBy = "product")
+    @ManyToMany(mappedBy = "products")
     private List<Comment> comments;
 
     public Product() {

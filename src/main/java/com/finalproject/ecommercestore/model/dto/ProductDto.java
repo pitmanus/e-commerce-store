@@ -21,7 +21,7 @@ public class ProductDto {
     private MultipartFile productImage;
     private CartItem cartItem;
     private List<Category> productCategories = new ArrayList<>();
-    private List<Comment> comments;
+    private List<Comment> comments = new ArrayList<>();
 
     public ProductDto() {
     }

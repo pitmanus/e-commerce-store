@@ -2,6 +2,7 @@ package com.finalproject.ecommercestore.model.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "comment")
@@ -15,16 +16,19 @@ public class Comment {
     @Column(columnDefinition = "TIMESTAMP")
     private LocalDateTime time;
 
-    @ManyToOne
-    @JoinColumn(name = "product_id")
-    private Product product;
+    @ManyToMany
+    @JoinTable(
+            name = "products_comments",
+            joinColumns = @JoinColumn(name = "comment_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id"))
+    private List<Product> products;
 
-    public Product getProduct() {
-        return product;
+    public List<Product> getProducts() {
+        return products;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 
     public Long getId() {

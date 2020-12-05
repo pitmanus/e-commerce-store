@@ -4,20 +4,26 @@ import com.finalproject.ecommercestore.model.entity.Product;
 
 import javax.persistence.Column;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CommentDto {
     private Long id;
     private String text;
     private String author;
     private LocalDateTime time;
-    private ProductDto product;
+    private List<ProductDto> products = new ArrayList<>();
 
-    public ProductDto getProduct() {
-        return product;
+    public List<ProductDto> getProducts() {
+        return products;
     }
 
-    public void setProduct(ProductDto product) {
-        this.product = product;
+    public void setProducts(List<ProductDto> products) {
+        this.products = products;
+    }
+
+    public void addProducts(ProductDto productDto){
+        products.add(productDto);
     }
 
     public Long getId() {
