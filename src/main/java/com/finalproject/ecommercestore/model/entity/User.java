@@ -32,6 +32,10 @@ public class User implements UserDetails {
     @JoinColumn(name = "address_id")
     private Address address;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "shopping_cart_id")
+    private ShoppingCart shoppingCart;
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "user_roles",
@@ -44,15 +48,12 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(String firstName, String lastName, String username, String email, String tel, String password,Address address, List<Role> roles) {
-        this.firstName = firstName;
-        this.username = username;
-        this.lastName = lastName;
-        this.email = email;
-        this.tel = tel;
-        this.password = password;
-        this.roles = roles;
-        this.address = address;
+    public ShoppingCart getShoppingCart() {
+        return shoppingCart;
+    }
+
+    public void setShoppingCart(ShoppingCart shoppingCart) {
+        this.shoppingCart = shoppingCart;
     }
 
     public long getId() {

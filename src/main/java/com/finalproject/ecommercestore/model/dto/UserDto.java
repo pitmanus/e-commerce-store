@@ -1,5 +1,6 @@
 package com.finalproject.ecommercestore.model.dto;
 import com.finalproject.ecommercestore.model.entity.Role;
+import com.finalproject.ecommercestore.model.entity.ShoppingCart;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -40,9 +41,18 @@ public class UserDto {
 
     private AddressDto address;
 
+    private ShoppingCart shoppingCart;
+
     public UserDto() {
     }
 
+    public ShoppingCart getShoppingCart() {
+        return shoppingCart;
+    }
+
+    public void setShoppingCart(ShoppingCart shoppingCart) {
+        this.shoppingCart = shoppingCart;
+    }
 
     public Long getId() {
         return id;

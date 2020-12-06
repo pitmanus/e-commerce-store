@@ -1,10 +1,7 @@
 package com.finalproject.ecommercestore.service;
 
 import com.finalproject.ecommercestore.model.dto.UserDto;
-import com.finalproject.ecommercestore.model.entity.Address;
-import com.finalproject.ecommercestore.model.entity.Role;
-import com.finalproject.ecommercestore.model.entity.RoleNames;
-import com.finalproject.ecommercestore.model.entity.User;
+import com.finalproject.ecommercestore.model.entity.*;
 import com.finalproject.ecommercestore.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +35,7 @@ public class UserService implements UserDetailsService {
         User user = modelMapper.map(userDto, User.class);
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setRoles(Arrays.asList(new Role(RoleNames.ROLE_USER)));
+        user.setShoppingCart(new ShoppingCart());
         return userRepository.save(user);
     }
 
