@@ -5,7 +5,7 @@
 <body>
 <div th:replace="common/common :: navbar"></div>
 
-<ul class="nav nav-tabs" >
+<ul class="nav nav-tabs" th:object="${user}">
     <li class="nav-item">
         <a class="nav-link" data-toggle="tab" href="#tab-1"><span style="color: black">Shopping cart</span></a>
     </li>
@@ -20,7 +20,7 @@
 <!--tab panels-->
 <div class="tab-content">
 
-    <div class="tab-pane fade" id="tab-1" >
+    <div class="tab-pane fade" id="tab-1">
         <div class="panel-group">
             <div class="panel panel-default" style="border: none;">
                 <div class="panel-body" style=" margin-top: 20px;">
@@ -30,7 +30,7 @@
         </div>
     </div>
 
-    <div class="tab-pane fade" id="tab-2" >
+    <div class="tab-pane fade" id="tab-2">
         <div class="panel-group">
             <div class="panel panel-default" style="border: none;">
                 <div class="panel-body" style=" margin-top: 20px;">
@@ -40,11 +40,75 @@
         </div>
     </div>
 
-    <div class="tab-pane fade" id="tab-3" >
+    <div class="tab-pane fade" id="tab-3">
         <div class="panel-group">
             <div class="panel panel-default" style="border: none;">
-                <div class="panel-body" style=" margin-top: 20px;">
-                    <p>Here will be user account information</p>
+                <div class="panel-body">
+
+                            <div class="card">
+                                <h5 class="card-header">Account information</h5>
+                                <div class="card-body">
+                                    <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="card h-100">
+                                            <div class="card-body">
+                                                <div class="inline d-flex flex-row align-items-center">
+                                                    <span><b>First name: </b></span> &nbsp <span
+                                                        th:text="${user.firstName}"></span></div>
+                                                <br/>
+                                                <div class="inline d-flex flex-row align-items-center">
+                                                    <span><b>Last name: </b></span> &nbsp <span
+                                                        th:text="${user.lastName}"></span></div>
+                                                <br/>
+                                                <div class="inline d-flex flex-row align-items-center">
+                                                    <span><b>Username: </b></span> &nbsp <span
+                                                        th:text="${user.username}"></span></div>
+                                                <br/>
+                                                <div class="inline d-flex flex-row align-items-center">
+                                                    <span><b>Email: </b></span> &nbsp <span
+                                                        th:text="${user.email}"></span></div>
+                                                <br/>
+                                                <div class="inline d-flex flex-row align-items-center">
+                                                    <span><b>Tel: </b></span> &nbsp <span
+                                                        th:text="${user.tel}"></span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="card h-100">
+                                            <div class="card-body">
+                                                <br/>
+                                                <div class="inline d-flex flex-row align-items-center">
+                                                    <span><b>City: </b></span> &nbsp <span
+                                                        th:text="${user.address.city}"></span></div>
+                                                <br/>
+                                                <div class="inline d-flex flex-row align-items-center">
+                                                    <span><b>Street: </b></span> &nbsp <span
+                                                        th:text="${user.address.street}"></span></div>
+                                                <br/>
+                                                <div class="inline d-flex flex-row align-items-center">
+                                                    <span><b>Building number: </b></span> &nbsp <span
+                                                        th:text="${user.address.buildingNumber}"></span></div>
+                                                <br/>
+                                                <div class="inline d-flex flex-row align-items-center">
+                                                    <span><b>Apartment number: </b></span> &nbsp <span
+                                                        th:text="${user.address.apartmentNumber}"></span></div>
+                                                <br/>
+                                                <div class="inline d-flex flex-row align-items-center">
+                                                    <span><b>Zip: </b></span> &nbsp <span
+                                                        th:text="${user.address.zip}"></span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    </br>
+
+                                    <a href="#" class="btn btn-primary">Edit</a>
+
+                                </div>
+                            </div>
+
                 </div>
             </div>
         </div>
