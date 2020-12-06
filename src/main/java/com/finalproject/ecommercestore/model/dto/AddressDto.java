@@ -10,7 +10,8 @@ public class AddressDto {
     @Size(min = 3, message = "Invalid street name!")
     private String street;
     @NotNull
-    private String buildingNumberAndApartment;
+    private String buildingNumber;
+    private String apartmentNumber;
     @NotNull
     @Size(min = 3, message = "Invalid city name!")
     private String city;
@@ -18,9 +19,10 @@ public class AddressDto {
     @Size(min = 3, message = "Invalid zip code!")
     private String zip;
 
-    public AddressDto(String street, String buildingNumberAndApartment, String city, String zip) {
+    public AddressDto(String street, String buildingNumber, String apartmentNumber, String city, String zip) {
         this.street = street;
-        this.buildingNumberAndApartment = buildingNumberAndApartment;
+        this.buildingNumber = buildingNumber;
+        this.apartmentNumber = apartmentNumber;
         this.city = city;
         this.zip = zip;
     }
@@ -44,12 +46,20 @@ public class AddressDto {
         this.street = street;
     }
 
-    public String getBuildingNumberAndApartment() {
-        return buildingNumberAndApartment;
+    public String getBuildingNumber() {
+        return buildingNumber;
     }
 
-    public void setBuildingNumberAndApartment(String buildingNumberAndApartment) {
-        this.buildingNumberAndApartment = buildingNumberAndApartment;
+    public void setBuildingNumber(String buildingNumber) {
+        this.buildingNumber = buildingNumber;
+    }
+
+    public String getApartmentNumber() {
+        return apartmentNumber;
+    }
+
+    public void setApartmentNumber(String apartmentNumber) {
+        this.apartmentNumber = apartmentNumber;
     }
 
     public String getCity() {

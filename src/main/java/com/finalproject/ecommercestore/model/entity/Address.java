@@ -11,14 +11,17 @@ public class Address {
     private Long id;
 
     private String street;
-    @Column(name = "building_number_and_apartment")
-    private String buildingNumberAndApartment;
+    @Column(name = "building_number")
+    private String buildingNumber;
+    @Column(name = "apartment_number")
+    private String apartmentNumber;
     private String city;
     private String zip;
 
-    public Address(String street, String buildingNumberAndApartment, String city, String zip) {
+    public Address(String street, String buildingNumber, String apartmentNumber, String city, String zip) {
         this.street = street;
-        this.buildingNumberAndApartment = buildingNumberAndApartment;
+        this.buildingNumber = buildingNumber;
+        this.apartmentNumber = apartmentNumber;
         this.city = city;
         this.zip = zip;
     }
@@ -42,12 +45,20 @@ public class Address {
         this.street = street;
     }
 
-    public String getBuildingNumberAndApartment() {
-        return buildingNumberAndApartment;
+    public String getBuildingNumber() {
+        return buildingNumber;
     }
 
-    public void setBuildingNumberAndApartment(String buildingNumberAndApartment) {
-        this.buildingNumberAndApartment = buildingNumberAndApartment;
+    public void setBuildingNumber(String buildingNumber) {
+        this.buildingNumber = buildingNumber;
+    }
+
+    public String getApartmentNumber() {
+        return apartmentNumber;
+    }
+
+    public void setApartmentNumber(String apartmentNumber) {
+        this.apartmentNumber = apartmentNumber;
     }
 
     public String getCity() {
