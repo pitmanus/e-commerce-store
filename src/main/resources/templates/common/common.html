@@ -33,7 +33,7 @@
                 </li>
 
 
-                <div th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}"><li class="nav-item active"><a class="nav-link" href="#" >Shopping cart</a> </li></div>
+                <div th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}"><li class="nav-item active"><a class="nav-link" th:href="@{/shopping-cart}" >Shopping cart</a> </li></div>
                 <li class="nav-item active"><a class="nav-link" th:href="@{/my-account}" >My account</a> </li>
                 <li class="nav-item active"><a class="nav-link" th:href="@{/logout}" >Logout</a> </li>
                 <li style="padding-left: 10px" class="nav-item active"><a class="nav-link" href="#" ><div sec:authorize="isAuthenticated()">

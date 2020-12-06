@@ -41,16 +41,16 @@ public class UserDto {
 
     private AddressDto address;
 
-    private ShoppingCart shoppingCart;
+    private ShoppingCartDto shoppingCart;
 
     public UserDto() {
     }
 
-    public ShoppingCart getShoppingCart() {
+    public ShoppingCartDto getShoppingCart() {
         return shoppingCart;
     }
 
-    public void setShoppingCart(ShoppingCart shoppingCart) {
+    public void setShoppingCart(ShoppingCartDto shoppingCart) {
         this.shoppingCart = shoppingCart;
     }
 

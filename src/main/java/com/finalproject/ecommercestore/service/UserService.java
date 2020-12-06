@@ -5,6 +5,8 @@ import com.finalproject.ecommercestore.model.entity.*;
 import com.finalproject.ecommercestore.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -60,6 +62,11 @@ public class UserService implements UserDetailsService {
                 .map(user -> modelMapper.map(user, UserDto.class))
                 .findAny()
                 .orElse(null);
+    }
+
+
+    public UserDto getUserByUserName(String userName){
+        return modelMapper.map(userRepository.findByUsername(userName), UserDto.class);
     }
 
     @Override
