@@ -16,7 +16,7 @@ public class Comment {
     @Column(columnDefinition = "TIMESTAMP")
     private LocalDateTime time;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "products_comments",
             joinColumns = @JoinColumn(name = "comment_id"),
