@@ -44,7 +44,7 @@ public class ProductService {
     public List<ProductDto> getProductsByProductName(String productName){
         return productRepository.findAll()
                 .stream()
-                .filter(product -> product.getName().contains(productName))
+                .filter(product -> product.getName().toUpperCase().contains(productName.toUpperCase()))
                 .map(product -> modelMapper.map(product, ProductDto.class))
                 .collect(Collectors.toList());
     }
