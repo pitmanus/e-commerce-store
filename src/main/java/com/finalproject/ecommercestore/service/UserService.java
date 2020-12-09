@@ -41,6 +41,12 @@ public class UserService implements UserDetailsService {
         return userRepository.save(user);
     }
 
+    public void fullUserUpdate(UserDto userDto){
+        User user = modelMapper.map(userDto, User.class);
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        userRepository.save(user);
+    }
+
     public User updateUser(UserDto userDto){
         return userRepository.save(modelMapper.map(userDto, User.class));
     }

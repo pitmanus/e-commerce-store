@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:replace="common/common :: common-header">
+</head>
+<body>
+<div th:replace="common/common :: navbar"></div>
+
+<div class="card">
+    <h5 class="card-header">Edit account information</h5>
+    <form th:action="@{/edit-user/{id}(id=${user.id})}" method="post" th:object="${user}">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <input type="hidden" name="id" th:field="*{id}">
+                        <input type="hidden" name="id" th:field="*{shoppingCart.id}">
+                        <input type="hidden" name="id" th:field="*{address.id}">
+                        <div class="form-group">
+                            <label class="control-label" for="firstName"><b>First name</b></label>
+                            <input id="firstName" class="form-control" th:field="*{firstName}" required autofocus="autofocus"/>
+                            <p class="text-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First name error</p>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label" for="lastName"><b>Last name</b></label>
+                            <input id="lastName" class="form-control" th:field="*{lastName}" required autofocus="autofocus"/>
+                            <p class="text-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last name error</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label" for="username"><b>Username</b></label>
+                            <input id="username" class="form-control" th:field="*{username}" required autofocus="autofocus"/>
+                            <p class="text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username error</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label" for="email"><b>Email</b></label>
+                            <input id="email" class="form-control" th:field="*{email}" required autofocus="autofocus"/>
+                            <p class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label" for="tel"><b>Telephone</b></label>
+                            <input id="tel" class="form-control" th:field="*{tel}" required autofocus="autofocus"/>
+                            <p class="text-danger" th:if="${#fields.hasErrors('tel')}" th:errors="*{tel}">Telephone number error</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label" for="password"><b>Password</b></label>
+                            <input type="password" id="password" class="form-control" th:field="*{password}" required
+                                   autofocus="autofocus"/>
+                            <p class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password error</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div th:object="${address}">
+                            <input type="hidden" name="id" th:field="*{id}">
+                            <div class="form-group">
+                                <label class="control-label" for="street"><b>Street</b></label>
+                                <input type="text" id="street" class="form-control" th:field="*{street}" required
+                                       autofocus="autofocus"/>
+                                <p class="text-danger" th:if="${#fields.hasErrors('street')}" th:errors="*{street}">Street name error</p>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label" for="building-number"><b>Building number</b></label>
+                                <input type="text" id="building-number" class="form-control" th:field="*{buildingNumber}" required
+                                       autofocus="autofocus"/>
+                                <p class="text-danger" th:if="${#fields.hasErrors('buildingNumber')}" th:errors="*{buildingNumber}">Building number error</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label" for="apartment-number"><b>Apartment number</b></label>
+                                <input type="text" id="apartment-number" class="form-control" th:field="*{apartmentNumber}" required
+                                       autofocus="autofocus"/>
+                                <p class="text-danger" th:if="${#fields.hasErrors('apartmentNumber')}" th:errors="*{apartmentNumber}">Apartment number error</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label" for="city"><b>City</b></label>
+                                <input type="text" id="city" class="form-control" th:field="*{city}" required
+                                       autofocus="autofocus"/>
+                                <p class="text-danger" th:if="${#fields.hasErrors('city')}" th:errors="*{city}">City name error</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label" for="zip-code"><b>Zip Code</b></label>
+                                <input type="text" id="zip-code" class="form-control" th:field="*{zip}" required
+                                       autofocus="autofocus"/>
+                                <p class="text-danger" th:if="${#fields.hasErrors('zip')}" th:errors="*{zip}">Zip code error</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </br>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a th:href="@{/user-account}" class="btn btn-danger">Cancel</a>
+
+    </div>
+    </form>
+</div>
+
+</body>
+</html>

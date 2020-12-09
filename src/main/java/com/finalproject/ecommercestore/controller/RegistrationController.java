@@ -31,8 +31,8 @@ public class RegistrationController {
     }
 
     @PostMapping
-    public String registerUserAccount(@Valid @ModelAttribute("user") UserDto userDto, @Valid @ModelAttribute("address")AddressDto addressDto, BindingResult bindingResult){
-        if (bindingResult.hasErrors()){
+    public String registerUserAccount(@Valid @ModelAttribute("user") UserDto userDto, BindingResult bindingResult, @Valid @ModelAttribute("address")AddressDto addressDto, BindingResult bindingResult2){
+        if (bindingResult.hasErrors() || bindingResult2.hasErrors()){
             System.out.println("BINDING RESULT ERROR");
             return "registration";
         }else{
