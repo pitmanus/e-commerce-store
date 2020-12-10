@@ -36,7 +36,6 @@ public class UserPageController {
         UserDto userDto = userService.getById(id);
         model.addAttribute("user", userDto);
         model.addAttribute("address", userDto.getAddress());
-        model.addAttribute("roles", userDto.getRoles());
         return "edit-user-info";
     }
 
@@ -44,10 +43,9 @@ public class UserPageController {
     public String editUserInformation(@PathVariable Long id, @Valid @ModelAttribute("user") UserDto userDto, BindingResult bindingResult, @Valid @ModelAttribute("address") AddressDto addressDto, BindingResult bindingResult2) {
         if (bindingResult.hasErrors() || bindingResult2.hasErrors()) {
             System.out.println("BINDING RESULT ERROR");
-            return "registration";
+            return "redirect:/edit-user-info/"+id;
         } else {
             userDto.setAddress(addressDto);
-            System.out.println("Roles: " + userDto.getRoles().get(0).getId());
             userService.fullUserUpdate(userDto);
             return "redirect:/user-account";
         }
