@@ -1,6 +1,5 @@
 package com.finalproject.ecommercestore.controller;
 
-import com.finalproject.ecommercestore.configuration.SecurityConfiguration;
 import com.finalproject.ecommercestore.model.dto.AddressDto;
 import com.finalproject.ecommercestore.model.dto.UserDto;
 import com.finalproject.ecommercestore.service.UserService;
@@ -24,7 +23,7 @@ public class UserPageController {
     }
 
     @GetMapping("/user-account")
-    public String showUserAccountPage(Model model){
+    public String showUserAccountPage(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String userName = auth.getName();
         UserDto userDto = userService.getUserByUserName(userName);
@@ -33,25 +32,26 @@ public class UserPageController {
     }
 
     @GetMapping("/edit-user-info/{id}")
-    public String showEditUserPage(@PathVariable Long id, Model model){
+    public String showEditUserPage(@PathVariable Long id, Model model) {
         UserDto userDto = userService.getById(id);
         model.addAttribute("user", userDto);
-        model.addAttribute("address",userDto.getAddress());
-        System.out.println("Id: " + userDto.getAddress().getId());
+        model.addAttribute("address", userDto.getAddress());
+        model.addAttribute("roles", userDto.getRoles());
         return "edit-user-info";
     }
 
     @PostMapping("/edit-user/{id}")
-    public String editUserInformation(@PathVariable Long id, @Valid @ModelAttribute("user") UserDto userDto, BindingResult bindingResult, @Valid @ModelAttribute("address") AddressDto addressDto, BindingResult bindingResult2){
-        if (bindingResult.hasErrors()|| bindingResult2.hasErrors()){
+    public String editUserInformation(@PathVariable Long id, @Valid @ModelAttribute("user") UserDto userDto, BindingResult bindingResult, @Valid @ModelAttribute("address") AddressDto addressDto, BindingResult bindingResult2) {
+        if (bindingResult.hasErrors() || bindingResult2.hasErrors()) {
             System.out.println("BINDING RESULT ERROR");
-            return "redirect:/edit-user-info/"+id;
-        }else{
+            return "registration";
+        } else {
             userDto.setAddress(addressDto);
+            System.out.println("Roles: " + userDto.getRoles().get(0).getId());
             userService.fullUserUpdate(userDto);
             return "redirect:/user-account";
         }
-        }
     }
+}
 
 

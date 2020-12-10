@@ -1,6 +1,8 @@
 package com.finalproject.ecommercestore.model.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "role")
@@ -12,6 +14,12 @@ public class Role {
 
     @Enumerated(EnumType.STRING)
     private RoleNames name;
+
+    @ManyToMany(
+            mappedBy="roles"
+    )
+    private List<User> users = new ArrayList<>();
+
 
     public Role() {
     }
@@ -35,4 +43,10 @@ public class Role {
     public void setName(RoleNames name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return name.toString();
+    }
+
 }
