@@ -39,11 +39,11 @@ public class UserPageController {
         return "edit-user-info";
     }
 
-    @PostMapping("/edit-user/{id}")
-    public String editUserInformation(@PathVariable Long id, @Valid @ModelAttribute("user") UserDto userDto, BindingResult bindingResult, @Valid @ModelAttribute("address") AddressDto addressDto, BindingResult bindingResult2) {
+    @PostMapping("/edit-user")
+    public String editUserInformation(@Valid @ModelAttribute("user") UserDto userDto, BindingResult bindingResult, @Valid @ModelAttribute("address") AddressDto addressDto, BindingResult bindingResult2) {
         if (bindingResult.hasErrors() || bindingResult2.hasErrors()) {
             System.out.println("BINDING RESULT ERROR");
-            return "redirect:/edit-user-info/"+id;
+            return "edit-user-info";
         } else {
             userDto.setAddress(addressDto);
             userService.fullUserUpdate(userDto);
