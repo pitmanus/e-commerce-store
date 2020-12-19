@@ -14,7 +14,8 @@
         <label for="inputState">Choose product category</label>
         <select th:field="*{productCategories}" multiple="multiple" id="inputState" class="form-control">
             <option value="" selected="selected" disabled="disabled">Please select product category</option>
-            <option th:each="category : ${categories}" th:text="${category.categoryName}" th:value="${category.id}" th:field="*{productCategories}"></option>
+            <option th:each="category: ${categories}" th:text="${category.categoryName}" th:value="${category.id}" th:field="*{productCategories}"></option>
+
         </select>
     </div>
     <div class="form-group">

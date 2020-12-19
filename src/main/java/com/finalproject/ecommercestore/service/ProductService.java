@@ -26,6 +26,10 @@ public class ProductService {
        return productRepository.save(modelMapper.map(productDto, Product.class));
     }
 
+    public void save(Product product){
+        productRepository.save(product);
+    }
+
     public List<ProductDto> getAllProducts(){
         return productRepository.findAll()
                 .stream()
@@ -55,6 +59,10 @@ public class ProductService {
                 .map(product -> modelMapper.map(product,ProductDto.class))
                 .findAny()
                 .orElse(null);
+    }
+
+    public Product getProductById(Long id){
+       return productRepository.findById(id).get();
     }
 
     public void deleteProduct(Long id){

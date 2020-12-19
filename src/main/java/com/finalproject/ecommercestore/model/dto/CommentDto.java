@@ -12,19 +12,7 @@ public class CommentDto {
     private String text;
     private String author;
     private LocalDateTime time;
-    private List<ProductDto> products = new ArrayList<>();
-
-    public List<ProductDto> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<ProductDto> products) {
-        this.products = products;
-    }
-
-    public void addProducts(ProductDto productDto){
-        products.add(productDto);
-    }
+    private ProductDto productDto;
 
     public Long getId() {
         return id;

@@ -20,18 +20,18 @@ public class ProductDto {
     private boolean inStock = false;
     private MultipartFile productImage;
     private CartItem cartItem;
-    private List<Category> productCategories = new ArrayList<>();
-    private List<Comment> comments = new ArrayList<>();
+    private List<CategoryDto> productCategories;
+    private List<CommentDto> commentDtoList = new ArrayList<>();
 
     public ProductDto() {
     }
 
-    public List<Comment> getComments() {
-        return comments;
+    public List<CommentDto> getCommentDtoList() {
+        return commentDtoList;
     }
 
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
+    public void setCommentDtoList(List<CommentDto> commentDtoList) {
+        this.commentDtoList = commentDtoList;
     }
 
     public Long getId() {
@@ -98,11 +98,11 @@ public class ProductDto {
         this.cartItem = cartItem;
     }
 
-    public List<Category> getProductCategories() {
+    public List<CategoryDto> getProductCategories() {
         return productCategories;
     }
 
-    public void setProductCategories(List<Category> productCategories) {
+    public void setProductCategories(List<CategoryDto> productCategories) {
         this.productCategories = productCategories;
     }
 }

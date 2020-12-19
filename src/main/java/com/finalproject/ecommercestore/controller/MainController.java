@@ -69,16 +69,14 @@ public class MainController {
         model.addAttribute("product", product);
         CommentDto commentDto = new CommentDto();
         model.addAttribute("comment", commentDto);
-        List<CommentDto> comments = commentService.getAllCommentsForASingleProduct(id);
+        List<CommentDto> comments = commentService.getAllComments();
         model.addAttribute("comments", comments);
         return "product-page";
     }
 
     @PostMapping("/add-comment/{id}")
     public String addComment(@PathVariable Long id, @ModelAttribute("comment") CommentDto commentDto){
-        ProductDto product = productService.getById(id);
-        commentDto.addProducts(product);
-        commentService.addComment(commentDto);
+        commentService.addComment(commentDto, id);
         return "redirect:/product-page/" + id;
     }
 
