@@ -1,11 +1,10 @@
 package com.finalproject.ecommercestore.controller;
 
+import com.finalproject.ecommercestore.model.dto.CartItemDto;
 import com.finalproject.ecommercestore.model.dto.CategoryDto;
 import com.finalproject.ecommercestore.model.dto.CommentDto;
 import com.finalproject.ecommercestore.model.dto.ProductDto;
-import com.finalproject.ecommercestore.service.CategoryService;
-import com.finalproject.ecommercestore.service.CommentService;
-import com.finalproject.ecommercestore.service.ProductService;
+import com.finalproject.ecommercestore.service.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -27,11 +26,15 @@ public class MainController {
     private CategoryService categoryService;
     private ProductService productService;
     private CommentService commentService;
+    private ShoppingCartService shoppingCartService;
+    private CartItemService cartItemService;
 
-    public MainController(CategoryService categoryService, ProductService productService, CommentService commentService) {
+    public MainController(CategoryService categoryService, ProductService productService, CommentService commentService, ShoppingCartService shoppingCartService, CartItemService cartItemService) {
         this.categoryService = categoryService;
         this.productService = productService;
         this.commentService = commentService;
+        this.shoppingCartService = shoppingCartService;
+        this.cartItemService = cartItemService;
     }
 
     @GetMapping({"/index", "/"})
@@ -62,7 +65,7 @@ public class MainController {
     }
 
     @GetMapping("/product-page/{id}")
-    public String showSingleProductPage(@PathVariable Long id, Model model){
+    public String showSingleProductPage(@PathVariable Long id, Model model) {
         List<CategoryDto> categories = categoryService.showAllCategories();
         model.addAttribute("categories", categories);
         ProductDto product = productService.getById(id);
@@ -71,11 +74,23 @@ public class MainController {
         model.addAttribute("comment", commentDto);
         List<CommentDto> comments = commentService.getAllComments();
         model.addAttribute("comments", comments);
+        model.addAttribute("cartItem", new CartItemDto());
         return "product-page";
     }
 
+    @PostMapping("/add-to-cart/{id}")
+    public String addToCart(@PathVariable Long id, @ModelAttribute("cartItem") CartItemDto cartItemDto) {
+        ProductDto productDto = productService.getById(id);
+        cartItemDto.setProduct(productDto);
+        cartItemDto.setSubtotal(cartItemService.getSubTotal(productDto.getPrice(), cartItemDto.getQuantity()));
+        cartItemDto.setShoppingCart(shoppingCartService.getShoppingCart());
+        shoppingCartService.getShoppingCart().getCartItemList().add(cartItemDto);
+        cartItemService.addCartItem(cartItemDto);
+        return "redirect:/index";
+    }
+
     @PostMapping("/add-comment/{id}")
-    public String addComment(@PathVariable Long id, @ModelAttribute("comment") CommentDto commentDto){
+    public String addComment(@PathVariable Long id, @ModelAttribute("comment") CommentDto commentDto) {
         commentService.addComment(commentDto, id);
         return "redirect:/product-page/" + id;
     }

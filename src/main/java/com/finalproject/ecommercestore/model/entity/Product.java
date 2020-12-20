@@ -27,9 +27,8 @@ public class Product {
     @Transient
     private MultipartFile productImage;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "cart_item_id")
-    private CartItem cartItem;
+    @OneToMany(mappedBy = "product", cascade=CascadeType.ALL)
+    private List<CartItem> cartItems;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -118,11 +117,11 @@ public class Product {
         this.productImage = productImage;
     }
 
-    public CartItem getCartItem() {
-        return cartItem;
+    public List<CartItem> getCartItems() {
+        return cartItems;
     }
 
-    public void setCartItem(CartItem cartItem) {
-        this.cartItem = cartItem;
+    public void setCartItems(List<CartItem> cartItems) {
+        this.cartItems = cartItems;
     }
 }

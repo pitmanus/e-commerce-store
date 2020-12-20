@@ -13,13 +13,14 @@ public class CartItem {
     private int quantity;
     private BigDecimal subtotal;
 
-    @OneToMany(mappedBy = "cartItem")
-    private List<Product> productList;
+    @ManyToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name = "product_id")
+    private Product product;
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     private Order order;
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "shopping_cart_id")
     private ShoppingCart shoppingCart;
 
@@ -47,12 +48,12 @@ public class CartItem {
         this.subtotal = subtotal;
     }
 
-    public List<Product> getProductList() {
-        return productList;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProductList(List<Product> productList) {
-        this.productList = productList;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public ShoppingCart getShoppingCart() {

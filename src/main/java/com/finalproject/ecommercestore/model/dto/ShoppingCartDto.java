@@ -13,7 +13,7 @@ public class ShoppingCartDto {
 
     private Long id;
     private BigDecimal total;
-    private List<CartItem> cartItemList = new ArrayList<>();
+    private List<CartItemDto> cartItemList = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -31,11 +31,11 @@ public class ShoppingCartDto {
         this.total = total;
     }
 
-    public List<CartItem> getCartItemList() {
+    public List<CartItemDto> getCartItemList() {
         return cartItemList;
     }
 
-    public void setCartItemList(List<CartItem> cartItemList) {
+    public void setCartItemList(List<CartItemDto> cartItemList) {
         this.cartItemList = cartItemList;
     }
 }

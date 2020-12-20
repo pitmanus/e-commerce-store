@@ -41,6 +41,6 @@ public class StringToCategoryDtoConverter implements Converter<String, CategoryD
                 .stream()
                 .filter(categoryDto -> categoryDto.getId().equals(parsedId))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("Category with name: " + parsedId + " not found"));
+                .orElseThrow(() -> new IllegalArgumentException("Category with id: " + parsedId + " not found"));
     }
 }

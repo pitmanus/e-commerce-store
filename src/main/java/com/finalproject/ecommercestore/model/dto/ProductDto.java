@@ -19,7 +19,7 @@ public class ProductDto {
     private double shippingWeight;
     private boolean inStock = false;
     private MultipartFile productImage;
-    private CartItem cartItem;
+    private List<CartItemDto> cartItems;
     private List<CategoryDto> productCategories;
     private List<CommentDto> commentDtoList = new ArrayList<>();
 
@@ -90,12 +90,12 @@ public class ProductDto {
         this.productImage = productImage;
     }
 
-    public CartItem getCartItem() {
-        return cartItem;
+    public List<CartItemDto> getCartItems() {
+        return cartItems;
     }
 
-    public void setCartItem(CartItem cartItem) {
-        this.cartItem = cartItem;
+    public void setCartItems(List<CartItemDto> cartItems) {
+        this.cartItems = cartItems;
     }
 
     public List<CategoryDto> getProductCategories() {

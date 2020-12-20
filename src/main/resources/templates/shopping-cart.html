@@ -5,9 +5,10 @@
 <body>
 <div th:replace="common/common :: navbar"></div>
 
-<div th:object="${shoppingCart}">
-    <div th:text="${shoppingCart.getId()}"></div>
-    Here will be cart item elements.
+<div th:each="cartItem: ${cartItems}">
+    <div th:text="${cartItem.product.name}"></div>
+    <div th:text="${cartItem.quantity}"></div>
+    <div th:text="${cartItem.subtotal}+'$'"></div>
 </div>
 
 </body>
