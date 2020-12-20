@@ -5,11 +5,41 @@
 <body>
 <div th:replace="common/common :: navbar"></div>
 
-<div th:each="cartItem: ${cartItems}">
-    <div th:text="${cartItem.product.name}"></div>
-    <div th:text="${cartItem.quantity}"></div>
-    <div th:text="${cartItem.subtotal}+'$'"></div>
-</div>
+        <div class="row justify-content-center">
+            <div class="col-md-20 col-md-offset-10">
+
+                <table class="table table-hover">
+                    <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Product image</th>
+                        <th scope="col">Product name</th>
+                        <th scope="col">Price per unit</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Subtotal price</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr style="transform: rotate(0);" th:each="cartItem: ${cartItems}">
+                        <form th:action="@{/delete-cart-item}" th:method="post" th:object="${cartItem}">
+                            <td><img th:src="@{'/image/'+'product'+${cartItem.product.id}+'.png'}" alt="prod_img" border=1 height=100 width=100></td>
+                            <td th:text="${cartItem.product.name}"/>
+                            <td th:text="${cartItem.product.price}+'$'"/>
+                            <td th:text="${cartItem.quantity}"/>
+                            <td th:text="${cartItem.subtotal}+'$'"/>
+                            <td><a class="btn btn-success" th:href="@{/}">Add to order</a></td>
+                            <td>
+                                <input type="hidden" name="id" th:value="${cartItem.id}">
+                                <button type="submit" class="btn btn-danger">Remove from shopping cart</button>
+                            </td>
+                        </form>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
 
 </body>
 </html>

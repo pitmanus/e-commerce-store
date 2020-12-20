@@ -72,7 +72,7 @@ public class MainController {
         model.addAttribute("product", product);
         CommentDto commentDto = new CommentDto();
         model.addAttribute("comment", commentDto);
-        List<CommentDto> comments = commentService.getAllComments();
+        List<CommentDto> comments = commentService.getAllCommentsForASingleProduct(id);
         model.addAttribute("comments", comments);
         model.addAttribute("cartItem", new CartItemDto());
         return "product-page";
@@ -88,6 +88,7 @@ public class MainController {
         cartItemService.addCartItem(cartItemDto);
         return "redirect:/index";
     }
+
 
     @PostMapping("/add-comment/{id}")
     public String addComment(@PathVariable Long id, @ModelAttribute("comment") CommentDto commentDto) {

@@ -12,14 +12,17 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(columnDefinition = "TIMESTAMP")
-    private LocalDateTime orderDate;
-    @Column(columnDefinition = "TIMESTAMP")
-    private LocalDateTime shippingDate;
+ /*   @Column(columnDefinition = "TIMESTAMP")
+    private LocalDateTime orderDate;*/
+  /*  @Column(columnDefinition = "TIMESTAMP")
+    private LocalDateTime shippingDate;*/
     @Enumerated(EnumType.STRING)
+    @Column(name = "shipping_method")
     private ShippingMethod shippingMethod;
     @Enumerated(EnumType.STRING)
+    @Column(name = "order_status")
     private OrderStatus orderStatus;
+    @Column(name = "order_total")
     private BigDecimal orderTotal;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
@@ -37,7 +40,7 @@ public class Order {
         this.id = id;
     }
 
-    public LocalDateTime getOrderDate() {
+  /*  public LocalDateTime getOrderDate() {
         return orderDate;
     }
 
@@ -51,7 +54,7 @@ public class Order {
 
     public void setShippingDate(LocalDateTime shippingDate) {
         this.shippingDate = shippingDate;
-    }
+    }*/
 
     public ShippingMethod getShippingMethod() {
         return shippingMethod;

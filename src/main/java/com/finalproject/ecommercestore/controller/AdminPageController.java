@@ -59,7 +59,7 @@ public class AdminPageController {
     }
 
     @PostMapping("/deletecategory")
-    public String deleteCategory(@ModelAttribute CategoryDto categoryDto, Model model) {
+    public String deleteCategory(@ModelAttribute CategoryDto categoryDto) {
         categoryService.deleteCategory(categoryDto.getId());
         return "redirect:/admin-account?categoryremoved";
     }

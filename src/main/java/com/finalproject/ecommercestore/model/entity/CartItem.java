@@ -13,14 +13,14 @@ public class CartItem {
     private int quantity;
     private BigDecimal subtotal;
 
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
 
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne
     private Order order;
 
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "shopping_cart_id")
     private ShoppingCart shoppingCart;
 

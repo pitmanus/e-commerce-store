@@ -18,7 +18,7 @@ public class ShoppingCart {
     private BigDecimal total;
 
     @OneToMany(mappedBy = "shoppingCart", cascade = CascadeType.ALL)
-    @LazyCollection(LazyCollectionOption.FALSE)
+   /* @LazyCollection(LazyCollectionOption.FALSE)*/
     private List<CartItem> cartItemList = new ArrayList<>();
 
     public Long getId() {

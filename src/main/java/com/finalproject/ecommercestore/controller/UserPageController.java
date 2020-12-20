@@ -26,7 +26,7 @@ public class UserPageController {
     public String showUserAccountPage(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String userName = auth.getName();
-        UserDto userDto = userService.getUserByUserName(userName);
+        UserDto userDto = userService.getUserDtoByUserName(userName);
         model.addAttribute("user", userDto);
         return "user-account";
     }

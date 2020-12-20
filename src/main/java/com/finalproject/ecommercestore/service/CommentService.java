@@ -46,12 +46,12 @@ public class CommentService {
                 .collect(Collectors.toList());
     }
 
-   /* public List<CommentDto> getAllCommentsForASingleProduct(Long id){
+    public List<CommentDto> getAllCommentsForASingleProduct(Long id){
         return commentRepository.findAll()
                 .stream()
-                .filter(comment -> comment.getProducts().stream().anyMatch(product -> product.getId()==id))
+                .filter(comment -> comment.getProduct().getId()==id)
                 .map(comment -> modelMapper.map(comment, CommentDto.class))
                 .collect(Collectors.toList());
-    }*/
+    }
 }
 

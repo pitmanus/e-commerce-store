@@ -51,6 +51,10 @@ public class UserService implements UserDetailsService {
         return userRepository.save(modelMapper.map(userDto, User.class));
     }
 
+    public void save(User user){
+        userRepository.save(user);
+    }
+
     public void deleteUser(Long id){
         userRepository.deleteById(id);
     }
@@ -71,8 +75,12 @@ public class UserService implements UserDetailsService {
     }
 
 
-    public UserDto getUserByUserName(String userName){
+    public UserDto getUserDtoByUserName(String userName){
         return modelMapper.map(userRepository.findByUsername(userName), UserDto.class);
+    }
+
+    public User getUserByUserName(String userName){
+        return userRepository.findByUsername(userName);
     }
 
     @Override
