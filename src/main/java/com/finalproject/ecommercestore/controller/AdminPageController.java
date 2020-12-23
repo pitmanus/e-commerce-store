@@ -49,6 +49,8 @@ public class AdminPageController {
         model.addAttribute("categories", categories);
         List<UserDto> users = userService.getAllUsers();
         model.addAttribute("users", users);
+        List<ProductDto> products = productService.getAllProducts();
+        model.addAttribute("productList", products);
         return "admin-account";
     }
 
@@ -95,13 +97,6 @@ public class AdminPageController {
         return "new-product";
     }
 
-    @GetMapping("/productlist")
-    public String showAllProducts(Model model) {
-        List<ProductDto> products = productService.getAllProducts();
-        model.addAttribute("productList", products);
-        return "productlist";
-    }
-
     @PostMapping("/newproduct")
     public String addNewProduct(@ModelAttribute ProductDto productDto) {
         Product product = productService.addProduct(productDto);
@@ -118,13 +113,13 @@ public class AdminPageController {
             e.printStackTrace();
         }
 
-        return "redirect:/productlist";
+        return "redirect:/admin-account";
     }
 
     @PostMapping("/deleteproduct")
     public String deleteProduct(@ModelAttribute ProductDto productDto) {
         productService.deleteProduct(productDto.getId());
-        return "redirect:/productlist";
+        return "redirect:/admin-account";
     }
 
     @GetMapping("/editproduct/{id}")
@@ -159,7 +154,7 @@ public class AdminPageController {
                 e.printStackTrace();
             }
 
-        return "redirect:/productlist";
+        return "redirect:/admin-account";
     }
 
 }

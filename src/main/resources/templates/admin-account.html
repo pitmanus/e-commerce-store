@@ -6,9 +6,9 @@
 <body>
 <div th:replace="common/common :: navbar"></div>
 
-            <ul class="nav nav-tabs" >
+            <ul class="nav nav-tabs" id="admin-page-tabs"  >
                 <li class="nav-item">
-                    <a th:class="${classActiveCategories}? 'nav-link active' : 'nav-link'" data-toggle="tab" href="#tab-1"><span style="color: black">Product categories</span></a>
+                    <a class="nav-link" data-toggle="tab" href="#tab-1"><span style="color: black">Product categories</span></a>
                 </li>
                 <li>
                     <a class="nav-link" data-toggle="tab" href="#tab-2"><span style="color: black">Products</span></a>
@@ -74,8 +74,52 @@
                     <div class="panel-group">
                         <div class="panel panel-default" style="border: none;">
                             <div class="panel-body" style=" margin-top: 20px;">
-                                <td><a class="btn btn-success" th:href="@{/newproduct}">Add new product</a></td>
-                                <td><a class="btn btn-success" th:href="@{/productlist}">Product list</a></td>
+                                <div class="container">
+                                    <div class="row justify-content-md-center">
+                                        <div class="row">
+                                            <div class="col-md-20 col-md-offset-10">
+
+                                                <table class="table table-hover">
+                                                    <thead class="thead-light">
+                                                    <tr>
+                                                        <th scope="col">Product image</th>
+                                                        <th scope="col">Id</th>
+                                                        <th scope="col">Product name</th>
+                                                        <th scope="col">Product category</th>
+                                                        <th scope="col">Price</th>
+                                                        <th scope="col">Weight</th>
+                                                        <th scope="col">Description</th>
+                                                        <th scope="col">In stock</th>
+                                                        <th scope="col">Edit product</th>
+                                                        <th scope="col">Delete product</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr style="transform: rotate(0);" th:each="product: ${productList}">
+                                                        <form th:action="@{/deleteproduct}" th:method="post" th:object="${product}">
+                                                            <td><img th:src="@{'/image/'+'product'+${product.id}+'.png'}" alt="prod_img" border=1 height=100 width=100></td>
+                                                            <td th:type="number" th:text="${product.id}"/></td>
+                                                            <td th:text="${product.name}"/>
+                                                            <td th:text="${product.productCategories}"/>
+                                                            <td th:text="${#numbers.formatDecimal(product.price,0,2)}+'$'"/>
+                                                            <td th:text="${#numbers.formatDecimal(product.shippingWeight,1,2)}+'kg'"/>
+                                                            <td th:text="${product.description}"/>
+                                                            <td th:text="${product.inStock}"/>
+                                                            <td><a class="btn btn-warning" th:href="@{/editproduct/{id}(id=${product.id})}">Edit</a></td>
+                                                            <td>
+                                                                <input type="hidden" name="id" th:value="${product.id}">
+                                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                                            </td>
+                                                        </form>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                                <br/>
+                                                <a class="btn btn-success" th:href="@{/newproduct}">Add new product</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -90,7 +134,6 @@
                                     <div class="row justify-content-md-center">
                                         <div class="row">
                                             <div class="col-md-20 col-md-offset-10">
-
                                                 <table class="table table-hover">
                                                     <thead class="thead-light">
                                                     <tr>
@@ -166,6 +209,11 @@
         </div>
     </div>
 </div>
-
+<script th:inline="javascript">
+    var tabToSelect = "tab-2";
+    $(document).ready(function() {
+        $('#admin-page-tabs a[href="#'+tabToSelect+'"]').tab('show')
+    });
+</script>
 </body>
 </html>
