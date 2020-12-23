@@ -1,5 +1,6 @@
 package com.finalproject.ecommercestore.configuration;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +21,11 @@ import javax.sql.DataSource;
 @EnableJpaRepositories("com.finalproject.ecommercestore.repository")
 @EnableTransactionManagement
 public class SpringConfig {
+
+    @Bean
+    public ModelMapper modelMapper(){
+        return new ModelMapper();
+    }
 
     @Bean
     public DataSource getDataSource(){

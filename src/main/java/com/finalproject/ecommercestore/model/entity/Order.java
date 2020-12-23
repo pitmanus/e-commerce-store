@@ -12,10 +12,10 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
- /*   @Column(columnDefinition = "TIMESTAMP")
-    private LocalDateTime orderDate;*/
-  /*  @Column(columnDefinition = "TIMESTAMP")
-    private LocalDateTime shippingDate;*/
+    @Column(name = "order_date", columnDefinition = "TIMESTAMP")
+    private LocalDateTime orderDate;
+    @Column(name = "shipping_date",columnDefinition = "TIMESTAMP")
+    private LocalDateTime shippingDate;
     @Enumerated(EnumType.STRING)
     @Column(name = "shipping_method")
     private ShippingMethod shippingMethod;
@@ -40,7 +40,7 @@ public class Order {
         this.id = id;
     }
 
-  /*  public LocalDateTime getOrderDate() {
+    public LocalDateTime getOrderDate() {
         return orderDate;
     }
 
@@ -54,7 +54,7 @@ public class Order {
 
     public void setShippingDate(LocalDateTime shippingDate) {
         this.shippingDate = shippingDate;
-    }*/
+    }
 
     public ShippingMethod getShippingMethod() {
         return shippingMethod;
