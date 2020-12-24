@@ -15,9 +15,7 @@ public class Role {
     @Enumerated(EnumType.STRING)
     private RoleNames name;
 
-    @ManyToMany(
-            mappedBy="roles"
-    )
+    @ManyToMany(mappedBy="roles")
     private List<User> users = new ArrayList<>();
 
 

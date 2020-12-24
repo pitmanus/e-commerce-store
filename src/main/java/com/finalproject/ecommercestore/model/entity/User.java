@@ -36,6 +36,13 @@ public class User implements UserDetails {
     @JoinColumn(name = "shopping_cart_id")
     private ShoppingCart shoppingCart;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Order> orderList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<UserPayment> userPayments = new ArrayList<>();
+
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "user_roles",
@@ -46,6 +53,22 @@ public class User implements UserDetails {
     private List<Role> roles = new ArrayList<>();
 
     public User() {
+    }
+
+    public List<UserPayment> getUserPayments() {
+        return userPayments;
+    }
+
+    public void setUserPayments(List<UserPayment> userPayments) {
+        this.userPayments = userPayments;
+    }
+
+    public List<Order> getOrderList() {
+        return orderList;
+    }
+
+    public void setOrderList(List<Order> orderList) {
+        this.orderList = orderList;
     }
 
     public ShoppingCart getShoppingCart() {

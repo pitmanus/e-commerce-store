@@ -1,6 +1,8 @@
 package com.finalproject.ecommercestore.model.dto;
+import com.finalproject.ecommercestore.model.entity.Order;
 import com.finalproject.ecommercestore.model.entity.Role;
 import com.finalproject.ecommercestore.model.entity.ShoppingCart;
+import com.finalproject.ecommercestore.model.entity.UserPayment;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -43,7 +45,28 @@ public class UserDto {
 
     private ShoppingCartDto shoppingCart;
 
+    private List<OrderDto> orderList = new ArrayList<>();
+
+    private List<UserPaymentDto> userPayments = new ArrayList<>();
+
+
     public UserDto() {
+    }
+
+    public List<UserPaymentDto> getUserPayments() {
+        return userPayments;
+    }
+
+    public void setUserPayments(List<UserPaymentDto> userPayments) {
+        this.userPayments = userPayments;
+    }
+
+    public List<OrderDto> getOrderList() {
+        return orderList;
+    }
+
+    public void setOrderList(List<OrderDto> orderList) {
+        this.orderList = orderList;
     }
 
     public ShoppingCartDto getShoppingCart() {

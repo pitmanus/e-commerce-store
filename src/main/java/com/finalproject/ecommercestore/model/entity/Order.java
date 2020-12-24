@@ -28,9 +28,21 @@ public class Order {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<CartItem> cartItems;
 
+    @OneToOne
+    @JoinColumn(name = "shipping_address")
+    private Address shippingAddress;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    public Address getShippingAddress() {
+        return shippingAddress;
+    }
+
+    public void setShippingAddress(Address shippingAddress) {
+        this.shippingAddress = shippingAddress;
+    }
 
     public Long getId() {
         return id;

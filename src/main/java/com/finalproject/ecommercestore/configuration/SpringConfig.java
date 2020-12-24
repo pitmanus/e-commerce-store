@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
+import java.util.Properties;
 
 @Configuration
 @ComponentScan(basePackages = {"com.finalproject.ecommercestore.service", "com.finalproject.ecommercestore.controller"})
@@ -34,7 +35,6 @@ public class SpringConfig {
         dataSource.setUrl("jdbc:mysql://localhost:3306/e_commerce_store?useSSL=false");
         dataSource.setUsername("root");
         dataSource.setPassword("04069218");
-
         return dataSource;
     }
 
@@ -45,6 +45,9 @@ public class SpringConfig {
         entityManager.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
         entityManager.setPackagesToScan("com.finalproject.ecommercestore.model");
 
+        Properties properties = new Properties();
+        properties.setProperty("hibernate.hbm2ddl.auto", "update");
+        entityManager.setJpaProperties(properties);
         return entityManager;
     }
 
