@@ -3,6 +3,7 @@ package com.finalproject.ecommercestore.model.dto;
 import com.finalproject.ecommercestore.model.entity.Address;
 import com.finalproject.ecommercestore.model.entity.CardBrands;
 import com.finalproject.ecommercestore.model.entity.User;
+import org.springframework.web.multipart.MultipartFile;
 
 public class UserPaymentDto {
 
@@ -16,6 +17,7 @@ public class UserPaymentDto {
     private int cvc;
     private String holderName;
     private boolean defaultPayment;
+    private MultipartFile cardImage;
 
     private UserDto user;
 
@@ -115,5 +117,13 @@ public class UserPaymentDto {
 
     public void setBillingAddress(AddressDto billingAddress) {
         this.billingAddress = billingAddress;
+    }
+
+    public MultipartFile getCardImage() {
+        return cardImage;
+    }
+
+    public void setCardImage(MultipartFile cardImage) {
+        this.cardImage = cardImage;
     }
 }

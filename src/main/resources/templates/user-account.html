@@ -13,10 +13,10 @@
         <a class="nav-link" data-toggle="tab" href="#tab-2" role="tab" aria-selected="false"><span style="color: black">Orders</span></a>
     </li>
     <li>
-        <a class="nav-link" data-toggle="tab" href="#tab-2" role="tab" aria-selected="false"><span style="color: black">Payment information</span></a>
+        <a class="nav-link" data-toggle="tab" href="#tab-3" role="tab" aria-selected="false"><span style="color: black">Billing information</span></a>
     </li>
     <li>
-        <a class="nav-link" data-toggle="tab" href="#tab-3" role="tab" aria-selected="true"><span style="color: black">Account information</span></a>
+        <a class="nav-link" data-toggle="tab" href="#tab-4" role="tab" aria-selected="true"><span style="color: black">Account information</span></a>
     </li>
 </ul>
 
@@ -43,7 +43,60 @@
         </div>
     </div>
 
-    <div class="tab-pane fade" id="tab-3" role="tabpanel">
+    <div class="tab-pane fade" id="tab-3" >
+        <div class="panel-group">
+            <div class="panel panel-default" style="border: none;">
+                <div class="panel-body" style=" margin-top: 20px;">
+                    <div class="container">
+                        <div class="row justify-content-md-center">
+                                <div class="col-md-20 col-md-offset-10">
+
+                                    <table class="table table-hover">
+                                        <thead class="thead">
+                                        <tr>
+                                            <th scope="col"></th>
+                                            <th scope="col"></th>
+                                            <th scope="col"></th>
+                                            <th scope="col"></th>
+                                            <th scope="col"></th>
+                                            <th scope="col"></th>
+                                            <th scope="col"></th>
+                                            <th scope="col"></th>
+                                            <th scope="col"></th>
+                                            <th scope="col"></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr style="transform: rotate(0);" th:each="paymentCard: ${paymentCards}">
+                                            <form th:action="@{/deletecard}" th:method="post" th:object="${paymentCard}">
+                                                <td><img th:src="@{'/image/'+'card'+${paymentCard.id}+'.png'}" alt="card_img" border=1 height=100 width=100></td>
+                                                <td th:text="${paymentCard.cardName}"/>
+                                                <td th:text="${paymentCard.cardNumber}"/>
+                                                <td th:text="${paymentCard.bankName}"/>
+                                                <td th:text="${paymentCard.holderName}"/>
+                                                <td th:text="${paymentCard.expiryMonth}"/>
+                                                <!--<td><p>&nbsp;/</p><td/>-->
+                                                <td th:text="${paymentCard.expiryYear}"/>
+                                                <td><a class="btn btn-warning" th:href="@{/edit-payment-card/{id}(id=${paymentCard.id})}">Edit</a></td>
+                                                <td>
+                                                    <input type="hidden" name="id" th:value="${paymentCard.id}">
+                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                </td>
+                                            </form>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <br/>
+                                    <a class="btn btn-success" th:href="@{/new-payment-card}">Add new payment card</a>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-pane fade" id="tab-4" role="tabpanel">
         <div class="panel-group">
             <div class="panel panel-default" style="border: none;">
                 <div class="panel-body">
@@ -118,7 +171,7 @@
     </div>
 </div>
 <script th:inline="javascript">
-    var tabToSelect = "tab-3";
+    var tabToSelect = "tab-4";
     $(document).ready(function() {
         $('#user-page-tabs a[href="#'+tabToSelect+'"]').tab('show')
     });

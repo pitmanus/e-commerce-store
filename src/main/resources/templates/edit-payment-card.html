@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:replace="common/common :: common-header">
+</head>
+<body>
+<div th:replace="common/common :: navbar"></div>
+
+<div class="container" style="padding-top: 50px; padding-bottom: 50px">
+    <div class="row justify-content-center">
+        <div style="width: 60%">
+            <form class="form-horizontal" th:action="@{/edit-payment-card}" th:object="${userPaymentCard}" method="post" enctype="multipart/form-data">
+                <fieldset>
+                    <input type="hidden" name="id" th:field="*{id}">
+                    <div class="form-group col-md-20" style="padding-right: 10px">
+                        <label for="inputState">Choose card type</label>
+                        <select th:field="*{cardBrand}" id="inputState" class="form-control">
+                            <option th:each="cardBrand: ${T(com.finalproject.ecommercestore.model.entity.CardBrands).values()}" th:text="${cardBrand.displayValue}" th:value="${cardBrand}"></option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="card-name">Card name</label>
+                        <input type="text" th:field="*{cardName}" class="form-control" id="card-name">
+                    </div>
+                    <div class="form-group">
+                        <label for="holder-name">Holder name</label>
+                        <div class="input-group">
+                            <input type="text" th:field="*{holderName}" class="form-control" id="holder-name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="bank-name">Bank name</label>
+                        <div class="input-group">
+                            <input type="text" th:field="*{bankName}" class="form-control" id="bank-name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="card-number">Card number</label>
+                        <input type="text" th:field="*{cardNumber}" class="form-control" id="card-number">
+                    </div>
+                    <div class="form-group">
+                        <label for="cvc">CVC code</label>
+                        <input type="password" th:field="*{cvc}" class="form-control" id="cvc">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label for="expiry-month">Expiry month</label>
+                            <input type="text" th:field="*{expiryMonth}" class="form-control" id="expiry-month">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="expiry-year">Expiry year</label>
+                            <input type="text" th:field="*{expiryYear}" class="form-control" id="expiry-year">
+                        </div>
+                    </div>
+                    <div class="form-check" style="padding-bottom: 15px">
+                        <input type="checkbox" class="form-check-input" id="default-payment" th:field="${userPaymentCard.defaultPayment}">
+                        <label class="form-check-label" for="default-payment">Default payment</label>
+                        <br>
+                        <small class="help-block">Whether the card set as default payment method</small>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="productImage">Upload card image</label>
+                        <input type="file" class="form-control-file" name="image" id="productImage" accept="image/png, image/jpeg" th:field="*{cardImage}">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

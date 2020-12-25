@@ -1,5 +1,7 @@
 package com.finalproject.ecommercestore.model.entity;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.persistence.*;
 
 @Entity
@@ -10,6 +12,7 @@ public class UserPayment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "card_brand")
+    @Enumerated(EnumType.STRING)
     private CardBrands cardBrand;
     @Column(name = "card_name")
     private String cardName;
@@ -26,6 +29,9 @@ public class UserPayment {
     private String holderName;
     @Column(name = "default_payment")
     private boolean defaultPayment;
+
+    @Transient
+    private MultipartFile cardImage;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -129,5 +135,13 @@ public class UserPayment {
 
     public void setBillingAddress(Address billingAddress) {
         this.billingAddress = billingAddress;
+    }
+
+    public MultipartFile getCardImage() {
+        return cardImage;
+    }
+
+    public void setCardImage(MultipartFile cardImage) {
+        this.cardImage = cardImage;
     }
 }
