@@ -132,6 +132,13 @@ public class UserPageController {
         return "redirect:/user-account";
     }
 
+    @GetMapping("/card-details/{id}")
+    public String getCardDetailsPage(@PathVariable Long id, Model model){
+        UserPaymentDto userPaymentDto = userPaymentService.getUserPaymentCardById(id);
+        model.addAttribute("paymentCard", userPaymentDto);
+        return "card-details";
+    }
+
 }
 
 
