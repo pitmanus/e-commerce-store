@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Controller
@@ -31,18 +32,13 @@ public class ShoppingCartController {
     public String showShoppingCart(Model model) {
         ShoppingCartDto shoppingCart = shoppingCartService.getShoppingCart();
         model.addAttribute("shoppingCart", shoppingCart);
-        List<CartItemDto> cartItemDtoList = shoppingCart.getCartItemList();
-        model.addAttribute("cartItems", cartItemDtoList);
         return "shopping-cart";
     }
 
     @PostMapping("/delete-cart-item")
-    public String deleteCartItem(@ModelAttribute CartItemDto cartItemDto, Model model) {
+    public String deleteCartItem(@ModelAttribute CartItemDto cartItemDto) {
         shoppingCartService.deleteCartItem(cartItemDto.getId());
-        ShoppingCartDto shoppingCart = shoppingCartService.getShoppingCart();
-        model.addAttribute("shoppingCart", shoppingCart);
-        List<CartItemDto> cartItemDtoList = shoppingCart.getCartItemList();
-        model.addAttribute("cartItems", cartItemDtoList);
+        shoppingCartService.setTotalPriceOfShoppingCartWhileDeletingCartItem(cartItemDto.getSubtotal());
         return "redirect:/shopping-cart";
     }
 }

@@ -1,17 +1,24 @@
 package com.finalproject.ecommercestore.model.entity;
 
 public enum OrderStatus {
-    PENDING,
-    AWAITING_PAYMENT,
-    AWAITING_FULFILLMENT,
-    AWAITING_SHIPMENT,
-    AWAITING_PICKUP,
-    PARTIALLY_SHIPPED,
-    SHIPPED,
-    COMPLETED,
-    CANCELLED,
-    DECLINED,
-    REFUNDED,
-    DISPUTED,
-    PARTIALLY_REFUNDED
+    PENDING("Pending"),
+    AWAITING_PAYMENT("Awaiting payment"),
+    AWAITING_FULFILLMENT("Awaiting fulfilment"),
+    AWAITING_SHIPMENT("Awaiting shipment"),
+    AWAITING_PICKUP("Awaiting pickup"),
+    PARTIALLY_SHIPPED("Partially shipped"),
+    SHIPPED("Shipped"),
+    COMPLETED("Completed"),
+    CANCELLED("Cancelled"),
+    DECLINED("Declined"),
+    REFUNDED("Refunded"),
+    DISPUTED("Disputed"),
+    PARTIALLY_REFUNDED("Partially refunded");
+
+    private final String displayValue;
+
+    OrderStatus(String displayValue) {
+        this.displayValue = displayValue;
+    }
+
 }

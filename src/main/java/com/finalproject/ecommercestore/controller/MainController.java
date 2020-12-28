@@ -1,9 +1,6 @@
 package com.finalproject.ecommercestore.controller;
 
-import com.finalproject.ecommercestore.model.dto.CartItemDto;
-import com.finalproject.ecommercestore.model.dto.CategoryDto;
-import com.finalproject.ecommercestore.model.dto.CommentDto;
-import com.finalproject.ecommercestore.model.dto.ProductDto;
+import com.finalproject.ecommercestore.model.dto.*;
 import com.finalproject.ecommercestore.service.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -84,8 +82,15 @@ public class MainController {
         cartItemDto.setProduct(productDto);
         cartItemDto.setSubtotal(cartItemService.getSubTotal(productDto.getPrice(), cartItemDto.getQuantity()));
         cartItemDto.setShoppingCart(shoppingCartService.getShoppingCart());
-        shoppingCartService.getShoppingCart().getCartItemList().add(cartItemDto);
-        cartItemService.addCartItem(cartItemDto);
+        ShoppingCartDto shoppingCartDto = shoppingCartService.getShoppingCart();
+        shoppingCartDto.getCartItemList().add(cartItemDto);
+        shoppingCartDto.setTotal(shoppingCartDto
+                .getCartItemList()
+                .stream()
+                .map(item->item.getSubtotal())
+                .reduce(BigDecimal.ZERO, BigDecimal::add)
+        );
+        shoppingCartService.saveShoppingCart(shoppingCartDto);
         return "redirect:/index";
     }
 

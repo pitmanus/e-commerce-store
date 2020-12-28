@@ -21,22 +21,28 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr style="transform: rotate(0);" th:each="cartItem: ${cartItems}">
+                    <tr style="transform: rotate(0);" th:each="cartItem: ${shoppingCart.cartItemList}">
                         <form th:action="@{/delete-cart-item}" th:method="post" th:object="${cartItem}">
                             <td><img th:src="@{'/image/'+'product'+${cartItem.product.id}+'.png'}" alt="prod_img" border=1 height=100 width=100></td>
                             <td th:text="${cartItem.product.name}"/>
                             <td th:text="${cartItem.product.price}+'$'"/>
                             <td th:text="${cartItem.quantity}"/>
                             <td th:text="${cartItem.subtotal}+'$'"/>
-                            <td><a class="btn btn-success" th:href="@{/}">Add to order</a></td>
                             <td>
                                 <input type="hidden" name="id" th:value="${cartItem.id}">
+                                <input type="hidden" name="subtotal" th:value="${cartItem.subtotal}">
                                 <button type="submit" class="btn btn-danger">Remove from shopping cart</button>
                             </td>
                         </form>
                     </tr>
                     </tbody>
                 </table>
+
+                <div class="float-right">
+                    <a class="btn btn-success" style="margin-bottom: 10px" th:href="@{/order}">&nbsp&nbsp Buy &nbsp&nbsp</a>
+                    <p><b>Total price:</b></p>
+                    <div th:text="${shoppingCart.total} +'$'"></div>
+                </div>
 
             </div>
         </div>

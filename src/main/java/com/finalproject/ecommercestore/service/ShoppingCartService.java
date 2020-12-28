@@ -12,6 +12,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+
 @Service
 public class ShoppingCartService {
     private ShoppingCartRepository shoppingCartRepository;
@@ -35,6 +37,16 @@ public class ShoppingCartService {
 
     public ShoppingCartDto getShoppingCart(){
         return userService.getUserDtoByUserName(getUserNameFromSecurityContext()).getShoppingCart();
+    }
+
+    public void saveShoppingCart(ShoppingCartDto shoppingCartDto){
+        shoppingCartRepository.save(modelMapper.map(shoppingCartDto, ShoppingCart.class));
+    }
+
+    public void setTotalPriceOfShoppingCartWhileDeletingCartItem(BigDecimal bigDecimal){
+        ShoppingCartDto shoppingCartDto = getShoppingCart();
+        shoppingCartDto.setTotal(shoppingCartDto.getTotal().subtract(bigDecimal));
+        saveShoppingCart(shoppingCartDto);
     }
 
     public void deleteCartItem(Long id){
