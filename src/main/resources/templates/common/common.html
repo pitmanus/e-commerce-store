@@ -53,7 +53,7 @@
 
                     <h1 class="my-4">Categories:</h1>
                     <div class="list-group">
-                        <a th:each="category : ${categories}" th:text="${category.categoryName}" th:href="@{/products/{id}(id=${category.id})}" class="list-group-item">Category name</a>
+                        <a th:each="category : ${categories}" th:text="${category.categoryName}" th:href="@{/products/{id}(id=${category.id})}" style="color: black" class="list-group-item">Category name</a>
                     </div>
 
                 </div>

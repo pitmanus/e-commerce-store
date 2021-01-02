@@ -31,7 +31,7 @@
                             <td>
                                 <input type="hidden" name="id" th:value="${cartItem.id}">
                                 <input type="hidden" name="subtotal" th:value="${cartItem.subtotal}">
-                                <button type="submit" class="btn btn-danger">Remove from shopping cart</button>
+                                <button type="submit" class="btn"><i class="fa fa-trash"></i></button>
                             </td>
                         </form>
                     </tr>
@@ -39,7 +39,7 @@
                 </table>
 
                 <div class="float-right">
-                    <a class="btn btn-success" style="margin-bottom: 10px" th:href="@{/order}">&nbsp&nbsp Buy &nbsp&nbsp</a>
+                    <a class="btn btn-success" style="margin-bottom: 15px" th:href="@{/order}">&nbsp&nbsp Buy &nbsp&nbsp</a>
                     <p><b>Total price:</b></p>
                     <div th:text="${shoppingCart.total} +'$'"></div>
                 </div>

@@ -74,6 +74,11 @@ public class UserService implements UserDetailsService {
                 .orElse(null);
     }
 
+    public UserDto getLoggedUser(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        return getUserDtoByUserName(auth.getName());
+    }
+
 
     public UserDto getUserDtoByUserName(String userName){
         return modelMapper.map(userRepository.findByUsername(userName), UserDto.class);

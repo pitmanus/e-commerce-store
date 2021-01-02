@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:replace="common/common :: common-header">
+</head>
+<body>
+<div th:replace="common/common :: navbar"></div>
+    <h5 class="card-header text-center">Order information</h5>
+    <div class="card-body">
+        <div class="d-flex justify-content-center">
+            <div class="col-sm-6">
+                <div class="card">
+                    <table class="table table-hover">
+                        <thead class="card-header">
+                        <tr>
+                            <th scope="col">Product image</th>
+                            <th scope="col">Product name</th>
+                            <th scope="col">Price per unit</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Subtotal price</th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr style="transform: rotate(0);" th:each="cartItem: ${user.shoppingCart.cartItemList}">
+                            <td><img th:src="@{'/image/'+'product'+${cartItem.product.id}+'.png'}" alt="prod_img"
+                                     border=1 height=100 width=100></td>
+                            <td th:text="${cartItem.product.name}"/>
+                            <td th:text="${cartItem.product.price}+'$'"/>
+                            <td th:text="${cartItem.quantity}"/>
+                            <td th:text="${cartItem.subtotal}+'$'"/>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="card-footer">
+                    <div class="float-right">
+                        <p><b>Total price:</b></p>
+                        <div th:text="${user.shoppingCart.total} +'$'"></div>
+                    </div>
+                    </div>
+
+                </div>
+                <br>
+                <div class="card">
+                    <h5 class="card-header text-center">Shipping address</h5>
+                    <div class="card-body">
+                        <br/>
+                        <div class="inline d-flex flex-row align-items-center">
+                            <span><b>City: </b></span> &nbsp <span
+                                th:text="${user.address.city}"></span></div>
+                        <br/>
+                        <div class="inline d-flex flex-row align-items-center">
+                            <span><b>Street: </b></span> &nbsp <span
+                                th:text="${user.address.street}"></span></div>
+                        <br/>
+                        <div class="inline d-flex flex-row align-items-center">
+                            <span><b>Building number: </b></span> &nbsp <span
+                                th:text="${user.address.buildingNumber}"></span></div>
+                        <br/>
+                        <div class="inline d-flex flex-row align-items-center">
+                            <span><b>Apartment number: </b></span> &nbsp <span
+                                th:text="${user.address.apartmentNumber}"></span></div>
+                        <br/>
+                        <div class="inline d-flex flex-row align-items-center">
+                            <span><b>Zip: </b></span> &nbsp <span
+                                th:text="${user.address.zip}"></span></div>
+                    </div>
+                </div>
+                <br>
+<form class="form-horizontal" th:action="@{/order}" method="post" th:object="${order}">
+                <label for="shippingMethod"><h5>Choose shipping method</h5></label>
+                <select th:field="*{shippingMethod}" id="shippingMethod" class="form-control">
+                    <option value="" selected="selected" disabled="disabled">Please select shipping method</option>
+                    <option th:each="shippingMethod: ${T(com.finalproject.ecommercestore.model.entity.ShippingMethod).values()}" th:text="${shippingMethod.displayValue}" th:value="${shippingMethod}"></option>
+                </select>
+    <br>
+    <label for="paymentMethod"><h5>Choose payment method</h5></label>
+    <select th:field="*{userPayment}" id="paymentMethod" class="form-control">
+        <option value="" selected="selected" disabled="disabled">Please select payment method</option>
+        <option th:each="userPayment: ${user.userPayments}" th:text="${userPayment.cardName}" th:value="${userPayment.id}" th:field="*{userPayment}"></option>
+    </select>
+    <br>
+    <button class="btn btn-success btn-lg btn-block" type="submit" style="margin-bottom: 15px ">&nbsp&nbsp Buy &nbsp&nbsp</button>
+</form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

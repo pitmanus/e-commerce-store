@@ -29,12 +29,24 @@ public class Order {
     private List<CartItem> cartItems;
 
     @OneToOne
+    @JoinColumn(name = "user_payment_id")
+    private UserPayment userPayment;
+
+    @OneToOne
     @JoinColumn(name = "shipping_address")
     private Address shippingAddress;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    public UserPayment getUserPayment() {
+        return userPayment;
+    }
+
+    public void setUserPayment(UserPayment userPayment) {
+        this.userPayment = userPayment;
+    }
 
     public Address getShippingAddress() {
         return shippingAddress;
