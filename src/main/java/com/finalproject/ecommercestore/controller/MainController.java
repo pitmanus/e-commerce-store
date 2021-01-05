@@ -6,12 +6,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -77,21 +79,33 @@ public class MainController {
     }
 
     @PostMapping("/add-to-cart/{id}")
-    public String addToCart(@PathVariable Long id, @ModelAttribute("cartItem") CartItemDto cartItemDto) {
-        ProductDto productDto = productService.getById(id);
-        cartItemDto.setProduct(productDto);
-        cartItemDto.setSubtotal(cartItemService.getSubTotal(productDto.getPrice(), cartItemDto.getQuantity()));
-        cartItemDto.setShoppingCart(shoppingCartService.getShoppingCart());
-        ShoppingCartDto shoppingCartDto = shoppingCartService.getShoppingCart();
-        shoppingCartDto.getCartItemList().add(cartItemDto);
-        shoppingCartDto.setTotal(shoppingCartDto
-                .getCartItemList()
-                .stream()
-                .map(item->item.getSubtotal())
-                .reduce(BigDecimal.ZERO, BigDecimal::add)
-        );
-        shoppingCartService.saveShoppingCart(shoppingCartDto);
-        return "redirect:/index";
+    public String addToCart( @Valid @ModelAttribute("cartItem") CartItemDto cartItemDto, BindingResult bindingResult, @PathVariable Long id, Model model) {
+        if (bindingResult.hasErrors()){
+            List<CategoryDto> categories = categoryService.showAllCategories();
+            model.addAttribute("categories", categories);
+            ProductDto productDto = productService.getById(id);
+            model.addAttribute("product", productDto);
+            CommentDto commentDto = new CommentDto();
+            model.addAttribute("comment", commentDto);
+            List<CommentDto> comments = commentService.getAllCommentsForASingleProduct(id);
+            model.addAttribute("comments", comments);
+            return "product-page";
+        }else{
+            ProductDto productDto = productService.getById(id);
+            cartItemDto.setProduct(productDto);
+            cartItemDto.setSubtotal(cartItemService.getSubTotal(productDto.getPrice(), cartItemDto.getQuantity()));
+            cartItemDto.setShoppingCart(shoppingCartService.getShoppingCart());
+            ShoppingCartDto shoppingCartDto = shoppingCartService.getShoppingCart();
+            shoppingCartDto.getCartItemList().add(cartItemDto);
+            shoppingCartDto.setTotal(shoppingCartDto
+                    .getCartItemList()
+                    .stream()
+                    .map(item->item.getSubtotal())
+                    .reduce(BigDecimal.ZERO, BigDecimal::add)
+            );
+            shoppingCartService.saveShoppingCart(shoppingCartDto);
+            return "redirect:/index";
+        }
     }
 
 
