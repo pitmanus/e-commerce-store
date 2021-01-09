@@ -30,9 +30,8 @@ public class Order {
     @Column(name = "order_total")
     private BigDecimal orderTotal;
 
-    @OneToMany(mappedBy = "order")
-    /*@LazyCollection(LazyCollectionOption.FALSE)*/
-    private List<CartItem> cartItems;
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private List<OrderItem> orderItems;
 
     @OneToOne
     @JoinColumn(name = "user_payment_id")
@@ -118,11 +117,11 @@ public class Order {
         this.user = user;
     }
 
-    public List<CartItem> getCartItems() {
-        return cartItems;
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
     }
 
-    public void setCartItems(List<CartItem> cartItems) {
-        this.cartItems = cartItems;
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
     }
 }

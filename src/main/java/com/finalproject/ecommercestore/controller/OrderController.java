@@ -44,7 +44,6 @@ public class OrderController {
     @PostMapping("/order")
     public String createOrder(@ModelAttribute("order") OrderDto orderDto){
        orderService.addOrder(orderDto);
-       userService.getLoggedUser().getShoppingCart().getCartItemList().forEach(item->cartItemService.deleteCartItem(item.getId()));
-        return "redirect:/user-account";
+            return "redirect:/user-account";
     }
 }

@@ -1,12 +1,13 @@
 package com.finalproject.ecommercestore.model.entity;
 
+import com.finalproject.ecommercestore.model.dto.ProductDto;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.List;
 
 @Entity
-@Table(name = "cart_item")
-public class CartItem {
+@Table(name = "order_item")
+public class OrderItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,10 +18,18 @@ public class CartItem {
     @JoinColumn(name = "product_id")
     private Product product;
 
-
     @ManyToOne
-    @JoinColumn(name = "shopping_cart_id")
-    private ShoppingCart shoppingCart;
+    @JoinColumn(name = "order_id")
+    private Order order;
+
+    public OrderItem() {
+    }
+
+    public OrderItem(Product product, int quantity, BigDecimal subtotal) {
+        this.quantity = quantity;
+        this.subtotal = subtotal;
+        this.product = product;
+    }
 
     public Long getId() {
         return id;
@@ -54,12 +63,11 @@ public class CartItem {
         this.product = product;
     }
 
-    public ShoppingCart getShoppingCart() {
-        return shoppingCart;
+    public Order getOrder() {
+        return order;
     }
 
-    public void setShoppingCart(ShoppingCart shoppingCart) {
-        this.shoppingCart = shoppingCart;
+    public void setOrder(Order order) {
+        this.order = order;
     }
-
 }
