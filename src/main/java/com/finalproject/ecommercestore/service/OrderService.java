@@ -72,4 +72,8 @@ public class OrderService {
     public List<OrderDto> getAllUserOrders(){
         return userService.getLoggedUser().getOrderList();
     }
+
+    public OrderDto getOrderById(Long id){
+        return modelMapper.map(orderRepository.findById(id).get(), OrderDto.class);
+    }
 }

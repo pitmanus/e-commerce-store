@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:replace="common/common :: common-header">
+</head>
+<body>
+<div th:replace="common/common :: navbar"></div>
+
+<h5 class="card-header text-center">Order details</h5>
+<div class="card-body" th:object="${order}">
+    <div class="d-flex justify-content-center">
+        <div class="col-sm-6">
+            <div class="card">
+                <table class="table table-hover">
+                    <thead class="card-header">
+                    <tr>
+                        <th scope="col">Product image</th>
+                        <th scope="col">Product name</th>
+                        <th scope="col">Price per unit</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Subtotal price</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr style="transform: rotate(0);" th:each="orderItem: ${order.orderItems}">
+                        <td><img th:src="@{'/image/'+'product'+${orderItem.product.id}+'.png'}" alt="prod_img"
+                                 border=1 height=100 width=100></td>
+                        <td th:text="${orderItem.product.name}"/>
+                        <td th:text="${orderItem.product.price}+'$'"/>
+                        <td th:text="${orderItem.quantity}"/>
+                        <td th:text="${orderItem.subtotal}+'$'"/>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="card-footer">
+                    <div class="float-right">
+                        <p><b>Total price:</b></p>
+                        <div th:text="${order.orderTotal} +'$'"></div>
+                    </div>
+                </div>
+
+            </div>
+            <br>
+            <div class="card">
+                <h5 class="card-header text-center">Shipping address</h5>
+                <div class="card-body">
+                    <br/>
+                    <div class="inline d-flex flex-row align-items-center">
+                        <span><b>City: </b></span> &nbsp <span
+                            th:text="${order.shippingAddress.city}"></span></div>
+                    <br/>
+                    <div class="inline d-flex flex-row align-items-center">
+                        <span><b>Street: </b></span> &nbsp <span
+                            th:text="${order.shippingAddress.street}"></span></div>
+                    <br/>
+                    <div class="inline d-flex flex-row align-items-center">
+                        <span><b>Building number: </b></span> &nbsp <span
+                            th:text="${order.shippingAddress.buildingNumber}"></span></div>
+                    <br/>
+                    <div class="inline d-flex flex-row align-items-center">
+                        <span><b>Apartment number: </b></span> &nbsp <span
+                            th:text="${order.shippingAddress.apartmentNumber}"></span></div>
+                    <br/>
+                    <div class="inline d-flex flex-row align-items-center">
+                        <span><b>Zip: </b></span> &nbsp <span
+                            th:text="${order.shippingAddress.zip}"></span></div>
+                </div>
+            </div>
+            <br>
+            <div class="card">
+                <h5 class="card-header text-center">Order info</h5>
+                <div class="card-body">
+                    <br/>
+                    <div class="inline d-flex flex-row align-items-center">
+                        <span><b>Order status: </b></span> &nbsp <span
+                            th:text="${order.orderStatus.displayValue}"></span></div>
+                    <br/>
+                    <div class="inline d-flex flex-row align-items-center">
+                        <span><b>Order date: </b></span> &nbsp <span
+                            th:text="${order.orderDate}"></span></div>
+                    <br/>
+                    <div class="inline d-flex flex-row align-items-center">
+                        <span><b>Shipping date: </b></span> &nbsp <span
+                            th:text="${order.shippingDate}"></span></div>
+                    <br/>
+                    <div class="inline d-flex flex-row align-items-center">
+                        <span><b>Shipping method: </b></span> &nbsp <span
+                            th:text="${order.shippingMethod.displayValue}"></span></div>
+                    <br/>
+                    <div class="inline d-flex flex-row align-items-center">
+                        <span><b>Payment method: </b></span> &nbsp <span
+                            th:text="${order.userPayment.cardName}"></span></div>
+                    <br/>
+                    <div class="inline d-flex flex-row align-items-center">
+                        <span><b>Zip: </b></span> &nbsp <span
+                            th:text="${order.shippingAddress.zip}"></span></div>
+                </div>
+            </div>
+            <br>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

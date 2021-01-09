@@ -32,7 +32,12 @@ public class ShoppingCartController {
     public String showShoppingCart(Model model) {
         ShoppingCartDto shoppingCart = shoppingCartService.getShoppingCart();
         model.addAttribute("shoppingCart", shoppingCart);
-        return "shopping-cart";
+        if (shoppingCart.getCartItemList().isEmpty()){
+            return "empty-shopping-cart";
+        }else{
+            return "shopping-cart";
+        }
+
     }
 
     @PostMapping("/delete-cart-item")

@@ -5,7 +5,7 @@
 <body>
 <div th:replace="common/common :: navbar"></div>
 
-<ul class="nav nav-tabs" id="user-page-tabs"  th:object="${user}" role="tablist">
+<ul class="nav nav-tabs" id="user-page-tabs" th:object="${user}" role="tablist">
     <li>
         <a class="nav-link" data-toggle="tab" href="#tab-2" role="tab" aria-selected="false"><span style="color: black">Orders</span></a>
     </li>
@@ -24,82 +24,88 @@
         <div class="panel-group">
             <div class="panel panel-default" style="border: none;">
                 <div class="panel-body" style=" margin-top: 20px;">
-                        <div class="row justify-content-center">
-                            <div class="col-md-20 col-md-offset-10">
+                    <div class="row justify-content-center">
+                        <div class="col-md-20 col-md-offset-10">
 
-                                <table class="table table-hover">
-                                    <thead class="thead">
-                                    <tr>
-                                        <th scope="col">Order date</th>
-                                        <th scope="col">Shipping date</th>
-                                        <th scope="col">Shipping method</th>
-                                        <th scope="col">Order status</th>
-                                        <th scope="col">Total price</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr style="transform: rotate(0);" th:each="order: ${userOrders}">
-                                            <td th:text="${order.orderDate}"/>
-                                            <td th:text="${order.shippingDate}"/>
-                                            <td th:text="${order.shippingMethod.displayValue}"/>
-                                            <td th:text="${order.orderStatus.displayValue}"/>
-                                            <td th:text="${order.orderTotal}"/>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                            <table class="table table-hover">
+                                <thead class="thead">
+                                <tr>
+                                    <th scope="col">Order date</th>
+                                    <th scope="col">Shipping date</th>
+                                    <th scope="col">Shipping method</th>
+                                    <th scope="col">Order status</th>
+                                    <th scope="col">Total price</th>
+                                    <th scope="col">Detailed info</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr style="transform: rotate(0);" th:each="order: ${userOrders}">
+                                    <td th:text="${order.orderDate}"/>
+                                    <td th:text="${order.shippingDate}"/>
+                                    <td th:text="${order.shippingMethod.displayValue}"/>
+                                    <td th:text="${order.orderStatus.displayValue}"/>
+                                    <td th:text="${order.orderTotal}"/>
+                                    <td><a th:href="@{/order-details/{id}(id=${order.id})}"><i class="fa fa-info-circle fa-2x" aria-hidden="true" style="color: #b9bbbe"></i></a></td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="tab-pane fade" id="tab-3" >
+    <div class="tab-pane fade" id="tab-3">
         <div class="panel-group">
             <div class="panel panel-default" style="border: none;">
                 <div class="panel-body" style=" margin-top: 20px;">
                     <div class="container">
                         <div class="row justify-content-md-center">
-                                <div class="col-md-20 col-md-offset-10">
+                            <div class="col-md-20 col-md-offset-10">
 
-                                    <table class="table table-hover">
-                                        <thead class="thead">
-                                        <tr>
-                                            <th scope="col"></th>
-                                            <th scope="col"></th>
-                                            <th scope="col"></th>
-                                            <th scope="col"></th>
-                                            <th scope="col"></th>
-                                            <th scope="col"></th>
-                                            <th scope="col"></th>
-                                            <th scope="col"></th>
-                                            <th scope="col"></th>
-                                            <th scope="col"></th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr style="transform: rotate(0);" th:each="paymentCard: ${paymentCards}">
-                                            <form th:action="@{/deletecard}" th:method="post" th:object="${paymentCard}">
-                                                <td><a th:href="@{/card-details/{id}(id=${paymentCard.id})}"><img th:src="@{'/image/'+'card'+${paymentCard.id}+'.png'}" alt="card_img" border=1 height=100 width=150></a></td>
-                                                <td><a th:text="${paymentCard.cardName}" style="color: black"></a></td>
-                                                <td th:text="${paymentCard.cardNumber}"/>
-                                                <td th:text="${paymentCard.bankName}"/>
-                                                <td th:text="${paymentCard.holderName}"/>
-                                                <td th:text="${paymentCard.expiryMonth}"/>
-                                                <!--<td><p>&nbsp;/</p><td/>-->
-                                                <td th:text="${paymentCard.expiryYear}"/>
-                                                <td><a class="btn btn-warning" th:href="@{/edit-payment-card/{id}(id=${paymentCard.id})}">Edit</a></td>
-                                                <td>
-                                                    <input type="hidden" name="id" th:value="${paymentCard.id}">
-                                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                                </td>
-                                            </form>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                    <br/>
-                                    <a class="btn btn-success" th:href="@{/new-payment-card}">Add new payment card</a>
-                                </div>
+                                <table class="table table-hover">
+                                    <thead class="thead">
+                                    <tr>
+                                        <th scope="col"></th>
+                                        <th scope="col"></th>
+                                        <th scope="col"></th>
+                                        <th scope="col"></th>
+                                        <th scope="col"></th>
+                                        <th scope="col"></th>
+                                        <th scope="col"></th>
+                                        <th scope="col"></th>
+                                        <th scope="col"></th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr style="transform: rotate(0);" th:each="paymentCard: ${paymentCards}">
+                                        <form th:action="@{/deletecard}" th:method="post" th:object="${paymentCard}">
+                                            <td><a th:href="@{/card-details/{id}(id=${paymentCard.id})}"><img
+                                                    th:src="@{'/image/'+'card'+${paymentCard.id}+'.png'}" alt="card_img"
+                                                    border=1 height=100 width=150></a></td>
+                                            <td><a th:text="${paymentCard.cardName}" style="color: black"></a></td>
+                                            <td th:text="${paymentCard.cardNumber}"/>
+                                            <td th:text="${paymentCard.bankName}"/>
+                                            <td th:text="${paymentCard.holderName}"/>
+                                            <td th:text="${paymentCard.expiryMonth}"/>
+                                            <!--<td><p>&nbsp;/</p><td/>-->
+                                            <td th:text="${paymentCard.expiryYear}"/>
+                                            <td><a class="btn btn-warning"
+                                                   th:href="@{/edit-payment-card/{id}(id=${paymentCard.id})}">Edit</a>
+                                            </td>
+                                            <td>
+                                                <input type="hidden" name="id" th:value="${paymentCard.id}">
+                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                            </td>
+                                        </form>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <br/>
+                                <a class="btn btn-success" th:href="@{/new-payment-card}">Add new payment card</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -112,69 +118,69 @@
             <div class="panel panel-default" style="border: none;">
                 <div class="panel-body">
 
-                            <div class="card">
-                                <h5 class="card-header">Account information</h5>
-                                <div class="card-body">
-                                    <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="card h-100">
-                                            <div class="card-body">
-                                                <div class="inline d-flex flex-row align-items-center">
-                                                    <span><b>First name: </b></span> &nbsp <span
-                                                        th:text="${user.firstName}"></span></div>
-                                                <br/>
-                                                <div class="inline d-flex flex-row align-items-center">
-                                                    <span><b>Last name: </b></span> &nbsp <span
-                                                        th:text="${user.lastName}"></span></div>
-                                                <br/>
-                                                <div class="inline d-flex flex-row align-items-center">
-                                                    <span><b>Username: </b></span> &nbsp <span
-                                                        th:text="${user.username}"></span></div>
-                                                <br/>
-                                                <div class="inline d-flex flex-row align-items-center">
-                                                    <span><b>Email: </b></span> &nbsp <span
-                                                        th:text="${user.email}"></span></div>
-                                                <br/>
-                                                <div class="inline d-flex flex-row align-items-center">
-                                                    <span><b>Tel: </b></span> &nbsp <span
-                                                        th:text="${user.tel}"></span></div>
-                                            </div>
+                    <div class="card">
+                        <h5 class="card-header">Account information</h5>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <div class="inline d-flex flex-row align-items-center">
+                                                <span><b>First name: </b></span> &nbsp <span
+                                                    th:text="${user.firstName}"></span></div>
+                                            <br/>
+                                            <div class="inline d-flex flex-row align-items-center">
+                                                <span><b>Last name: </b></span> &nbsp <span
+                                                    th:text="${user.lastName}"></span></div>
+                                            <br/>
+                                            <div class="inline d-flex flex-row align-items-center">
+                                                <span><b>Username: </b></span> &nbsp <span
+                                                    th:text="${user.username}"></span></div>
+                                            <br/>
+                                            <div class="inline d-flex flex-row align-items-center">
+                                                <span><b>Email: </b></span> &nbsp <span
+                                                    th:text="${user.email}"></span></div>
+                                            <br/>
+                                            <div class="inline d-flex flex-row align-items-center">
+                                                <span><b>Tel: </b></span> &nbsp <span
+                                                    th:text="${user.tel}"></span></div>
                                         </div>
                                     </div>
+                                </div>
 
-                                    <div class="col-sm-6">
-                                        <div class="card h-100">
-                                            <div class="card-body">
-                                                <br/>
-                                                <div class="inline d-flex flex-row align-items-center">
-                                                    <span><b>City: </b></span> &nbsp <span
-                                                        th:text="${user.address.city}"></span></div>
-                                                <br/>
-                                                <div class="inline d-flex flex-row align-items-center">
-                                                    <span><b>Street: </b></span> &nbsp <span
-                                                        th:text="${user.address.street}"></span></div>
-                                                <br/>
-                                                <div class="inline d-flex flex-row align-items-center">
-                                                    <span><b>Building number: </b></span> &nbsp <span
-                                                        th:text="${user.address.buildingNumber}"></span></div>
-                                                <br/>
-                                                <div class="inline d-flex flex-row align-items-center">
-                                                    <span><b>Apartment number: </b></span> &nbsp <span
-                                                        th:text="${user.address.apartmentNumber}"></span></div>
-                                                <br/>
-                                                <div class="inline d-flex flex-row align-items-center">
-                                                    <span><b>Zip: </b></span> &nbsp <span
-                                                        th:text="${user.address.zip}"></span></div>
-                                            </div>
+                                <div class="col-sm-6">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <br/>
+                                            <div class="inline d-flex flex-row align-items-center">
+                                                <span><b>City: </b></span> &nbsp <span
+                                                    th:text="${user.address.city}"></span></div>
+                                            <br/>
+                                            <div class="inline d-flex flex-row align-items-center">
+                                                <span><b>Street: </b></span> &nbsp <span
+                                                    th:text="${user.address.street}"></span></div>
+                                            <br/>
+                                            <div class="inline d-flex flex-row align-items-center">
+                                                <span><b>Building number: </b></span> &nbsp <span
+                                                    th:text="${user.address.buildingNumber}"></span></div>
+                                            <br/>
+                                            <div class="inline d-flex flex-row align-items-center">
+                                                <span><b>Apartment number: </b></span> &nbsp <span
+                                                    th:text="${user.address.apartmentNumber}"></span></div>
+                                            <br/>
+                                            <div class="inline d-flex flex-row align-items-center">
+                                                <span><b>Zip: </b></span> &nbsp <span
+                                                    th:text="${user.address.zip}"></span></div>
                                         </div>
                                     </div>
-                                    </div>
-                                    </br>
-
-                                    <a th:href="@{/edit-user-info/{id}(id=${user.id})}" class="btn btn-primary">Edit</a>
-
                                 </div>
                             </div>
+                            </br>
+
+                            <a th:href="@{/edit-user-info/{id}(id=${user.id})}" class="btn btn-primary">Edit</a>
+
+                        </div>
+                    </div>
 
                 </div>
             </div>
@@ -183,8 +189,8 @@
 </div>
 <script th:inline="javascript">
     var tabToSelect = "tab-4";
-    $(document).ready(function() {
-        $('#user-page-tabs a[href="#'+tabToSelect+'"]').tab('show')
+    $(document).ready(function () {
+        $('#user-page-tabs a[href="#' + tabToSelect + '"]').tab('show')
     });
 </script>
 </body>
