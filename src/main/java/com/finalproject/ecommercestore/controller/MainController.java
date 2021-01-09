@@ -74,7 +74,9 @@ public class MainController {
         model.addAttribute("comment", commentDto);
         List<CommentDto> comments = commentService.getAllCommentsForASingleProduct(id);
         model.addAttribute("comments", comments);
-        model.addAttribute("cartItem", new CartItemDto());
+        CartItemDto cartItemDto = new CartItemDto();
+        cartItemDto.setQuantity(1);
+        model.addAttribute("cartItem", cartItemDto);
         return "product-page";
     }
 

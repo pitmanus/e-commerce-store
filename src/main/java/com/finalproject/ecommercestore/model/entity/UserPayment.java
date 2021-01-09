@@ -33,9 +33,9 @@ public class UserPayment {
     @Transient
     private MultipartFile cardImage;
 
-    @ManyToOne
+    /*@ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private User user;*/
 
     @OneToOne
     @JoinColumn(name = "billing_address")
@@ -121,13 +121,13 @@ public class UserPayment {
         this.defaultPayment = defaultPayment;
     }
 
-    public User getUser() {
+  /*  public User getUser() {
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
-    }
+    }*/
 
     public Address getBillingAddress() {
         return billingAddress;

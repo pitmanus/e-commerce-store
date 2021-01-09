@@ -1,5 +1,10 @@
 package com.finalproject.ecommercestore.model.entity;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -25,7 +30,8 @@ public class Order {
     @Column(name = "order_total")
     private BigDecimal orderTotal;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order")
+    /*@LazyCollection(LazyCollectionOption.FALSE)*/
     private List<CartItem> cartItems;
 
     @OneToOne

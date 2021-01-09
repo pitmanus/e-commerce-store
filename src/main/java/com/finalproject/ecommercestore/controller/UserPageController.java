@@ -1,11 +1,10 @@
 package com.finalproject.ecommercestore.controller;
 
-import com.finalproject.ecommercestore.model.dto.AddressDto;
-import com.finalproject.ecommercestore.model.dto.ProductDto;
-import com.finalproject.ecommercestore.model.dto.UserDto;
-import com.finalproject.ecommercestore.model.dto.UserPaymentDto;
+import com.finalproject.ecommercestore.model.dto.*;
+import com.finalproject.ecommercestore.model.entity.Order;
 import com.finalproject.ecommercestore.model.entity.Product;
 import com.finalproject.ecommercestore.model.entity.UserPayment;
+import com.finalproject.ecommercestore.service.OrderService;
 import com.finalproject.ecommercestore.service.UserPaymentService;
 import com.finalproject.ecommercestore.service.UserService;
 import org.springframework.security.core.Authentication;
@@ -29,11 +28,13 @@ public class UserPageController {
 
     private UserService userService;
     private UserPaymentService userPaymentService;
+    private OrderService orderService;
 
 
-    public UserPageController(UserService userService, UserPaymentService userPaymentService) {
+    public UserPageController(UserService userService, UserPaymentService userPaymentService, OrderService orderService) {
         this.userService = userService;
         this.userPaymentService = userPaymentService;
+        this.orderService = orderService;
     }
 
     @GetMapping("/user-account")
@@ -44,6 +45,8 @@ public class UserPageController {
         model.addAttribute("user", userDto);
         List<UserPaymentDto> userPaymentDtoList = userPaymentService.getAllUserPaymentCards();
         model.addAttribute("paymentCards", userPaymentDtoList);
+        List<OrderDto> userOrders = orderService.getAllUserOrders();
+        model.addAttribute("userOrders", userOrders);
         return "user-account";
     }
 

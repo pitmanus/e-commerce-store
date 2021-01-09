@@ -21,4 +21,8 @@ public enum OrderStatus {
         this.displayValue = displayValue;
     }
 
+    public String getDisplayValue(){
+        return displayValue;
+    }
+
 }

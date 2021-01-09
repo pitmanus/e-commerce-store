@@ -19,7 +19,7 @@ public class UserPaymentDto {
     private boolean defaultPayment;
     private MultipartFile cardImage;
 
-    private UserDto user;
+   /* private UserDto user;*/
 
     private AddressDto billingAddress;
 
@@ -103,13 +103,13 @@ public class UserPaymentDto {
         this.defaultPayment = defaultPayment;
     }
 
-    public UserDto getUser() {
+  /*  public UserDto getUser() {
         return user;
     }
 
     public void setUser(UserDto user) {
         this.user = user;
-    }
+    }*/
 
     public AddressDto getBillingAddress() {
         return billingAddress;

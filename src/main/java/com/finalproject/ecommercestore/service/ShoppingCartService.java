@@ -8,10 +8,14 @@ import com.finalproject.ecommercestore.model.entity.ShoppingCart;
 import com.finalproject.ecommercestore.model.entity.User;
 import com.finalproject.ecommercestore.repository.ShoppingCartRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
 import java.math.BigDecimal;
 
 @Service
@@ -21,6 +25,9 @@ public class ShoppingCartService {
     private UserService userService;
     private ProductService productService;
     private CartItemService cartItemService;
+
+    @Autowired
+    private LocalContainerEntityManagerFactoryBean entityManagerFactory;
 
     public String getUserNameFromSecurityContext(){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

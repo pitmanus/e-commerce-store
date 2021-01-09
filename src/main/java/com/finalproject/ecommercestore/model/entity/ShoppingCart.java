@@ -1,9 +1,11 @@
 package com.finalproject.ecommercestore.model.entity;
 
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +20,6 @@ public class ShoppingCart {
     private BigDecimal total;
 
     @OneToMany(mappedBy = "shoppingCart", cascade = CascadeType.ALL)
-   /* @LazyCollection(LazyCollectionOption.FALSE)*/
     private List<CartItem> cartItemList = new ArrayList<>();
 
     public Long getId() {

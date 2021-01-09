@@ -8,6 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.security.Principal;
 import java.util.List;
@@ -35,7 +36,7 @@ public class UserPaymentService {
         String name = auth.getName();
         User user = userService.getUserByUserName(name);
         UserPayment userPayment = modelMapper.map(userPaymentDto, UserPayment.class);
-        userPayment.setUser(user);
+        /*userPayment.setUser(user);*/
         userPayment.setBillingAddress(user.getAddress());
         user.getUserPayments().add(userPayment);
         userService.save(user);

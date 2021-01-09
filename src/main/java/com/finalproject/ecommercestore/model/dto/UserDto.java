@@ -3,6 +3,7 @@ import com.finalproject.ecommercestore.model.entity.Order;
 import com.finalproject.ecommercestore.model.entity.Role;
 import com.finalproject.ecommercestore.model.entity.ShoppingCart;
 import com.finalproject.ecommercestore.model.entity.UserPayment;
+import org.hibernate.Hibernate;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
