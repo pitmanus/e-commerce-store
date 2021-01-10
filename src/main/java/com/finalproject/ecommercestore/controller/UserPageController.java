@@ -1,9 +1,6 @@
 package com.finalproject.ecommercestore.controller;
 
 import com.finalproject.ecommercestore.model.dto.*;
-import com.finalproject.ecommercestore.model.entity.Order;
-import com.finalproject.ecommercestore.model.entity.Product;
-import com.finalproject.ecommercestore.model.entity.UserPayment;
 import com.finalproject.ecommercestore.service.OrderService;
 import com.finalproject.ecommercestore.service.UserPaymentService;
 import com.finalproject.ecommercestore.service.UserService;
@@ -13,14 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.List;
 
 @Controller
@@ -79,19 +70,7 @@ public class UserPageController {
 
     @PostMapping("/new-payment-card")
     public String addNewPaymentCard(@ModelAttribute UserPaymentDto userPaymentDto){
-        UserPayment userPayment = userPaymentService.saveUserPayment(userPaymentDto);
-
-        MultipartFile cardImage = userPaymentDto.getCardImage();
-
-        try {
-            byte[] bytes = cardImage.getBytes();
-            String name = userPayment.getId() + ".png";
-            BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File("src/main/resources/static/image/card" + name)));
-            stream.write(bytes);
-            stream.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        userPaymentService.addUserPayment(userPaymentDto);
 
         return "redirect:/user-account";
     }
@@ -112,25 +91,7 @@ public class UserPageController {
     @PostMapping("/edit-payment-card")
     public String editPaymentCard(@ModelAttribute("userPaymentCard") UserPaymentDto userPaymentDto) {
 
-        UserPayment userPayment = userPaymentService.saveUserPayment(userPaymentDto);
-
-        MultipartFile cardImage = userPaymentDto.getCardImage();
-
-        if (!cardImage.isEmpty())
-            try {
-                byte[] bytes = cardImage.getBytes();
-                String name = userPayment.getId() + ".png";
-
-                Files.delete(Paths.get("src/main/resources/static/image/card" + name));
-
-                BufferedOutputStream stream = new BufferedOutputStream(
-                        new FileOutputStream(new File
-                                ("src/main/resources/static/image/card" + name)));
-                stream.write(bytes);
-                stream.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        userPaymentService.editUserPayment(userPaymentDto);
 
         return "redirect:/user-account";
     }

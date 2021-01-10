@@ -1,7 +1,6 @@
 package com.finalproject.ecommercestore.service;
 
 import com.finalproject.ecommercestore.model.dto.CommentDto;
-import com.finalproject.ecommercestore.model.dto.ProductDto;
 import com.finalproject.ecommercestore.model.entity.Comment;
 import com.finalproject.ecommercestore.model.entity.Product;
 import com.finalproject.ecommercestore.repository.CommentRepository;

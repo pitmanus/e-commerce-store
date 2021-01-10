@@ -3,21 +3,15 @@ package com.finalproject.ecommercestore.controller;
 import com.finalproject.ecommercestore.model.dto.*;
 import com.finalproject.ecommercestore.service.*;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -93,19 +87,7 @@ public class MainController {
             model.addAttribute("comments", comments);
             return "product-page";
         }else{
-            ProductDto productDto = productService.getById(id);
-            cartItemDto.setProduct(productDto);
-            cartItemDto.setSubtotal(cartItemService.getSubTotal(productDto.getPrice(), cartItemDto.getQuantity()));
-            cartItemDto.setShoppingCart(shoppingCartService.getShoppingCart());
-            ShoppingCartDto shoppingCartDto = shoppingCartService.getShoppingCart();
-            shoppingCartDto.getCartItemList().add(cartItemDto);
-            shoppingCartDto.setTotal(shoppingCartDto
-                    .getCartItemList()
-                    .stream()
-                    .map(item->item.getSubtotal())
-                    .reduce(BigDecimal.ZERO, BigDecimal::add)
-            );
-            shoppingCartService.saveShoppingCart(shoppingCartDto);
+            shoppingCartService.addItemToShoppingCart(id, cartItemDto);
             return "redirect:/index";
         }
     }
@@ -124,7 +106,7 @@ public class MainController {
     }
 
     @RequestMapping("/my-account")
-    public void myAccountPageRedirect(HttpServletRequest request, HttpServletResponse response, Authentication authResult) throws IOException, ServletException {
+    public void myAccountPageRedirect(HttpServletRequest request, HttpServletResponse response, Authentication authResult) throws IOException {
         String role = authResult.getAuthorities().toString();
 
         if (role.contains("ROLE_ADMIN")) {

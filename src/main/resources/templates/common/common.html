@@ -70,7 +70,7 @@
                                 <a th:href="@{/product-page/{id}(id=${product.id})}"><img class="card-img-top" th:src="@{'/image/'+'product'+${product.id}+'.png'}" alt="prod_img" height=250 width=50></a>
                                 <div class="card-body">
                                     <h6 class="card-title">
-                                        <a th:href="@{/product-page/{id}(id=${product.id})}" th:text="${product.name}"></a>
+                                        <a th:href="@{/product-page/{id}(id=${product.id})}" style="color: black" th:text="${product.name}"></a>
                                     </h6>
                                     <h5 th:text="${#numbers.formatDecimal(product.price,0,2)}+'$'"></h5>
                                     <p th:text="${product.inStock}? 'In stock'" style="color: lime"></p>

@@ -1,6 +1,7 @@
 package com.finalproject.ecommercestore.service;
 
 import com.finalproject.ecommercestore.model.dto.CartItemDto;
+import com.finalproject.ecommercestore.model.dto.ProductDto;
 import com.finalproject.ecommercestore.model.dto.ShoppingCartDto;
 import com.finalproject.ecommercestore.model.entity.CartItem;
 import com.finalproject.ecommercestore.model.entity.Product;
@@ -26,9 +27,6 @@ public class ShoppingCartService {
     private ProductService productService;
     private CartItemService cartItemService;
 
-    @Autowired
-    private LocalContainerEntityManagerFactoryBean entityManagerFactory;
-
     public String getUserNameFromSecurityContext(){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return auth.getName();
@@ -42,9 +40,26 @@ public class ShoppingCartService {
         this.cartItemService = cartItemService;
     }
 
+    public void addItemToShoppingCart(Long id, CartItemDto cartItemDto){
+        ProductDto productDto = productService.getById(id);
+        cartItemDto.setProduct(productDto);
+        cartItemDto.setSubtotal(cartItemService.getSubTotal(productDto.getPrice(), cartItemDto.getQuantity()));
+        cartItemDto.setShoppingCart(getShoppingCart());
+        ShoppingCartDto shoppingCartDto = getShoppingCart();
+        shoppingCartDto.getCartItemList().add(cartItemDto);
+        shoppingCartDto.setTotal(shoppingCartDto
+                .getCartItemList()
+                .stream()
+                .map(item->item.getSubtotal())
+                .reduce(BigDecimal.ZERO, BigDecimal::add)
+        );
+        saveShoppingCart(shoppingCartDto);
+    }
+
     public ShoppingCartDto getShoppingCart(){
         return userService.getUserDtoByUserName(getUserNameFromSecurityContext()).getShoppingCart();
     }
+
 
     public void saveShoppingCart(ShoppingCartDto shoppingCartDto){
         shoppingCartRepository.save(modelMapper.map(shoppingCartDto, ShoppingCart.class));

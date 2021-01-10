@@ -4,7 +4,6 @@ import com.finalproject.ecommercestore.model.dto.CategoryDto;
 import com.finalproject.ecommercestore.model.entity.Category;
 import com.finalproject.ecommercestore.repository.CategoryRepository;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -2,7 +2,6 @@ package com.finalproject.ecommercestore.controller;
 
 import com.finalproject.ecommercestore.model.dto.CartItemDto;
 import com.finalproject.ecommercestore.model.dto.ShoppingCartDto;
-import com.finalproject.ecommercestore.model.entity.ShoppingCart;
 import com.finalproject.ecommercestore.service.CartItemService;
 import com.finalproject.ecommercestore.service.ProductService;
 import com.finalproject.ecommercestore.service.ShoppingCartService;
@@ -12,8 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.math.BigDecimal;
-import java.util.List;
 
 @Controller
 public class ShoppingCartController {

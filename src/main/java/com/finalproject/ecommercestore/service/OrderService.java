@@ -1,15 +1,12 @@
 package com.finalproject.ecommercestore.service;
 
 import com.finalproject.ecommercestore.model.dto.OrderDto;
-import com.finalproject.ecommercestore.model.dto.ShoppingCartDto;
-import com.finalproject.ecommercestore.model.dto.UserPaymentDto;
 import com.finalproject.ecommercestore.model.entity.*;
 import com.finalproject.ecommercestore.repository.OrderItemRepository;
 import com.finalproject.ecommercestore.repository.OrderRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.ModelMap;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

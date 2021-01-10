@@ -4,22 +4,12 @@ import com.finalproject.ecommercestore.model.dto.CategoryDto;
 import com.finalproject.ecommercestore.model.dto.ProductDto;
 import com.finalproject.ecommercestore.model.dto.UserDto;
 import com.finalproject.ecommercestore.model.entity.Category;
-import com.finalproject.ecommercestore.model.entity.Product;
 import com.finalproject.ecommercestore.service.CategoryService;
 import com.finalproject.ecommercestore.service.ProductService;
 import com.finalproject.ecommercestore.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.http.HttpServletRequest;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.List;
 
 @Controller
@@ -69,17 +59,13 @@ public class AdminPageController {
 
     @GetMapping("/block/{id}")
     public String blockUser(@PathVariable Long id) {
-        UserDto userDto = userService.getById(id);
-        userDto.setEnabled(false);
-        userService.updateUser(userDto);
+        userService.blockUser(id);
         return "redirect:/admin-account";
     }
 
     @GetMapping("/unblock/{id}")
     public String unBlockUser(@PathVariable Long id) {
-        UserDto userDto = userService.getById(id);
-        userDto.setEnabled(true);
-        userService.updateUser(userDto);
+        userService.unblockUser(id);
         return "redirect:/admin-account";
     }
 
@@ -99,20 +85,7 @@ public class AdminPageController {
 
     @PostMapping("/newproduct")
     public String addNewProduct(@ModelAttribute ProductDto productDto) {
-        Product product = productService.addProduct(productDto);
-
-        MultipartFile productImage = productDto.getProductImage();
-
-        try {
-            byte[] bytes = productImage.getBytes();
-            String name = product.getId() + ".png";
-            BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File("src/main/resources/static/image/product" + name)));
-            stream.write(bytes);
-            stream.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        productService.addNewProduct(productDto);
         return "redirect:/admin-account";
     }
 
@@ -133,27 +106,7 @@ public class AdminPageController {
 
     @PostMapping("/editproduct")
     public String editProduct(@ModelAttribute("selectedProduct") ProductDto productDto) {
-        Product product = productService.addProduct(productDto);
-
-        MultipartFile productImage = productDto.getProductImage();
-
-        if (!productImage.isEmpty())
-            try {
-                byte[] bytes = productImage.getBytes();
-                String name = product.getId() + ".png";
-
-                Files.delete(Paths.get("src/main/resources/static/image/product" + name));
-
-                BufferedOutputStream stream = new BufferedOutputStream(
-                        new FileOutputStream(new File
-                                ("src/main/resources/static/image/product" + name)));
-                stream.write(bytes);
-                stream.close();
-                System.out.println("File updated");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
+        productService.editProduct(productDto);
         return "redirect:/admin-account";
     }
 

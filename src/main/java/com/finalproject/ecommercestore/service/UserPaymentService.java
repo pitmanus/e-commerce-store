@@ -8,12 +8,14 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.security.Principal;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
-import java.util.stream.Collectors;
-
 @Service
 public class UserPaymentService {
     private UserPaymentRepository userPaymentRepository;
@@ -36,13 +38,50 @@ public class UserPaymentService {
         String name = auth.getName();
         User user = userService.getUserByUserName(name);
         UserPayment userPayment = modelMapper.map(userPaymentDto, UserPayment.class);
-        /*userPayment.setUser(user);*/
         userPayment.setBillingAddress(user.getAddress());
         user.getUserPayments().add(userPayment);
         userService.save(user);
         return user.getUserPayments().stream()
                 .filter(payment -> payment.getCardNumber().equals(userPaymentDto.getCardNumber()))
                 .findFirst().get();
+    }
+
+    public void addUserPayment(UserPaymentDto userPaymentDto){
+        UserPayment userPayment = saveUserPayment(userPaymentDto);
+
+        MultipartFile cardImage = userPaymentDto.getCardImage();
+
+        try {
+            byte[] bytes = cardImage.getBytes();
+            String name = userPayment.getId() + ".png";
+            BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File("src/main/resources/static/image/card" + name)));
+            stream.write(bytes);
+            stream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void editUserPayment(UserPaymentDto userPaymentDto){
+        UserPayment userPayment = saveUserPayment(userPaymentDto);
+
+        MultipartFile cardImage = userPaymentDto.getCardImage();
+
+        if (!cardImage.isEmpty())
+            try {
+                byte[] bytes = cardImage.getBytes();
+                String name = userPayment.getId() + ".png";
+
+                Files.delete(Paths.get("src/main/resources/static/image/card" + name));
+
+                BufferedOutputStream stream = new BufferedOutputStream(
+                        new FileOutputStream(new File
+                                ("src/main/resources/static/image/card" + name)));
+                stream.write(bytes);
+                stream.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
     }
 
     public List<UserPaymentDto> getAllUserPaymentCards(){
