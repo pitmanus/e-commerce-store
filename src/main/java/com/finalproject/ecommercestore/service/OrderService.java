@@ -68,6 +68,12 @@ public class OrderService {
 
     }
 
+    public List<OrderDto> getAllOrders(){
+        return orderRepository.findAll().stream()
+                .map(order -> modelMapper.map(order, OrderDto.class))
+                .collect(Collectors.toList());
+    }
+
     public List<OrderDto> getAllUserOrders(){
         return userService.getLoggedUser().getOrderList();
     }

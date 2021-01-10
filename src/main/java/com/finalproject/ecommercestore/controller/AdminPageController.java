@@ -1,10 +1,12 @@
 package com.finalproject.ecommercestore.controller;
 
 import com.finalproject.ecommercestore.model.dto.CategoryDto;
+import com.finalproject.ecommercestore.model.dto.OrderDto;
 import com.finalproject.ecommercestore.model.dto.ProductDto;
 import com.finalproject.ecommercestore.model.dto.UserDto;
 import com.finalproject.ecommercestore.model.entity.Category;
 import com.finalproject.ecommercestore.service.CategoryService;
+import com.finalproject.ecommercestore.service.OrderService;
 import com.finalproject.ecommercestore.service.ProductService;
 import com.finalproject.ecommercestore.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -18,11 +20,13 @@ public class AdminPageController {
     private CategoryService categoryService;
     private UserService userService;
     private ProductService productService;
+    private OrderService orderService;
 
-    public AdminPageController(CategoryService categoryService, UserService userService, ProductService productService) {
+    public AdminPageController(CategoryService categoryService, UserService userService, ProductService productService, OrderService orderService) {
         this.categoryService = categoryService;
         this.userService = userService;
         this.productService = productService;
+        this.orderService = orderService;
     }
 
 
@@ -41,6 +45,8 @@ public class AdminPageController {
         model.addAttribute("users", users);
         List<ProductDto> products = productService.getAllProducts();
         model.addAttribute("productList", products);
+        List<OrderDto> orders = orderService.getAllOrders();
+        model.addAttribute("orders", orders);
         return "admin-account";
     }
 

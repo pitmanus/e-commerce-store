@@ -44,7 +44,7 @@
                                     <td th:text="${order.shippingDate}"/>
                                     <td th:text="${order.shippingMethod.displayValue}"/>
                                     <td th:text="${order.orderStatus.displayValue}"/>
-                                    <td th:text="${order.orderTotal}"/>
+                                    <td th:text="${order.orderTotal}+'$'"/>
                                     <td><a th:href="@{/order-details/{id}(id=${order.id})}" style= margin-left:25px ><i class="fa fa-info-circle fa-2x" aria-hidden="true" style="color: #b9bbbe"></i></a></td>
                                 </tr>
                                 </tbody>
