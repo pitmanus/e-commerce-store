@@ -33,9 +33,9 @@ public class Order {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems;
 
-    @OneToOne
-    @JoinColumn(name = "user_payment_id")
-    private UserPayment userPayment;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "order_payment_id")
+    private OrderPayment orderPayment;
 
     @OneToOne
     @JoinColumn(name = "shipping_address")
@@ -45,12 +45,12 @@ public class Order {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public UserPayment getUserPayment() {
-        return userPayment;
+    public OrderPayment getOrderPayment() {
+        return orderPayment;
     }
 
-    public void setUserPayment(UserPayment userPayment) {
-        this.userPayment = userPayment;
+    public void setOrderPayment(OrderPayment orderPayment) {
+        this.orderPayment = orderPayment;
     }
 
     public Address getShippingAddress() {

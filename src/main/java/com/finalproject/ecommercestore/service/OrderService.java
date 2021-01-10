@@ -2,6 +2,7 @@ package com.finalproject.ecommercestore.service;
 
 import com.finalproject.ecommercestore.model.dto.OrderDto;
 import com.finalproject.ecommercestore.model.dto.ShoppingCartDto;
+import com.finalproject.ecommercestore.model.dto.UserPaymentDto;
 import com.finalproject.ecommercestore.model.entity.*;
 import com.finalproject.ecommercestore.repository.OrderItemRepository;
 import com.finalproject.ecommercestore.repository.OrderRepository;
@@ -37,6 +38,7 @@ public class OrderService {
     @Transactional
     public void addOrder(OrderDto orderDto){
         User user = modelMapper.map(userService.getLoggedUser(), User.class);
+
         Order order = modelMapper.map(orderDto, Order.class);
         LocalDateTime now = LocalDateTime.now();
         order.setOrderDate(now);

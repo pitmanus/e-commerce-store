@@ -2,6 +2,7 @@ package com.finalproject.ecommercestore.controller;
 
 import com.finalproject.ecommercestore.model.dto.OrderDto;
 import com.finalproject.ecommercestore.model.dto.UserDto;
+import com.finalproject.ecommercestore.model.dto.UserPaymentDto;
 import com.finalproject.ecommercestore.model.entity.Order;
 import com.finalproject.ecommercestore.service.CartItemService;
 import com.finalproject.ecommercestore.service.OrderService;
@@ -38,11 +39,13 @@ public class OrderController {
         model.addAttribute("order", orderDto);
         UserDto userDto = userService.getLoggedUser();
         model.addAttribute("user", userDto);
+        UserPaymentDto userPaymentDto = new UserPaymentDto();
+        model.addAttribute("userPayment", userPaymentDto);
         return "order";
     }
 
     @PostMapping("/order")
-    public String createOrder(@ModelAttribute("order") OrderDto orderDto){
+    public String createOrder(@ModelAttribute("order") OrderDto orderDto, @ModelAttribute("userPayment") UserPaymentDto userPaymentDto){
        orderService.addOrder(orderDto);
             return "redirect:/user-account";
     }

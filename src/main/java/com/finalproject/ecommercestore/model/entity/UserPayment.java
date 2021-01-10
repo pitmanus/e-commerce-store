@@ -33,10 +33,6 @@ public class UserPayment {
     @Transient
     private MultipartFile cardImage;
 
-    /*@ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;*/
-
     @OneToOne
     @JoinColumn(name = "billing_address")
     private Address billingAddress;

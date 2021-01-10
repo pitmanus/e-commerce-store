@@ -74,10 +74,11 @@
                     <option th:each="shippingMethod: ${T(com.finalproject.ecommercestore.model.entity.ShippingMethod).values()}" th:text="${shippingMethod.displayValue}" th:value="${shippingMethod}"></option>
                 </select>
     <br>
+
     <label for="paymentMethod"><h5>Choose payment method</h5></label>
-    <select th:field="*{userPayment}" id="paymentMethod" class="form-control">
+    <select th:field="*{orderPayment}" id="paymentMethod" class="form-control">
         <option value="" selected="selected" disabled="disabled">Please select payment method</option>
-        <option th:each="userPayment: ${user.userPayments}" th:text="${userPayment.cardName}" th:value="${userPayment.id}" th:field="*{userPayment}"></option>
+        <option th:each="userPayment: ${user.userPayments}" th:text="${userPayment.cardName}" th:value="${userPayment.id}" th:field="*{orderPayment}"></option>
     </select>
     <br>
     <button class="btn btn-success btn-lg btn-block" type="submit" style="margin-bottom: 15px ">&nbsp&nbsp Buy &nbsp&nbsp</button>

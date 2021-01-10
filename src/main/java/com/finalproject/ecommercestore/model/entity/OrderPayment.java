@@ -1,25 +1,46 @@
-package com.finalproject.ecommercestore.model.dto;
+package com.finalproject.ecommercestore.model.entity;
 
-import com.finalproject.ecommercestore.model.entity.Address;
-import com.finalproject.ecommercestore.model.entity.CardBrands;
-import com.finalproject.ecommercestore.model.entity.User;
+import com.finalproject.ecommercestore.model.dto.AddressDto;
 import org.springframework.web.multipart.MultipartFile;
 
-public class UserPaymentDto {
+import javax.persistence.*;
 
+@Entity
+@Table(name = "order_payment")
+public class OrderPayment {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "card_brand")
+    @Enumerated(EnumType.STRING)
     private CardBrands cardBrand;
+    @Column(name = "card_name")
     private String cardName;
+    @Column(name = "bank_name")
     private String bankName;
+    @Column(name = "card_number")
     private String cardNumber;
+    @Column(name = "expiry_month")
     private int expiryMonth;
+    @Column(name = "expiry_year")
     private int expiryYear;
     private int cvc;
+    @Column(name = "holder_name")
     private String holderName;
+    @Column(name = "default_payment")
     private boolean defaultPayment;
+
+    @Transient
     private MultipartFile cardImage;
 
-    private AddressDto billingAddress;
+    @OneToOne
+    @JoinColumn(name = "billing_address")
+    private Address billingAddress;
+
+    public OrderPayment() {
+    }
+
 
     public Long getId() {
         return id;
@@ -101,19 +122,19 @@ public class UserPaymentDto {
         this.defaultPayment = defaultPayment;
     }
 
-    public AddressDto getBillingAddress() {
-        return billingAddress;
-    }
-
-    public void setBillingAddress(AddressDto billingAddress) {
-        this.billingAddress = billingAddress;
-    }
-
     public MultipartFile getCardImage() {
         return cardImage;
     }
 
     public void setCardImage(MultipartFile cardImage) {
         this.cardImage = cardImage;
+    }
+
+    public Address getBillingAddress() {
+        return billingAddress;
+    }
+
+    public void setBillingAddress(Address billingAddress) {
+        this.billingAddress = billingAddress;
     }
 }
