@@ -92,12 +92,11 @@
                                             <td th:text="${paymentCard.expiryMonth}"/>
                                             <!--<td><p>&nbsp;/</p><td/>-->
                                             <td th:text="${paymentCard.expiryYear}"/>
-                                            <td><a class="btn btn-warning"
-                                                   th:href="@{/edit-payment-card/{id}(id=${paymentCard.id})}">Edit</a>
+                                            <td><a th:href="@{/edit-payment-card/{id}(id=${paymentCard.id})}" style= margin-top:10px><i class="fa fa-edit fa-2x" style="color: #b9bbbe"></i></a>
                                             </td>
                                             <td>
                                                 <input type="hidden" name="id" th:value="${paymentCard.id}">
-                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                                <button type="submit" class="btn"><i class="fa fa-trash fa-2x" style="color: #b9bbbe"></i></button>
                                             </td>
                                         </form>
                                     </tr>

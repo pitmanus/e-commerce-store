@@ -30,11 +30,11 @@
                             <div class="panel-body" style=" margin-top: 20px;">
 
 
-                                        <div class="row justify-content-md-center">
-                                            <div class="col-md-20 col-md-offset-10">
+                                        <div class="d-flex justify-content-center">
+                                            <div class="col-sm-6">
 
                                                 <table class="table table-hover">
-                                                    <thead class="thead-light">
+                                                    <thead class="thead">
                                                     <tr>
                                                         <th scope="col">Id</th>
                                                         <th scope="col">Category name</th>
@@ -49,7 +49,7 @@
                                                             <td th:text="${category.categoryName}"/>
                                                             <td>
                                                                 <input type="hidden" name="id" th:value="${category.id}">
-                                                                <button type="submit" class="btn btn-danger">Remove</button>
+                                                                <button type="submit" class="btn"><i class="fa fa-trash fa-2x" style="color: #b9bbbe"></i></button>
                                                             </td>
                                                         </form>
                                                     </tr>
@@ -83,7 +83,7 @@
                                             <div class="col-md-20 col-md-offset-10">
 
                                                 <table class="table table-hover">
-                                                    <thead class="thead-light">
+                                                    <thead class="thead">
                                                     <tr>
                                                         <th scope="col">Product image</th>
                                                         <th scope="col">Id</th>
@@ -108,10 +108,10 @@
                                                             <td th:text="${#numbers.formatDecimal(product.shippingWeight,1,2)}+'kg'"/>
                                                             <td th:text="${product.description}"/>
                                                             <td th:text="${product.inStock}"/>
-                                                            <td><a class="btn btn-warning" th:href="@{/editproduct/{id}(id=${product.id})}">Edit</a></td>
+                                                            <td><a th:href="@{/editproduct/{id}(id=${product.id})}" style= margin-left:15px><i class="fa fa-edit fa-2x" style="color: #b9bbbe"></i></a></td>
                                                             <td>
                                                                 <input type="hidden" name="id" th:value="${product.id}">
-                                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                                                <button type="submit" class="btn"><i class="fa fa-trash fa-2x" style="color: #b9bbbe"></i></button>
                                                             </td>
                                                         </form>
                                                     </tr>
@@ -138,7 +138,7 @@
                                         <div class="row">
                                             <div class="col-md-20 col-md-offset-10">
                                                 <table class="table table-hover">
-                                                    <thead class="thead-light">
+                                                    <thead class="thead">
                                                     <tr>
                                                         <th scope="col">Id</th>
                                                         <th scope="col">Username</th>
@@ -173,11 +173,11 @@
                                                             <td th:text="${user.address.apartmentNumber}"/>
                                                             <td th:text="${user.address.zip}"/>
                                                             <td th:text="${user.enabled}"/>
-                                                            <td><a class="btn btn-warning" th:href="@{/block/{id}(id=${user.id})}">Block</a></td>
-                                                            <td><a class="btn btn-success" th:href="@{/unblock/{id}(id=${user.id})}">Unblock</a></td>
+                                                            <td><a th:href="@{/block/{id}(id=${user.id})}" style= margin-left:7px><i class="fa fa-ban fa-2x" style="color: #b9bbbe"></i></a></td>
+                                                            <td><a th:href="@{/unblock/{id}(id=${user.id})}" style= margin-left:15px><i class="fa fa-unlock fa-2x" style="color: #b9bbbe"></i></a></td>
                                                             <td>
                                                                 <input type="hidden" name="id" th:value="${user.id}">
-                                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                                                <button type="submit" class="btn"><i class="fa fa-trash fa-2x" style="color: #b9bbbe"></i></button>
                                                             </td>
                                                         </form>
                                                     </tr>
@@ -204,7 +204,7 @@
                                         <table class="table table-hover">
                                             <thead class="thead">
                                             <tr>
-                                                <th scope="col">User info</th>
+                                                <th scope="col">Client info</th>
                                                 <th scope="col">Order date</th>
                                                 <th scope="col">Shipping date</th>
                                                 <th scope="col">Shipping method</th>
