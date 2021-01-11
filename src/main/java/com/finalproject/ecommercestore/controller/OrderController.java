@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -40,5 +41,25 @@ public class OrderController {
     public String createOrder(@ModelAttribute("order") OrderDto orderDto){
        orderService.addOrder(orderDto);
             return "redirect:/user-account";
+    }
+
+    @GetMapping("/order-details/{id}")
+    public String getOrderDetailsPage(@PathVariable Long id, Model model){
+        OrderDto orderDto = orderService.getOrderById(id);
+        model.addAttribute("order", orderDto);
+        return "order_details";
+    }
+
+    @GetMapping("/order-manage/{id}")
+    public String getOrderManagePage(@PathVariable Long id, Model model){
+        OrderDto orderDto = orderService.getOrderById(id);
+        model.addAttribute("order2", orderDto);
+        return "order-manage";
+    }
+
+    @PostMapping("/order-manage")
+    public String orderManage(@ModelAttribute("order2") OrderDto orderDto){
+        orderService.save(orderDto);
+        return "redirect:/admin-account";
     }
 }

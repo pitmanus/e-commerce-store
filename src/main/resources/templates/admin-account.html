@@ -211,6 +211,7 @@
                                                 <th scope="col">Order status</th>
                                                 <th scope="col">Total price</th>
                                                 <th scope="col">Detailed info</th>
+                                                <th scope="col">Manage</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -226,7 +227,9 @@
                                                 <td th:text="${order.shippingMethod.displayValue}"/>
                                                 <td th:text="${order.orderStatus.displayValue}"/>
                                                 <td th:text="${order.orderTotal}+'$'"/>
-                                                <td><a th:href="@{/order-details/{id}(id=${order.id})}" style= margin-left:25px ><i class="fa fa-info-circle fa-2x" aria-hidden="true" style="color: #b9bbbe"></i></a></td>
+                                                <td><a th:href="@{/order-details/{id}(id=${order.id})}" style= margin-left:25px ><i class="fa fa-info-circle fa-2x" style="color: #b9bbbe"></i></a></td>
+                                                <td><a th:href="@{/order-manage/{id}(id=${order.id})}" style= margin-left:15px><i class="fa fa-edit fa-2x" style="color: #b9bbbe"></i>
+                                                </a></td>
                                             </tr>
                                             </tbody>
                                         </table>
@@ -256,7 +259,7 @@
     </div>
 </div>
 <script th:inline="javascript">
-    var tabToSelect = "tab-2";
+    var tabToSelect = "tab-4";
     $(document).ready(function() {
         $('#admin-page-tabs a[href="#'+tabToSelect+'"]').tab('show')
     });

@@ -103,12 +103,6 @@ public class UserPageController {
         return "card-details";
     }
 
-    @GetMapping("/order-details/{id}")
-    public String getOrderDetailsPage(@PathVariable Long id, Model model){
-        OrderDto orderDto = orderService.getOrderById(id);
-        model.addAttribute("order", orderDto);
-        return "order_details";
-    }
 
 }
 

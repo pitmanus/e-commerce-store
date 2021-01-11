@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:replace="common/common :: common-header">
+</head>
+<body>
+<div th:replace="common/common :: navbar"></div>
+
+<div class="card-body">
+    <div class="d-flex justify-content-center">
+        <div class="col-sm-6">
+            <div class="card">
+                <h5 class="card-header text-center">Order management</h5>
+                <div class="container">
+                <form class="form-horizontal" th:action="@{/order-manage}" method="post" th:object="${order2}">
+                    <div class="text-center">
+                    <label for="orderStatus" style="margin-top: 10px"><h5 class="text-center">Choose order status</h5></label>
+                    <select th:field="*{orderStatus}" id="orderStatus" class="form-control">
+                        <option value="" selected="selected" disabled="disabled">Please select shipping method</option>
+                        <option th:each="status: ${T(com.finalproject.ecommercestore.model.entity.OrderStatus).values()}"
+                                th:text="${status.displayValue}" th:value="${status}"></option>
+                    </select>
+                    <input type="hidden" name="id" th:field="*{id}">
+                    <input type="hidden" name="user" th:field="*{user.id}">
+                    <input type="hidden" name="shippingAddress" th:field="*{shippingAddress.id}">
+                    <input type="hidden" name="orderPayment" th:field="*{orderPayment}">
+                    <div th:each="item,stat : ${order2.orderItems}">
+                        <input th:value="${item.id}" th:field="*{orderItems[__${stat.index}__].id}" type="hidden"/>
+                        <input th:value="${item.order.id}" th:field="*{orderItems[__${stat.index}__].order.id}"
+                               type="hidden"/>
+                        <input th:value="${item.subtotal}" th:field="*{orderItems[__${stat.index}__].subtotal}"
+                               type="hidden"/>
+                        <input th:value="${item.quantity}" th:field="*{orderItems[__${stat.index}__].quantity}"
+                               type="hidden"/>
+                        <input th:value="${item.product.id}" th:field="*{orderItems[__${stat.index}__].product.id}"
+                               type="hidden"/>
+                    </div>
+                    <input type="hidden" name="orderDate" th:field="*{orderDate}">
+                    <input type="hidden" name="shippingDate" th:field="*{shippingDate}">
+                    <input type="hidden" name="shippingMethod" th:field="*{shippingMethod}">
+                    <input type="hidden" name="orderTotal" th:field="*{orderTotal}">
+                    <br>
+                    <button class="btn btn-success" type="submit" style="margin-bottom: 15px ">
+                        &nbsp&nbsp Confirm &nbsp&nbsp
+                    </button>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

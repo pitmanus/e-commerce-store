@@ -68,6 +68,10 @@ public class OrderService {
 
     }
 
+    public void save(OrderDto orderDto){
+        orderRepository.save(modelMapper.map(orderDto, Order.class));
+    }
+
     public List<OrderDto> getAllOrders(){
         return orderRepository.findAll().stream()
                 .map(order -> modelMapper.map(order, OrderDto.class))
