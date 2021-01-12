@@ -1,4 +1,4 @@
-package com.finalproject.ecommercestore.model.entity;
+package com.finalproject.ecommercestore.model.dto;
 
 import com.finalproject.ecommercestore.model.entity.OrderPayment;
 import com.finalproject.ecommercestore.repository.OrderPaymentRepository;

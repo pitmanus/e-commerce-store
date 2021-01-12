@@ -1,6 +1,7 @@
 package com.finalproject.ecommercestore.model.dto;
 
 import javax.persistence.Column;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -10,6 +11,8 @@ public class AddressDto {
     @Size(min = 3, message = "Invalid street name!")
     private String street;
     @NotNull
+    @NotEmpty
+    @Size(min = 1, message = "Please enter building number")
     private String buildingNumber;
     private String apartmentNumber;
     @NotNull

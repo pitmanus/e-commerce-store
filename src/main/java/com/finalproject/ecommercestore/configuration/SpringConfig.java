@@ -48,6 +48,7 @@ public class SpringConfig {
 
         Properties properties = new Properties();
         properties.setProperty("hibernate.hbm2ddl.auto", "update");
+        properties.setProperty("hibernate.event.merge.entity_copy_observer", "allow");
         entityManager.setJpaProperties(properties);
         return entityManager;
     }

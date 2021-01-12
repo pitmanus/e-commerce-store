@@ -7,7 +7,7 @@
 
 <div class="card">
     <h5 class="card-header">Edit account information</h5>
-    <form th:action="@{/edit-user}" method="post" th:object="${user}">
+    <form novalidate th:action="@{/edit-user}" method="post" th:object="${user}">
     <div class="card-body">
         <div class="row">
             <div class="col-sm-6">
