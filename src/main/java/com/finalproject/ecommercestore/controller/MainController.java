@@ -21,14 +21,14 @@ public class MainController {
     private ProductService productService;
     private CommentService commentService;
     private ShoppingCartService shoppingCartService;
-    private CartItemService cartItemService;
+    private UserService userService;
 
-    public MainController(CategoryService categoryService, ProductService productService, CommentService commentService, ShoppingCartService shoppingCartService, CartItemService cartItemService) {
+    public MainController(CategoryService categoryService, ProductService productService, CommentService commentService, ShoppingCartService shoppingCartService, UserService userService) {
         this.categoryService = categoryService;
         this.productService = productService;
         this.commentService = commentService;
         this.shoppingCartService = shoppingCartService;
-        this.cartItemService = cartItemService;
+        this.userService = userService;
     }
 
     @GetMapping({"/index", "/"})
@@ -60,18 +60,23 @@ public class MainController {
 
     @GetMapping("/product-page/{id}")
     public String showSingleProductPage(@PathVariable Long id, Model model) {
-        List<CategoryDto> categories = categoryService.showAllCategories();
-        model.addAttribute("categories", categories);
-        ProductDto product = productService.getById(id);
-        model.addAttribute("product", product);
-        CommentDto commentDto = new CommentDto();
-        model.addAttribute("comment", commentDto);
-        List<CommentDto> comments = commentService.getAllCommentsForASingleProduct(id);
-        model.addAttribute("comments", comments);
-        CartItemDto cartItemDto = new CartItemDto();
-        cartItemDto.setQuantity(1);
-        model.addAttribute("cartItem", cartItemDto);
-        return "product-page";
+        if (userService.getLoggedUser().getEnabled()==true){
+            List<CategoryDto> categories = categoryService.showAllCategories();
+            model.addAttribute("categories", categories);
+            ProductDto product = productService.getById(id);
+            model.addAttribute("product", product);
+            CommentDto commentDto = new CommentDto();
+            model.addAttribute("comment", commentDto);
+            List<CommentDto> comments = commentService.getAllCommentsForASingleProduct(id);
+            model.addAttribute("comments", comments);
+            CartItemDto cartItemDto = new CartItemDto();
+            cartItemDto.setQuantity(1);
+            model.addAttribute("cartItem", cartItemDto);
+            return "product-page";
+        }
+        else {
+            return "banned-user";
+        }
     }
 
     @PostMapping("/add-to-cart/{id}")
