@@ -17,22 +17,19 @@ public class StringToCategoryDtoConverter implements Converter<String, CategoryD
 
     private CategoryRepository categoryRepository;
     private ModelMapper modelMapper;
-    private final List<CategoryDto> categoryDtoList = new ArrayList<>();
 
     public StringToCategoryDtoConverter(CategoryRepository categoryRepository, ModelMapper modelMapper) {
         this.categoryRepository = categoryRepository;
         this.modelMapper = modelMapper;
-
-        List<CategoryDto> categories = categoryRepository.findAll()
-                .stream().map(category -> modelMapper.map(category, CategoryDto.class))
-                .collect(Collectors.toList());
-
-        categories.forEach(categoryDtoList::add);
     }
 
 
     @Override
     public CategoryDto convert(String id) {
+        List<CategoryDto> categoryDtoList = categoryRepository.findAll()
+                .stream().map(category -> modelMapper.map(category, CategoryDto.class))
+                .collect(Collectors.toList());
+
         if(id.equals(""))
             return null;
 

@@ -1,8 +1,10 @@
 package com.finalproject.ecommercestore.service;
 
 import com.finalproject.ecommercestore.model.dto.UserPaymentDto;
+import com.finalproject.ecommercestore.model.entity.OrderPayment;
 import com.finalproject.ecommercestore.model.entity.User;
 import com.finalproject.ecommercestore.model.entity.UserPayment;
+import com.finalproject.ecommercestore.repository.OrderPaymentRepository;
 import com.finalproject.ecommercestore.repository.UserPaymentRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.Authentication;
@@ -19,13 +21,15 @@ import java.util.List;
 @Service
 public class UserPaymentService {
     private UserPaymentRepository userPaymentRepository;
+    private OrderPaymentRepository orderPaymentRepository;
     private ModelMapper modelMapper;
     private UserService userService;
 
-    public UserPaymentService(UserPaymentRepository userPaymentRepository, ModelMapper modelMapper, UserService userService) {
+    public UserPaymentService(UserPaymentRepository userPaymentRepository, ModelMapper modelMapper, UserService userService, OrderPaymentRepository orderPaymentRepository) {
         this.userPaymentRepository = userPaymentRepository;
         this.modelMapper = modelMapper;
         this.userService = userService;
+        this.orderPaymentRepository = orderPaymentRepository;
     }
 
     public String getUserNameFromSecurityContext(){

@@ -38,7 +38,7 @@ public class RegistrationController {
         }else{
             userDto.setAddress(addressDto);
             userService.saveUser(userDto);
-            return "redirect:/registration?success";
+            return "redirect:/login";
         }
     }
 

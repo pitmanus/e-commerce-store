@@ -16,23 +16,21 @@ public class StringToOrderPaymentConverter implements Converter<String, OrderPay
     private OrderPaymentRepository orderPaymentRepository;
     private UserPaymentRepository userPaymentRepository;
     private ModelMapper modelMapper;
-    private List<OrderPayment> orderPayments = new ArrayList<>();
 
     public StringToOrderPaymentConverter (OrderPaymentRepository orderPaymentRepository, UserPaymentRepository userPaymentRepository, ModelMapper modelMapper) {
         this.orderPaymentRepository = orderPaymentRepository;
         this.userPaymentRepository = userPaymentRepository;
         this.modelMapper = modelMapper;
 
-        List<OrderPayment> paymentsList = userPaymentRepository.findAll().stream()
-                .map(payment -> modelMapper.map(payment, OrderPayment.class))
-                .collect(Collectors.toList());
-
-        paymentsList.forEach(orderPayments::add);
-
     }
 
     @Override
     public OrderPayment convert(String id) {
+        List<OrderPayment> orderPayments = userPaymentRepository.findAll()
+                .stream()
+                .map(payment -> modelMapper.map(payment, OrderPayment.class))
+                .collect(Collectors.toList());
+
         if(id.equals(""))
             return null;
 
