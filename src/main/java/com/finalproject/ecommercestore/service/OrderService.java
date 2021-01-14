@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -75,11 +76,15 @@ public class OrderService {
     public List<OrderDto> getAllOrders(){
         return orderRepository.findAll().stream()
                 .map(order -> modelMapper.map(order, OrderDto.class))
+                .sorted(Comparator.comparing(OrderDto::getOrderDate).reversed())
                 .collect(Collectors.toList());
     }
 
     public List<OrderDto> getAllUserOrders(){
-        return userService.getLoggedUser().getOrderList();
+        return userService.getLoggedUser().getOrderList()
+                .stream()
+                .sorted(Comparator.comparing(OrderDto::getOrderDate).reversed())
+                .collect(Collectors.toList());
     }
 
     public OrderDto getOrderById(Long id){
