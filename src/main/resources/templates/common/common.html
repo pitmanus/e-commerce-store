@@ -63,6 +63,10 @@
 
             <!--Here could be carousel-->
 
+                    <div class="justify-content-center" th:if="${param.success}">
+                        <div class="alert alert-info"><p class="text-center">Item was added to the shopping cart</p></div>
+                    </div>
+
                     <div class="row">
 
                         <div class="col-lg-4 col-md-6 mb-4" style="padding-top: 95px" th:each="product: ${productlist}">

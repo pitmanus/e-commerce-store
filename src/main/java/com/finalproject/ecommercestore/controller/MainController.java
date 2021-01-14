@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -81,10 +82,10 @@ public class MainController {
 
     @PostMapping("/add-to-cart/{id}")
     public String addToCart( @Valid @ModelAttribute("cartItem") CartItemDto cartItemDto, BindingResult bindingResult, @PathVariable Long id, Model model) {
+        ProductDto productDto = productService.getById(id);
         if (bindingResult.hasErrors()){
             List<CategoryDto> categories = categoryService.showAllCategories();
             model.addAttribute("categories", categories);
-            ProductDto productDto = productService.getById(id);
             model.addAttribute("product", productDto);
             CommentDto commentDto = new CommentDto();
             model.addAttribute("comment", commentDto);
@@ -93,7 +94,7 @@ public class MainController {
             return "product-page";
         }else{
             shoppingCartService.addItemToShoppingCart(id, cartItemDto);
-            return "redirect:/index";
+            return "redirect:/index?success";
         }
     }
 
