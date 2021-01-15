@@ -62,4 +62,11 @@ public class OrderController {
         orderService.save(orderDto);
         return "redirect:/admin-account";
     }
+
+    @PostMapping("/deleteorder")
+    public String deleteOrder(@ModelAttribute OrderDto orderDto){
+        orderService.deleteOrder(orderDto.getId());
+        return "redirect:/admin-account";
+    }
+
 }

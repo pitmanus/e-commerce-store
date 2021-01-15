@@ -17,7 +17,7 @@ public class StringToOrderPaymentConverter implements Converter<String, OrderPay
     private UserPaymentRepository userPaymentRepository;
     private ModelMapper modelMapper;
 
-    public StringToOrderPaymentConverter (OrderPaymentRepository orderPaymentRepository, UserPaymentRepository userPaymentRepository, ModelMapper modelMapper) {
+    public StringToOrderPaymentConverter(OrderPaymentRepository orderPaymentRepository, UserPaymentRepository userPaymentRepository, ModelMapper modelMapper) {
         this.orderPaymentRepository = orderPaymentRepository;
         this.userPaymentRepository = userPaymentRepository;
         this.modelMapper = modelMapper;
@@ -31,14 +31,25 @@ public class StringToOrderPaymentConverter implements Converter<String, OrderPay
                 .map(payment -> modelMapper.map(payment, OrderPayment.class))
                 .collect(Collectors.toList());
 
-        if(id.equals(""))
+        if (id.equals(""))
             return null;
 
         long parsedId = Long.parseLong(id);
-        return orderPayments
-                .stream()
-                .filter(payment -> payment.getId().equals(parsedId))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("Order payment with id: " + parsedId + " not found"));
+
+        try {
+            return orderPayments
+                    .stream()
+                    .filter(payment -> payment.getId().equals(parsedId))
+                    .findFirst()
+                    .orElseThrow(() -> new IllegalArgumentException("Order payment with id: " + parsedId + " not found"));
+
+        } catch (IllegalArgumentException e) {
+            return orderPaymentRepository.findAll().stream()
+                    .filter(payment -> payment.getId().equals(parsedId))
+                    .findFirst()
+                    .orElseThrow(() -> new IllegalArgumentException("Order payment with id: " + parsedId + " not found"));
+
+
+        }
     }
 }

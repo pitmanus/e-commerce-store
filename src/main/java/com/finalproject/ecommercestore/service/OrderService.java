@@ -66,6 +66,11 @@ public class OrderService {
         user.getOrderList().add(order);
         user.getShoppingCart().setTotal(BigDecimal.ZERO);
         userService.save(user);
+        /*Order createdOrder = user.getOrderList().stream()
+                .filter(order1 -> order1.getOrderDate().isEqual(now))
+                .findFirst().get();
+        createdOrder.getOrderPayment().setOrder(createdOrder);
+        orderRepository.save(createdOrder);*/
 
     }
 
@@ -89,5 +94,9 @@ public class OrderService {
 
     public OrderDto getOrderById(Long id){
         return modelMapper.map(orderRepository.findById(id).get(), OrderDto.class);
+    }
+
+    public void deleteOrder(Long id){
+        orderRepository.deleteById(id);
     }
 }

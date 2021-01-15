@@ -212,10 +212,12 @@
                                                 <th scope="col">Total price</th>
                                                 <th scope="col">Detailed info</th>
                                                 <th scope="col">Manage</th>
+                                                <th scope="col">Delete</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             <tr style="transform: rotate(0);" th:each="order: ${orders}">
+                                                <form th:action="@{/deleteorder}" th:method="post" th:object="${order}">
                                                 <td>
                                                 <span th:text="${order.user.firstName}"></span>
                                                     <span th:text="${order.user.lastName}"></span>
@@ -230,6 +232,11 @@
                                                 <td><a th:href="@{/order-details/{id}(id=${order.id})}" style= margin-left:25px ><i class="fa fa-info-circle fa-2x" style="color: #b9bbbe"></i></a></td>
                                                 <td><a th:href="@{/order-manage/{id}(id=${order.id})}" style= margin-left:15px><i class="fa fa-edit fa-2x" style="color: #b9bbbe"></i>
                                                 </a></td>
+                                                <td>
+                                                    <input type="hidden" name="id" th:value="${order.id}">
+                                                    <button type="submit" class="btn"><i class="fa fa-trash fa-2x" style="color: #b9bbbe"></i></button>
+                                                </td>
+                                                    </form>
                                             </tr>
                                             </tbody>
                                         </table>

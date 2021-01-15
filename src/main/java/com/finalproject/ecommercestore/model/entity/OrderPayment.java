@@ -38,6 +38,7 @@ public class OrderPayment {
     @JoinColumn(name = "billing_address")
     private Address billingAddress;
 
+
     public OrderPayment() {
     }
 
@@ -137,4 +138,5 @@ public class OrderPayment {
     public void setBillingAddress(Address billingAddress) {
         this.billingAddress = billingAddress;
     }
+
 }
