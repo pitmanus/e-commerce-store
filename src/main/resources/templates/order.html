@@ -81,7 +81,13 @@
         <option th:each="userPayment: ${user.userPayments}" th:text="${userPayment.cardName}" th:value="${userPayment.id}" th:field="*{orderPayment}"></option>
     </select>
     <br>
-    <button class="btn btn-success btn-lg btn-block" type="submit" style="margin-bottom: 15px ">&nbsp&nbsp Buy &nbsp&nbsp</button>
+    <div th:if="${!user.userPayments.isEmpty()}">
+        <button class="btn btn-success btn-lg btn-block" type="submit" style="margin-bottom: 15px ">&nbsp&nbsp Buy &nbsp&nbsp</button>
+    </div>
+    <div th:if="${user.userPayments.isEmpty()}">
+        <div><h5 style="color: #ff0000">You don't have any payment methods. Please add at least one credit card in user panel!</h5></div>
+    </div>
+
 </form>
             </div>
         </div>
