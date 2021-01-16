@@ -37,7 +37,6 @@ public class ShoppingCartController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         System.out.println(auth.getAuthorities());
         GrantedAuthority authority = auth.getAuthorities().stream().findFirst().get();
-        System.out.println(authority.getAuthority());
         if (auth.getPrincipal().equals("anonymousUser")||authority.getAuthority().equals("ROLE_ADMIN")){
             return null;
         }

@@ -6,100 +6,144 @@
     <link href="/css/main.css" rel="stylesheet">
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" ></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
     <!--<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
     <script>tinymce.init({selector:'textarea'})</script>-->
 </head>
 <body>
 <div th:fragment="navbar">
 
-<!-- Navbar section -->
+    <!-- Navbar section -->
 
-<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <a class="navbar-brand ml-5 font-weight-bold" th:href="@{/index}"><span id="">The</span><span id=""> Store</span></a>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
+                aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand ml-5 font-weight-bold" th:href="@{/index}"><span id="">The</span><span
+                id=""> Store</span></a>
 
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
             <ul class="navbar-nav ml-auto">
                 <li style="padding-right: 200px">
                     <form class="form-inline" th:action="@{/search-products}">
-                        <input class="form-control mr-sm-2" type="text" name="productName" placeholder="Search products" aria-label="Search">
+                        <input class="form-control mr-sm-2" type="text" name="productName" placeholder="Search products"
+                               aria-label="Search">
                         <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
                     </form>
                 </li>
 
 
-                <div th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}"><li class="nav-item active"><a class="nav-link" th:href="@{/shopping-cart}" >Shopping cart</a> </li></div>
-                <li class="nav-item active"><a class="nav-link" th:href="@{/my-account}" >My account</a> </li>
-                <li class="nav-item active"><a class="nav-link" th:href="@{/logout}" >Logout</a> </li>
-                <li style="padding-left: 10px" class="nav-item active"><a class="nav-link" href="/my-account" ><div sec:authorize="isAuthenticated()">
-                    <h5> <span sec:authentication="name"></span></h5></div></a> </li>
-                <li style="padding-left: 10px" class="nav-item active"><a class="nav-link" href="/my-account" ><div th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
-                    <span><img class="rounded-circle" th:src="@{'/image/'+'user'+${user.id}+'.png'}" alt="user_img" border=1 height=35 width=35></span></div></a> </li>
+                <div th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
+                    <li class="nav-item active"><a class="nav-link" th:href="@{/shopping-cart}">Shopping cart</a></li>
+                </div>
+                <li class="nav-item active"><a class="nav-link" th:href="@{/my-account}">My account</a></li>
+                <li class="nav-item active"><a class="nav-link" th:href="@{/logout}">Logout</a></li>
+                <li style="padding-left: 10px" class="nav-item active"><a class="nav-link" href="/my-account">
+                    <div sec:authorize="isAuthenticated()">
+                        <h5><span sec:authentication="name"></span></h5></div>
+                </a></li>
+                <li style="padding-left: 10px" class="nav-item active"><a class="nav-link" href="/my-account">
+                    <div th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
+                        <span><img class="rounded-circle" th:src="@{'/image/'+'user'+${user.id}+'.png'}" alt="user_img"
+                                   border=1 height=35 width=35></span></div>
+                </a></li>
 
-                <li class="nav-item active"><a class="nav-link" href="/my-account" ><div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
-                    <span><img class="rounded-circle" th:src="@{'/image/'+'user-icon'+'.png'}" alt="user_img" border=1 height=35 width=35></span></div></a> </li>
+                <li class="nav-item active"><a class="nav-link" href="/my-account">
+                    <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+                        <span><img class="rounded-circle" th:src="@{'/image/'+'user-icon'+'.png'}" alt="user_img"
+                                   border=1 height=35 width=35></span></div>
+                </a></li>
             </ul>
         </div>
 
-</nav>
+    </nav>
 </div>
 
-    <div th:fragment="contentpage">
-        <div class="container">
+<div th:fragment="contentpage">
+    <!-- Page Content -->
+    <div class="container">
 
-            <div class="row">
+        <div class="row">
 
-                <div class="col-lg-3">
+            <div class="col-lg-3">
 
-                    <h1 class="my-4">Categories:</h1>
-                    <div class="list-group">
-                        <a th:each="category : ${categories}" th:text="${category.categoryName}" th:href="@{/products/{id}(id=${category.id})}" style="color: black" class="list-group-item">Category name</a>
-                    </div>
-
+                <h1 class="my-4">Categories:</h1>
+                <div class="list-group">
+                    <a th:each="category : ${categories}" th:text="${category.categoryName}"
+                       th:href="@{/products/{id}(id=${category.id})}" style="color: black" class="list-group-item">Category
+                        name</a>
                 </div>
-                <!-- /.col-lg-3 -->
 
-                <div class="col-lg-9">
+            </div>
+            <!-- /.col-lg-3 -->
 
-            <!--Here could be carousel-->
+            <div class="col-lg-9">
 
-                    <div class="justify-content-center" th:if="${param.success}">
-                        <div class="alert alert-info"><p class="text-center">Item was added to the shopping cart</p></div>
-                    </div>
+                <!--Here could be carousel-->
 
-                    <div class="row">
+                <div class="justify-content-center" th:if="${param.success}">
+                    <div class="alert alert-info"><p class="text-center">Item was added to the shopping cart</p></div>
+                </div>
 
-                        <div class="col-lg-4 col-md-6 mb-4" style="padding-top: 95px" th:each="product: ${productlist}">
-                            <div class="card h-100" >
-                                <a th:href="@{/product-page/{id}(id=${product.id})}"><img class="card-img-top" th:src="@{'/image/'+'product'+${product.id}+'.png'}" alt="prod_img" height=250 width=50></a>
-                                <div class="card-body">
-                                    <h6 class="card-title">
-                                        <a th:href="@{/product-page/{id}(id=${product.id})}" style="color: black" th:text="${product.name}"></a>
-                                    </h6>
-                                    <h5 th:text="${#numbers.formatDecimal(product.price,0,2)}+'$'"></h5>
-                                    <p th:text="${product.inStock}? 'In stock'" style="color: lime"></p>
-                                    <p th:text="${!product.inStock}? 'Out of stock'" style="color: red"></p>
+                <div class="row">
 
-                                </div>
-                               <!-- <div class="card-body">
-                                    <a href="#" class="card-link">Add to shopping cart</a>
-                                </div>-->
-                                <div class="card-footer">
-                                    <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                                </div>
+                    <div class="col-lg-4 col-md-6 mb-4" style="padding-top: 95px" th:each="product: ${productList}">
+                        <div class="card h-100">
+                            <a th:href="@{/product-page/{id}(id=${product.id})}"><img class="card-img-top"
+                                                                                      th:src="@{'/image/'+'product'+${product.id}+'.png'}"
+                                                                                      alt="prod_img" height=250
+                                                                                      width=50></a>
+                            <div class="card-body">
+                                <h6 class="card-title">
+                                    <a th:href="@{/product-page/{id}(id=${product.id})}" style="color: black"
+                                       th:text="${product.name}"></a>
+                                </h6>
+                                <h5 th:text="${#numbers.formatDecimal(product.price,0,2)}+'$'"></h5>
+                                <p th:text="${product.inStock}? 'In stock'" style="color: lime"></p>
+                                <p th:text="${!product.inStock}? 'Out of stock'" style="color: red"></p>
+
+                            </div>
+                            <!-- <div class="card-body">
+                                 <a href="#" class="card-link">Add to shopping cart</a>
+                             </div>-->
+                            <div class="card-footer">
+                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
                             </div>
                         </div>
                     </div>
-                    <!-- /.row -->
+                </div>
+                <!-- /.row -->
+
+                <!-- /.col-lg-9 -->
+                <div th:if="${totalPages>1}">
+                    <div class="row col-sm-10">
+                        <div class="col-sm-3">
+                            Total items: [[${totalItems}]]
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="inline d-inline" th:each="i:${#numbers.sequence(1, totalPages)}">
+                                <a style="margin-right: 10px" th:if="${currentPage != i}" th:href="@{'/page/' + ${i}}">[[${i}]]</a>
+                                <span style="margin-right: 10px" th:unless="${currentPage != i}">[[${i}]]</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-1">
+                            <a th:if="${currentPage<totalPages}" th:href="@{'/page/'+${currentPage+1}}">Next</a>
+                            <span th:unless="${currentPage<totalPages}">Next</span>
+                        </div>
+                        <div class="col-sm-1">
+                            <a th:if="${currentPage<totalPages}" th:href="@{'/page/'+${totalPages}}">Last</a>
+                            <span th:unless="${currentPage<totalPages}">Last</span>
+                        </div>
+                    </div>
 
                 </div>
-                <!-- /.col-lg-9 -->
-
             </div>
             <!-- /.row -->
 
@@ -108,7 +152,7 @@
     </div>
 
 <div th:fragment="footer">
-    <div class="footer" >
+    <div class="footer">
         <div class="py-2 bg-dark ml-auto">
             <div class="footer-text"><p>Footer</p></div>
         </div>

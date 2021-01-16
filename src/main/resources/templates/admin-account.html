@@ -121,6 +121,12 @@
                                                 </table>
                                                 <br/>
                                                 <a class="btn btn-success" th:href="@{/newproduct}">Add new product</a>
+
+                                                <hr/>
+                                                <ul class="nav-nav-pills">
+                                                    <li class="nav-item" th:each="${#numbers.sequence(0,productList.total)}"></li>
+
+                                                </ul>
                                             </div>
                                         </div>
                                     </div>

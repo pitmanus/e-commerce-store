@@ -2,6 +2,8 @@ package com.finalproject.ecommercestore.controller;
 
 import com.finalproject.ecommercestore.model.dto.*;
 import com.finalproject.ecommercestore.service.*;
+import org.springframework.beans.support.PagedListHolder;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -36,11 +38,23 @@ public class MainController {
 
     @GetMapping({"/index", "/"})
     public String mainPage(Model model) {
+        return findPaginated(model, 1);
+    }
+
+    @GetMapping("/page/{pageNum}")
+    public String findPaginated(Model model, @PathVariable int pageNum) {
+        int pageSize = 6;
         List<CategoryDto> categories = categoryService.showAllCategories();
         model.addAttribute("categories", categories);
-        List<ProductDto> productList = productService.getAllProducts();
-        model.addAttribute("productlist", productList);
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        List<ProductDto> list = productService.getAllProducts();
+        PagedListHolder<ProductDto> page = new PagedListHolder<>(list);
+        page.setPageSize(pageSize);
+        page.setPage(pageNum-1);
+        model.addAttribute("currentPage", pageNum);
+        model.addAttribute("totalPages", page.getPageCount());
+        model.addAttribute("totalItems", list.size());
+        model.addAttribute("productList", page.getPageList());
+
         return "index";
     }
 
