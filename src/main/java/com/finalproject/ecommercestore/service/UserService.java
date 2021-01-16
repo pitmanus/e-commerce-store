@@ -1,5 +1,6 @@
 package com.finalproject.ecommercestore.service;
 
+import com.finalproject.ecommercestore.model.dto.AddressDto;
 import com.finalproject.ecommercestore.model.dto.UserDto;
 import com.finalproject.ecommercestore.model.entity.*;
 import com.finalproject.ecommercestore.repository.UserRepository;
@@ -11,7 +12,13 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -39,10 +46,51 @@ public class UserService implements UserDetailsService {
         return userRepository.save(user);
     }
 
-    public void fullUserUpdate(UserDto userDto) {
+    public void registerUser(UserDto userDto, AddressDto addressDto) {
+        userDto.setAddress(addressDto);
+        User user = saveUser(userDto);
+
+        MultipartFile accountImage = userDto.getAccountImage();
+
+        try {
+            byte[] bytes = accountImage.getBytes();
+            String name = user.getId() + ".png";
+            BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File("src/main/resources/static/image/user" + name)));
+            stream.write(bytes);
+            stream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void editUser(UserDto userDto, AddressDto addressDto){
+        userDto.setAddress(addressDto);
+       User user = fullUserUpdate(userDto);
+
+        MultipartFile accountImage = userDto.getAccountImage();
+
+        if (!accountImage.isEmpty())
+            try {
+                byte[] bytes = accountImage.getBytes();
+                String name = user.getId() + ".png";
+
+                Files.delete(Paths.get("src/main/resources/static/image/user" + name));
+
+                BufferedOutputStream stream = new BufferedOutputStream(
+                        new FileOutputStream(new File
+                                ("src/main/resources/static/image/user" + name)));
+                stream.write(bytes);
+                stream.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+    }
+
+
+    public User fullUserUpdate(UserDto userDto) {
         User user = modelMapper.map(userDto, User.class);
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-        userRepository.save(user);
+       return userRepository.save(user);
     }
 
     public User updateUser(UserDto userDto) {
@@ -96,13 +144,13 @@ public class UserService implements UserDetailsService {
         return user;
     }
 
-    public void blockUser(Long id){
+    public void blockUser(Long id) {
         UserDto userDto = getById(id);
         userDto.setEnabled(false);
         updateUser(userDto);
     }
 
-    public void unblockUser(Long id){
+    public void unblockUser(Long id) {
         UserDto userDto = getById(id);
         userDto.setEnabled(true);
         updateUser(userDto);

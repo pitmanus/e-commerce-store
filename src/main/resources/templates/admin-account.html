@@ -93,6 +93,7 @@
                                                         <th scope="col">Weight</th>
                                                         <th scope="col">Description</th>
                                                         <th scope="col">In stock</th>
+                                                        <th scope="col">Active</th>
                                                         <th scope="col">Edit product</th>
                                                         <th scope="col">Delete product</th>
                                                     </tr>
@@ -108,6 +109,7 @@
                                                             <td th:text="${#numbers.formatDecimal(product.shippingWeight,1,2)}+'kg'"/>
                                                             <td th:text="${product.description}"/>
                                                             <td th:text="${product.inStock}"/>
+                                                            <td th:text="${product.active}"/>
                                                             <td><a th:href="@{/editproduct/{id}(id=${product.id})}" style= margin-left:15px><i class="fa fa-edit fa-2x" style="color: #b9bbbe"></i></a></td>
                                                             <td>
                                                                 <input type="hidden" name="id" th:value="${product.id}">
@@ -140,6 +142,7 @@
                                                 <table class="table table-hover">
                                                     <thead class="thead">
                                                     <tr>
+                                                        <th scope="col">Account image</th>
                                                         <th scope="col">Id</th>
                                                         <th scope="col">Username</th>
                                                         <th scope="col">First name</th>
@@ -161,6 +164,7 @@
                                                     <tbody>
                                                     <tr style="transform: rotate(0);" th:each="user: ${users}">
                                                         <form th:action="@{/deleteuser}" th:method="post" th:object="${user}">
+                                                            <td> <img class="rounded-circle" th:src="@{'/image/'+'user'+${user.id}+'.png'}" alt="user_img" border=1 height=50 width=50></td>
                                                             <td th:type="number" th:text="${user.id}"/></td>
                                                             <td th:text="${user.username}"/>
                                                             <td th:text="${user.firstName}"/>

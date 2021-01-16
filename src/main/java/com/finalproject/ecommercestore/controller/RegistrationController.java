@@ -36,8 +36,7 @@ public class RegistrationController {
             System.out.println("BINDING RESULT ERROR");
             return "registration";
         }else{
-            userDto.setAddress(addressDto);
-            userService.saveUser(userDto);
+            userService.registerUser(userDto, addressDto);
             return "redirect:/login";
         }
     }

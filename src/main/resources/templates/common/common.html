@@ -38,6 +38,8 @@
                 <li class="nav-item active"><a class="nav-link" th:href="@{/logout}" >Logout</a> </li>
                 <li style="padding-left: 10px" class="nav-item active"><a class="nav-link" href="#" ><div sec:authorize="isAuthenticated()">
                     <h5>Hello, <span sec:authentication="name"></span>!</h5></div></a> </li>
+                <li style="padding-left: 10px" class="nav-item active"><a class="nav-link" href="/my-account" ><div th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
+                    <span><img class="rounded-circle" th:src="@{'/image/'+'user'+${user.id}+'.png'}" alt="user_img" border=1 height=35 width=35></span></div></a> </li>
             </ul>
         </div>
 

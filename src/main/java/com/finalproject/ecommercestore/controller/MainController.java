@@ -3,6 +3,8 @@ package com.finalproject.ecommercestore.controller;
 import com.finalproject.ecommercestore.model.dto.*;
 import com.finalproject.ecommercestore.service.*;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -38,7 +40,24 @@ public class MainController {
         model.addAttribute("categories", categories);
         List<ProductDto> productList = productService.getAllProducts();
         model.addAttribute("productlist", productList);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return "index";
+    }
+
+    public String common(){
+        return "common";
+    }
+
+    @ModelAttribute("user")
+    public UserDto userInViews(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(auth.getAuthorities());
+        GrantedAuthority authority = auth.getAuthorities().stream().findFirst().get();
+        System.out.println(authority.getAuthority());
+        if (auth.getPrincipal().equals("anonymousUser")||authority.getAuthority().equals("ROLE_ADMIN")){
+            return null;
+        }
+        return userService.getLoggedUser();
     }
 
     @GetMapping("/products/{id}")

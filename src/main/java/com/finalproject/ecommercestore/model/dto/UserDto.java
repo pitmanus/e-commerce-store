@@ -4,6 +4,7 @@ import com.finalproject.ecommercestore.model.entity.Role;
 import com.finalproject.ecommercestore.model.entity.ShoppingCart;
 import com.finalproject.ecommercestore.model.entity.UserPayment;
 import org.hibernate.Hibernate;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -49,6 +50,8 @@ public class UserDto {
     private List<OrderDto> orderList = new ArrayList<>();
 
     private List<UserPaymentDto> userPayments = new ArrayList<>();
+
+    private MultipartFile accountImage;
 
 
     public UserDto() {
@@ -156,5 +159,13 @@ public class UserDto {
 
     public void setAddress(AddressDto address) {
         this.address = address;
+    }
+
+    public MultipartFile getAccountImage() {
+        return accountImage;
+    }
+
+    public void setAccountImage(MultipartFile accountImage) {
+        this.accountImage = accountImage;
     }
 }

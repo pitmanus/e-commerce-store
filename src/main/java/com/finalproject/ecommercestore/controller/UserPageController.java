@@ -5,6 +5,7 @@ import com.finalproject.ecommercestore.service.OrderService;
 import com.finalproject.ecommercestore.service.UserPaymentService;
 import com.finalproject.ecommercestore.service.UserService;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +27,18 @@ public class UserPageController {
         this.userService = userService;
         this.userPaymentService = userPaymentService;
         this.orderService = orderService;
+    }
+
+    @ModelAttribute("user")
+    public UserDto userInViews(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(auth.getAuthorities());
+        GrantedAuthority authority = auth.getAuthorities().stream().findFirst().get();
+        System.out.println(authority.getAuthority());
+        if (auth.getPrincipal().equals("anonymousUser")||authority.getAuthority().equals("ROLE_ADMIN")){
+            return null;
+        }
+        return userService.getLoggedUser();
     }
 
     @GetMapping("/user-account")
@@ -55,8 +68,7 @@ public class UserPageController {
             System.out.println("BINDING RESULT ERROR");
             return "edit-user-info";
         } else {
-            userDto.setAddress(addressDto);
-            userService.fullUserUpdate(userDto);
+            userService.editUser(userDto, addressDto);
             return "redirect:/user-account";
         }
     }

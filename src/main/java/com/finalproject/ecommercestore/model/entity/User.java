@@ -7,6 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import javax.persistence.CascadeType;
@@ -33,6 +34,8 @@ public class User implements UserDetails {
     private String username;
     private String password;
     private Boolean enabled = true;
+    @Transient
+    private MultipartFile accountImage;
 
     @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "address_id")
@@ -43,7 +46,6 @@ public class User implements UserDetails {
     private ShoppingCart shoppingCart;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    /*@LazyCollection(LazyCollectionOption.FALSE)*/
     private List<Order> orderList = new ArrayList<>();
 
     @OneToMany( cascade = CascadeType.ALL, orphanRemoval = true)
@@ -193,5 +195,13 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public MultipartFile getAccountImage() {
+        return accountImage;
+    }
+
+    public void setAccountImage(MultipartFile accountImage) {
+        this.accountImage = accountImage;
     }
 }

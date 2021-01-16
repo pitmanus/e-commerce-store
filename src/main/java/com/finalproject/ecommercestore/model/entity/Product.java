@@ -23,6 +23,8 @@ public class Product {
     private double shippingWeight;
     @Column(name = "in_stock")
     private boolean inStock = false;
+    @Column(name = "is_active")
+    private boolean active;
 
     @Transient
     private MultipartFile productImage;
@@ -114,4 +116,11 @@ public class Product {
         this.productImage = productImage;
     }
 
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 }
