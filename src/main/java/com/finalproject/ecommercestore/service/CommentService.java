@@ -10,6 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -50,6 +51,7 @@ public class CommentService {
                 .stream()
                 .filter(comment -> comment.getProduct().getId()==id)
                 .map(comment -> modelMapper.map(comment, CommentDto.class))
+                .sorted(Comparator.comparing(CommentDto::getTime).reversed())
                 .collect(Collectors.toList());
     }
 }

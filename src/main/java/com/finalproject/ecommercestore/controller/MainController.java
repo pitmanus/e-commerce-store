@@ -44,16 +44,11 @@ public class MainController {
         return "index";
     }
 
-    public String common(){
-        return "common";
-    }
 
     @ModelAttribute("user")
     public UserDto userInViews(){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println(auth.getAuthorities());
         GrantedAuthority authority = auth.getAuthorities().stream().findFirst().get();
-        System.out.println(authority.getAuthority());
         if (auth.getPrincipal().equals("anonymousUser")||authority.getAuthority().equals("ROLE_ADMIN")){
             return null;
         }
@@ -80,7 +75,9 @@ public class MainController {
 
     @GetMapping("/product-page/{id}")
     public String showSingleProductPage(@PathVariable Long id, Model model) {
-        if (userService.getLoggedUser().getEnabled()==true){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        GrantedAuthority authority = auth.getAuthorities().stream().findFirst().get();
+        if (authority.getAuthority().equals("ROLE_ADMIN")){
             List<CategoryDto> categories = categoryService.showAllCategories();
             model.addAttribute("categories", categories);
             ProductDto product = productService.getById(id);
@@ -93,10 +90,26 @@ public class MainController {
             cartItemDto.setQuantity(1);
             model.addAttribute("cartItem", cartItemDto);
             return "product-page";
+        }else {
+            if (userService.getLoggedUser().getEnabled()==true){
+                List<CategoryDto> categories = categoryService.showAllCategories();
+                model.addAttribute("categories", categories);
+                ProductDto product = productService.getById(id);
+                model.addAttribute("product", product);
+                CommentDto commentDto = new CommentDto();
+                model.addAttribute("comment", commentDto);
+                List<CommentDto> comments = commentService.getAllCommentsForASingleProduct(id);
+                model.addAttribute("comments", comments);
+                CartItemDto cartItemDto = new CartItemDto();
+                cartItemDto.setQuantity(1);
+                model.addAttribute("cartItem", cartItemDto);
+                return "product-page";
+            }
+            else {
+                return "banned-user";
+            }
         }
-        else {
-            return "banned-user";
-        }
+
     }
 
     @PostMapping("/add-to-cart/{id}")
