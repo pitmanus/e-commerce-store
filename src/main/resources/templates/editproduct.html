@@ -4,69 +4,79 @@
 </head>
 <body>
 <div th:replace="common/common :: navbar"></div>
+<div class="content-section">
+    <div class="container" style="padding-top: 50px; padding-bottom: 50px">
+        <div class="row justify-content-center">
+            <div style="width: 60%">
+                <form class="form-horizontal" th:action="@{/editproduct}" th:object="${selectedProduct}" method="post"
+                      enctype="multipart/form-data">
+                    <fieldset>
+                        <div class="form-group col-md-20" style="padding-right: 10px">
+                            <label for="inputState">Choose product category</label>
+                            <select th:field="*{productCategories}" multiple="multiple" id="inputState"
+                                    class="form-control">
+                                <option value="" selected="selected" disabled="disabled">Please select product
+                                    category
+                                </option>
+                                <option th:each="category: ${categories}" th:text="${category.categoryName}"
+                                        th:value="${category.id}" th:field="*{productCategories}"></option>
 
-<div class="container" style="padding-top: 50px; padding-bottom: 50px">
-    <div class="row justify-content-center">
-        <div style="width: 60%">
-            <form class="form-horizontal" th:action="@{/editproduct}" th:object="${selectedProduct}" method="post" enctype="multipart/form-data">
-                <fieldset>
-                    <div class="form-group col-md-20" style="padding-right: 10px">
-                        <label for="inputState">Choose product category</label>
-                        <select th:field="*{productCategories}" multiple="multiple" id="inputState" class="form-control">
-                            <option value="" selected="selected" disabled="disabled">Please select product category</option>
-                            <option th:each="category: ${categories}" th:text="${category.categoryName}" th:value="${category.id}" th:field="*{productCategories}"></option>
-
-                        </select>
-                    </div>
-
-                   <!-- Here we need to add hidden id field
-                    because we are changing existing entity
-                    in the database with id and we want to edit it.-->
-                    <input type="hidden" name="id" th:field="*{id}">
-
-                    <div class="form-group">
-                        <label for="product-name">Product name</label>
-                        <input type="text" th:field="*{name}" class="form-control" id="product-name">
-                    </div>
-                    <div class="form-group">
-                        <label for="price">Price</label>
-                        <div class="input-group">
-                            <span class="input-group-text">$</span>
-                            <input type="number" step="any" th:field="*{price}" class="form-control" id="price">
+                            </select>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="shipping-weight">Shipping weight</label>
-                        <input type="number" step="any" th:field="*{shippingWeight}" class="form-control" id="shipping-weight">
-                    </div>
-                    <div class="form-check" style="padding-bottom: 15px">
-                        <input type="checkbox" class="form-check-input" id="in-stock" th:field="${selectedProduct.inStock}">
-                        <label class="form-check-label" for="in-stock">In stock</label>
-                        <br>
-                        <small class="help-block">Whether the product is in stock or out of stock</small>
 
-                    </div>
-                    <div class="form-check" style="padding-bottom: 15px">
-                        <input type="checkbox" class="form-check-input" id="is-active" th:field="${selectedProduct.active}">
-                        <label class="form-check-label" for="is-active">Is active?</label>
-                        <br>
-                        <small class="help-block">Whether the product is active or not</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="productImage">Upload product image</label>
-                        <input type="file" class="form-control-file" name="image" id="productImage" accept="image/png, image/jpeg" th:field="*{productImage}">
-                    </div>
-                    <div class="form-group">
-                        <label for="description">Description</label>
-                        <textarea rows="5"  class="form-control" id="description" th:field="*{description}"
-                                  placeholder="Description of the product"/>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </fieldset>
-            </form>
+                        <!-- Here we need to add hidden id field
+                         because we are changing existing entity
+                         in the database with id and we want to edit it.-->
+                        <input type="hidden" name="id" th:field="*{id}">
+
+                        <div class="form-group">
+                            <label for="product-name">Product name</label>
+                            <input type="text" th:field="*{name}" class="form-control" id="product-name">
+                        </div>
+                        <div class="form-group">
+                            <label for="price">Price</label>
+                            <div class="input-group">
+                                <span class="input-group-text">$</span>
+                                <input type="number" step="any" th:field="*{price}" class="form-control" id="price">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="shipping-weight">Shipping weight</label>
+                            <input type="number" step="any" th:field="*{shippingWeight}" class="form-control"
+                                   id="shipping-weight">
+                        </div>
+                        <div class="form-check" style="padding-bottom: 15px">
+                            <input type="checkbox" class="form-check-input" id="in-stock"
+                                   th:field="${selectedProduct.inStock}">
+                            <label class="form-check-label" for="in-stock">In stock</label>
+                            <br>
+                            <small class="help-block">Whether the product is in stock or out of stock</small>
+
+                        </div>
+                        <div class="form-check" style="padding-bottom: 15px">
+                            <input type="checkbox" class="form-check-input" id="is-active"
+                                   th:field="${selectedProduct.active}">
+                            <label class="form-check-label" for="is-active">Is active?</label>
+                            <br>
+                            <small class="help-block">Whether the product is active or not</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="productImage">Upload product image</label>
+                            <input type="file" class="form-control-file" name="image" id="productImage"
+                                   accept="image/png, image/jpeg" th:field="*{productImage}">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea rows="5" class="form-control" id="description" th:field="*{description}"
+                                      placeholder="Description of the product"/>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </fieldset>
+                </form>
+            </div>
         </div>
     </div>
 </div>
-
+<div th:replace="common/common :: footer"></div>
 </body>
 </html>

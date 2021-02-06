@@ -3,10 +3,7 @@ package com.finalproject.ecommercestore.service;
 import com.finalproject.ecommercestore.model.dto.CartItemDto;
 import com.finalproject.ecommercestore.model.dto.ProductDto;
 import com.finalproject.ecommercestore.model.dto.ShoppingCartDto;
-import com.finalproject.ecommercestore.model.entity.CartItem;
-import com.finalproject.ecommercestore.model.entity.Product;
-import com.finalproject.ecommercestore.model.entity.ShoppingCart;
-import com.finalproject.ecommercestore.model.entity.User;
+import com.finalproject.ecommercestore.model.entity.*;
 import com.finalproject.ecommercestore.repository.ShoppingCartRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,10 +66,6 @@ public class ShoppingCartService {
         ShoppingCartDto shoppingCartDto = getShoppingCart();
         shoppingCartDto.setTotal(shoppingCartDto.getTotal().subtract(bigDecimal));
         saveShoppingCart(shoppingCartDto);
-    }
-
-    public void deleteCartItem(Long id){
-        cartItemService.deleteCartItem(id);
     }
 
     public void deleteAllItems(Long id){

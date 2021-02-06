@@ -1,22 +1,54 @@
+
 * {
-    box-sizing: border-box
+    box-sizing: border-box;
 }
 
-.blok{margin:30px;}
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+}
+
+.content-section{
+    flex: 1 0 auto;
+}
+
+.blok {margin:30px;}
 
 .footer {
-    border-top: 30px;
-    position: absolute;
-    left: 0;
-    bottom: 0;
+    margin-top: 20px;
+    flex-shrink: 0;
+    /*position: relative;*/
     width: 100%;
-    height: 60px;
-    color: white;
+    height: 100px;
+    background-color: #343a40;
     text-align: center;
 }
 
 .footer-text{
-    padding-top: 10px;
+    color: white;
+    padding-top: 35px;
+}
+.social-section{
+    background-color:#343a40;
+}
+.social-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 23px;
+    font: 900 13px/1 "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    text-transform: uppercase;
+    color: white;
+    background-color: #343a40;
+}
+.social-container .col {
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 #search {

@@ -3,10 +3,12 @@ package com.finalproject.ecommercestore.controller;
 import com.finalproject.ecommercestore.model.dto.CartItemDto;
 import com.finalproject.ecommercestore.model.dto.ShoppingCartDto;
 import com.finalproject.ecommercestore.model.dto.UserDto;
+import com.finalproject.ecommercestore.model.entity.CartItem;
 import com.finalproject.ecommercestore.service.CartItemService;
 import com.finalproject.ecommercestore.service.ProductService;
 import com.finalproject.ecommercestore.service.ShoppingCartService;
 import com.finalproject.ecommercestore.service.UserService;
+import org.modelmapper.ModelMapper;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,18 +26,20 @@ public class ShoppingCartController {
     private CartItemService cartItemService;
     private ProductService productService;
     private UserService userService;
+    private ModelMapper modelMapper;
 
-    public ShoppingCartController(ShoppingCartService shoppingCartService, CartItemService cartItemService, ProductService productService, UserService userService) {
+    public ShoppingCartController(ShoppingCartService shoppingCartService, CartItemService cartItemService, ProductService productService, UserService userService,
+                                  ModelMapper modelMapper) {
         this.shoppingCartService = shoppingCartService;
         this.cartItemService = cartItemService;
         this.productService = productService;
         this.userService = userService;
+        this.modelMapper = modelMapper;
     }
 
     @ModelAttribute("user")
     public UserDto userInViews(){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println(auth.getAuthorities());
         GrantedAuthority authority = auth.getAuthorities().stream().findFirst().get();
         if (auth.getPrincipal().equals("anonymousUser")||authority.getAuthority().equals("ROLE_ADMIN")){
             return null;
@@ -57,7 +61,7 @@ public class ShoppingCartController {
 
     @PostMapping("/delete-cart-item")
     public String deleteCartItem(@ModelAttribute CartItemDto cartItemDto) {
-        shoppingCartService.deleteCartItem(cartItemDto.getId());
+        cartItemService.delete(modelMapper.map(cartItemDto, CartItem.class));
         shoppingCartService.setTotalPriceOfShoppingCartWhileDeletingCartItem(cartItemDto.getSubtotal());
         return "redirect:/shopping-cart";
     }

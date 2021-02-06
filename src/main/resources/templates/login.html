@@ -3,59 +3,60 @@
 <head th:replace="common/common :: common-header"></head>
 <body>
 <div th:replace="common/common :: navbar"></div>
+<div class="content-section">
+    <br/>
+    <br/>
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="row">
+                <div class="col-md-20 col-md-offset-10">
 
-<br/>
-<br/>
+                    <h1>User Login Page</h1>
 
+                    <form th:action="@{/login}" method="post">
 
-<div class="container">
-    <div class="row justify-content-md-center">
-    <div class="row">
-        <div class="col-md-20 col-md-offset-10">
-
-            <h1>User Login Page</h1>
-
-            <form th:action="@{/login}" method="post">
-
-                <!--error message-->
-                <div th:if="${param.error}">
-                    <div class="alert alert-danger">Invalid username or password!</div>
-                </div>
-
-                <!--logout message-->
-                <div th:if="${param.logout}">
-                    <div class="alert alert-info">You've been logged out!</div>
-                </div>
-
-                <div class="form-group">
-                    <label class="control-label" for="username">Login: </label>
-                    <input type="text" id="username" name="username" class="form-control" required autofocus="autofocus" placeholder="Enter your login"/>
-                </div>
-
-                <div class="form-group">
-                    <label class="control-label" for="password">Password: </label>
-                    <input type="password" id="password" name="password" class="form-control" required
-                           autofocus="autofocus" placeholder="Password"/>
-                </div>
-
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-6 col-sm-offset-3">
-                            <input type="submit" name="login-submit" id="login-submit" class="form-control btn btn-primary" value="Login"></input>
+                        <!--error message-->
+                        <div th:if="${param.error}">
+                            <div class="alert alert-danger">Invalid username or password!</div>
                         </div>
-                    </div>
-                </div>
-            </form>
 
-            <div class="form-group">
+                        <!--logout message-->
+                        <div th:if="${param.logout}">
+                            <div class="alert alert-info">You've been logged out!</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label" for="username">Login: </label>
+                            <input type="text" id="username" name="username" class="form-control" required
+                                   autofocus="autofocus" placeholder="Enter your login"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label" for="password">Password: </label>
+                            <input type="password" id="password" name="password" class="form-control" required
+                                   autofocus="autofocus" placeholder="Password"/>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-6 col-sm-offset-3">
+                                    <input type="submit" name="login-submit" id="login-submit"
+                                           class="form-control btn btn-primary" value="Login"></input>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="form-group">
     <span>
         <h5>New user ?</h5> <a href="/" th:href="@{/registration}">Register here</a>
     </span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    </div>
 </div>
-
+<div th:replace="common/common :: footer"></div>
 </body>
 </html>

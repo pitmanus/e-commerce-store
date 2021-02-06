@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class MainController {
@@ -62,7 +63,10 @@ public class MainController {
     @ModelAttribute("user")
     public UserDto userInViews(){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        GrantedAuthority authority = auth.getAuthorities().stream().findFirst().get();
+        Optional<? extends GrantedAuthority> optAuthority = auth.getAuthorities().stream().findFirst();
+        GrantedAuthority authority = null;
+        if (!optAuthority.isEmpty())
+             authority = optAuthority.get();
         if (auth.getPrincipal().equals("anonymousUser")||authority.getAuthority().equals("ROLE_ADMIN")){
             return null;
         }
@@ -74,7 +78,7 @@ public class MainController {
         List<CategoryDto> categories = categoryService.showAllCategories();
         model.addAttribute("categories", categories);
         List<ProductDto> productList = productService.getProductsByCategories(id);
-        model.addAttribute("productlist", productList);
+        model.addAttribute("productList", productList);
         return "filtered-products";
     }
 
@@ -83,7 +87,7 @@ public class MainController {
         List<CategoryDto> categories = categoryService.showAllCategories();
         model.addAttribute("categories", categories);
         List<ProductDto> productList = productService.getProductsByProductName(productName);
-        model.addAttribute("productlist", productList);
+        model.addAttribute("productList", productList);
         return "filtered-products";
     }
 

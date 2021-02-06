@@ -4,80 +4,83 @@
 </head>
 <body>
 <div th:replace="common/common :: navbar"></div>
-
-<div th:object="${paymentCard}" class="card">
-    <h5 class="card-header">Payment card details</h5>
-    <div class="card-body">
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <h5 class="mt-0" th:text="${paymentCard.cardName}"></h5>
-                        <br/>
-                        <div class="media">
-                            <img th:src="@{'/image/'+'card'+${paymentCard.id}+'.png'}" alt="card_img" border=1 height=100 width=150>
-                            <div class="media-body">
-                                <div class="inline d-flex flex-row align-items-center">
-                                    <span><b>Card brand: </b></span> &nbsp <span
-                                        th:text="${paymentCard.cardBrand.displayValue}"></span></div>
-                                <br/>
-                                <div class="inline d-flex flex-row align-items-center">
-                                    <span><b>Bank name: </b></span> &nbsp <span
-                                        th:text="${paymentCard.bankName}"></span></div>
-                                <br/>
-                                <div class="inline d-flex flex-row align-items-center">
-                                    <span><b>Holder name: </b></span> &nbsp <span
-                                        th:text="${paymentCard.holderName}"></span></div>
+<div class="content-section">
+    <div th:object="${paymentCard}" class="card">
+        <h5 class="card-header">Payment card details</h5>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="mt-0" th:text="${paymentCard.cardName}"></h5>
+                            <br/>
+                            <div class="media">
+                                <img th:src="@{'/image/'+'card'+${paymentCard.id}+'.png'}" alt="card_img" border=1
+                                     height=100 width=150>
+                                <div class="media-body">
+                                    <div class="inline d-flex flex-row align-items-center">
+                                        <span><b>Card brand: </b></span> &nbsp <span
+                                            th:text="${paymentCard.cardBrand.displayValue}"></span></div>
+                                    <br/>
+                                    <div class="inline d-flex flex-row align-items-center">
+                                        <span><b>Bank name: </b></span> &nbsp <span
+                                            th:text="${paymentCard.bankName}"></span></div>
+                                    <br/>
+                                    <div class="inline d-flex flex-row align-items-center">
+                                        <span><b>Holder name: </b></span> &nbsp <span
+                                            th:text="${paymentCard.holderName}"></span></div>
+                                </div>
                             </div>
+
+                            <br/>
+                            <div class="inline d-flex flex-row align-items-center">
+                                <span><b>Card number: </b></span> &nbsp <span
+                                    th:text="${paymentCard.cardNumber}"></span></div>
+                            <br/>
+                            <div class="inline d-flex flex-row align-items-center">
+                                <span><b>Expiry month/year: </b></span> &nbsp <span
+                                    th:text="${paymentCard.expiryMonth}"></span>/<span
+                                    th:text="${paymentCard.expiryYear}"></span></div>
+                            <br/>
                         </div>
+                    </div>
+                </div>
 
-                        <br/>
-                        <div class="inline d-flex flex-row align-items-center">
-                            <span><b>Card number: </b></span> &nbsp <span
-                                th:text="${paymentCard.cardNumber}"></span></div>
-                        <br/>
-                        <div class="inline d-flex flex-row align-items-center">
-                            <span><b>Expiry month/year: </b></span> &nbsp <span
-                                th:text="${paymentCard.expiryMonth}"></span>/<span
-                                th:text="${paymentCard.expiryYear}"></span></div>
-                        <br/>
+                <div class="col-sm-6">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5>Billing address</h5>
+                            <br/>
+                            <div class="inline d-flex flex-row align-items-center">
+                                <span><b>City: </b></span> &nbsp <span
+                                    th:text="${paymentCard.billingAddress.city}"></span></div>
+                            <br/>
+                            <div class="inline d-flex flex-row align-items-center">
+                                <span><b>Street: </b></span> &nbsp <span
+                                    th:text="${paymentCard.billingAddress.street}"></span></div>
+                            <br/>
+                            <div class="inline d-flex flex-row align-items-center">
+                                <span><b>Building number: </b></span> &nbsp <span
+                                    th:text="${paymentCard.billingAddress.buildingNumber}"></span></div>
+                            <br/>
+                            <div class="inline d-flex flex-row align-items-center">
+                                <span><b>Apartment number: </b></span> &nbsp <span
+                                    th:text="${paymentCard.billingAddress.apartmentNumber}"></span></div>
+                            <br/>
+                            <div class="inline d-flex flex-row align-items-center">
+                                <span><b>Zip: </b></span> &nbsp <span
+                                    th:text="${paymentCard.billingAddress.zip}"></span></div>
+                        </div>
                     </div>
                 </div>
             </div>
+            </br>
 
-            <div class="col-sm-6">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <h5>Billing address</h5>
-                        <br/>
-                        <div class="inline d-flex flex-row align-items-center">
-                            <span><b>City: </b></span> &nbsp <span
-                                th:text="${paymentCard.billingAddress.city}"></span></div>
-                        <br/>
-                        <div class="inline d-flex flex-row align-items-center">
-                            <span><b>Street: </b></span> &nbsp <span
-                                th:text="${paymentCard.billingAddress.street}"></span></div>
-                        <br/>
-                        <div class="inline d-flex flex-row align-items-center">
-                            <span><b>Building number: </b></span> &nbsp <span
-                                th:text="${paymentCard.billingAddress.buildingNumber}"></span></div>
-                        <br/>
-                        <div class="inline d-flex flex-row align-items-center">
-                            <span><b>Apartment number: </b></span> &nbsp <span
-                                th:text="${paymentCard.billingAddress.apartmentNumber}"></span></div>
-                        <br/>
-                        <div class="inline d-flex flex-row align-items-center">
-                            <span><b>Zip: </b></span> &nbsp <span
-                                th:text="${paymentCard.billingAddress.zip}"></span></div>
-                    </div>
-                </div>
-            </div>
+            <a th:href="@{/user-account/}" class="btn btn-primary">Back</a>
+
         </div>
-        </br>
-
-        <a th:href="@{/user-account/}" class="btn btn-primary">Back</a>
-
     </div>
 </div>
+<div th:replace="common/common :: footer"></div>
 </body>
 </html>

@@ -4,7 +4,7 @@
 </head>
 <body>
 <div th:replace="common/common :: navbar"></div>
-
+<div class="content-section">
 <div class="card">
     <h5 class="card-header">Edit account information</h5>
     <form novalidate th:action="@{/edit-user}" method="post" th:object="${user}" enctype="multipart/form-data">
@@ -116,6 +116,7 @@
     </div>
     </form>
 </div>
-
+</div>
+<div th:replace="common/common :: footer"></div>
 </body>
 </html>

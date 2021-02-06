@@ -4,6 +4,7 @@
 </head>
 <body>
 <div th:replace="common/common :: navbar"></div>
+<div class="content-section">
 
 <ul class="nav nav-tabs" id="user-page-tabs" th:object="${user}" role="tablist">
     <li>
@@ -186,6 +187,10 @@
         </div>
     </div>
 </div>
+</div>
+<div th:replace="common/common :: footer"></div>
+
+
 <script th:inline="javascript">
     var tabToSelect = "tab-4";
     $(document).ready(function () {

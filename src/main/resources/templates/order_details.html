@@ -5,6 +5,8 @@
 <body>
 <div th:replace="common/common :: navbar"></div>
 
+<div class="content-section">
+
 <h5 class="card-header text-center">Order details</h5>
 <div class="card-body" th:object="${order}">
     <div class="d-flex justify-content-center">
@@ -103,6 +105,7 @@
         </div>
     </div>
 </div>
-
+</div>
+<div th:replace="common/common :: footer"></div>
 </body>
 </html>

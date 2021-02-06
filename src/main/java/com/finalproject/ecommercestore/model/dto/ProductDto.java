@@ -18,8 +18,8 @@ public class ProductDto {
     private String description;
     private double shippingWeight;
     private boolean inStock = false;
+    private boolean active;
     private MultipartFile productImage;
-    private List<CartItemDto> cartItems;
     private List<CategoryDto> productCategories;
     private List<CommentDto> commentDtoList = new ArrayList<>();
 
@@ -90,19 +90,19 @@ public class ProductDto {
         this.productImage = productImage;
     }
 
-    public List<CartItemDto> getCartItems() {
-        return cartItems;
-    }
-
-    public void setCartItems(List<CartItemDto> cartItems) {
-        this.cartItems = cartItems;
-    }
-
     public List<CategoryDto> getProductCategories() {
         return productCategories;
     }
 
     public void setProductCategories(List<CategoryDto> productCategories) {
         this.productCategories = productCategories;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

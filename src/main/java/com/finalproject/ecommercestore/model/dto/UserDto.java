@@ -168,4 +168,6 @@ public class UserDto {
     public void setAccountImage(MultipartFile accountImage) {
         this.accountImage = accountImage;
     }
+
+
 }

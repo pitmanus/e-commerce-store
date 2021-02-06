@@ -5,6 +5,7 @@
 </head>
 <body>
 <div th:replace="common/common :: navbar"></div>
+<div class="content-section">
 
             <ul class="nav nav-tabs" id="admin-page-tabs"  >
                 <li class="nav-item">
@@ -122,11 +123,6 @@
                                                 <br/>
                                                 <a class="btn btn-success" th:href="@{/newproduct}">Add new product</a>
 
-                                                <hr/>
-                                                <ul class="nav-nav-pills">
-                                                    <li class="nav-item" th:each="${#numbers.sequence(0,productList.total)}"></li>
-
-                                                </ul>
                                             </div>
                                         </div>
                                     </div>
@@ -275,6 +271,10 @@
         </div>
     </div>
 </div>
+
+</div>
+
+<div th:replace="common/common :: footer"></div>
 <script th:inline="javascript">
     var tabToSelect = "tab-4";
     $(document).ready(function() {
